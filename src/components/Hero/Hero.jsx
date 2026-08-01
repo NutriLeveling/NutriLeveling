@@ -1,82 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Hero.css";
 
-function Hero({
-  onOpenQuest,
-  onOpenAbout,
-  onOpenLearn,
-  onOpenProjects,
-  onOpenContact,
-  onRevealBuilds,
-}) {
-    const [hideScrollIndicator, setHideScrollIndicator] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setHideScrollIndicator(window.scrollY > 5);
-        };
-
-        handleScroll();
-
-        window.addEventListener("scroll", handleScroll, {
-            passive: true,
-        });
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    const scrollToSection = (sectionId) => {
-        const target = document.getElementById(sectionId);
-
-        if (!target) {
-            console.warn(`Section with id "${sectionId}" was not found.`);
-            return;
-        }
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
-    };
-
-const handleNavigation = (item) => {
-  if (item.action === "about") {
-    onOpenAbout?.();
-    return;
-  }
-
-  if (item.action === "learn") {
-    onOpenLearn?.();
-    return;
-  }
-
-  if (item.action === "quest") {
-    onOpenQuest?.();
-    return;
-  }
-
-if (item.action === "projects") {
-  onOpenProjects?.();
-  return;
-}
-
-if (item.action === "contact") {
-  onOpenContact?.();
-  return;
-}
-
-  if (item.action === "performance") {
-    onRevealBuilds?.();
-    return;
-  }
-
-  if (item.target) {
-    scrollToSection(item.target);
-  }
-};
-
 const navigationItems = [
   {
     label: "ABOUT",
@@ -104,28 +28,113 @@ const navigationItems = [
   },
 ];
 
+function Hero({
+  onOpenQuest,
+  onOpenAbout,
+  onOpenLearn,
+  onOpenProjects,
+  onOpenContact,
+  onRevealBuilds,
+}) {
+  const [hideScrollIndicator, setHideScrollIndicator] =
+    useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHideScrollIndicator(window.scrollY > 5);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const target = document.getElementById(sectionId);
+
+    if (!target) {
+      console.warn(
+        `Section with id "${sectionId}" was not found.`
+      );
+      return;
+    }
+
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const handleNavigation = (item) => {
+    switch (item.action) {
+      case "about":
+        onOpenAbout?.();
+        break;
+
+      case "performance":
+        onRevealBuilds?.();
+        break;
+
+      case "quest":
+        onOpenQuest?.();
+        break;
+
+      case "learn":
+        onOpenLearn?.();
+        break;
+
+      case "projects":
+        onOpenProjects?.();
+        break;
+
+      case "contact":
+        onOpenContact?.();
+        break;
+
+      default:
+        if (item.target) {
+          scrollToSection(item.target);
+        }
+    }
+  };
+
   return (
     <section className="hero" id="home">
-      <div className="heroAmbientGlow" aria-hidden="true" />
+      <div
+        className="heroAmbientGlow"
+        aria-hidden="true"
+      />
 
       <div className="heroContent">
         <div className="heroNavigationFrame">
-  <nav className="heroNavigation" aria-label="Main navigation">
-    {navigationItems.map((item, index) => (
-      <button
-        key={item.label}
-        type="button"
-        className="heroNavigationButton"
-        style={{ "--nav-index": index }}
-        onClick={() => handleNavigation(item)}
-      >
-        <span className="heroNavigationMarker" aria-hidden="true" />
+          <nav
+            className="heroNavigation"
+            aria-label="Main navigation"
+          >
+            {navigationItems.map((item, index) => (
+              <button
+                key={item.label}
+                type="button"
+                className="heroNavigationButton"
+                style={{ "--nav-index": index }}
+                onClick={() => handleNavigation(item)}
+              >
+                <span
+                  className="heroNavigationMarker"
+                  aria-hidden="true"
+                />
 
-        <span>{item.label}</span>
-      </button>
-    ))}
-  </nav>
-</div>
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
 
         <div className="heroMain">
           <div className="heroLogoReveal">
@@ -153,7 +162,10 @@ const navigationItems = [
               className="heroCTA"
               onClick={() => scrollToSection("about")}
             >
-              <span className="heroLine" aria-hidden="true" />
+              <span
+                className="heroLine"
+                aria-hidden="true"
+              />
 
               <span className="heroCTAText">
                 DISCOVER MORE
@@ -166,7 +178,9 @@ const navigationItems = [
       <button
         type="button"
         className={`scrollIndicator ${
-          hideScrollIndicator ? "scrollIndicatorHidden" : ""
+          hideScrollIndicator
+            ? "scrollIndicatorHidden"
+            : ""
         }`}
         onClick={() => scrollToSection("about")}
         aria-label="Scroll to About section"
