@@ -6,21 +6,21 @@ function Intro({ onComplete }) {
 
   useEffect(() => {
     if (phase === "loading") {
-      const loadingTimer = setTimeout(() => {
+      const loadingTimer = window.setTimeout(() => {
         setPhase("mission");
       }, 1400);
 
-      return () => clearTimeout(loadingTimer);
+      return () => window.clearTimeout(loadingTimer);
     }
 
     if (phase === "mission") {
-  const timer = setTimeout(() => {
-    setPhase("hero");
-    onComplete?.();
-  }, 3500);
+      const missionTimer = window.setTimeout(() => {
+        setPhase("hero");
+        onComplete?.();
+      }, 3500);
 
-  return () => clearTimeout(timer);
-}
+      return () => window.clearTimeout(missionTimer);
+    }
   }, [phase, onComplete]);
 
   useEffect(() => {
@@ -38,50 +38,49 @@ function Intro({ onComplete }) {
 
   return (
     <section className="intro">
-  {phase === "play" && (
-  <>
-    <div className="pixelField" aria-hidden="true">
-      <span className="pixelLayer pixelLayerOne" />
-      <span className="pixelLayer pixelLayerTwo" />
-      <span className="pixelLayer pixelLayerThree" />
-    </div>
+      {phase === "play" && (
+        <>
+          <div className="pixelField" aria-hidden="true">
+            <span className="pixelLayer pixelLayerOne" />
+            <span className="pixelLayer pixelLayerTwo" />
+            <span className="pixelLayer pixelLayerThree" />
+          </div>
 
-   <button
-  className="playButton"
-  type="button"
-  onClick={handleStart}
->
-  <span className="playSelector" aria-hidden="true" />
-  <span>PRESS START</span>
-</button>
-  </>
-)}
+          <button
+            type="button"
+            className="playButton"
+            onClick={handleStart}
+          >
+            <span className="playSelector" aria-hidden="true" />
+            <span>PRESS START</span>
+          </button>
+        </>
+      )}
+
       {phase === "loading" && (
-  <div className="loadingScreen">
-    <div className="pixelSpinner" aria-label="Loading">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <span key={i} />
-      ))}
-    </div>
-  </div>
-)}
+        <div className="loadingScreen">
+          <div className="pixelSpinner" aria-label="Loading">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <span key={index} />
+            ))}
+          </div>
+        </div>
+      )}
 
-    {phase === "mission" && (
-  <div className="missionScreen">
-  <div className="missionLine" />
+      {phase === "mission" && (
+        <div className="missionScreen">
+          <div className="missionLine" />
 
-<span className="missionLabel">
-    MISSION
-</span>
+          <span className="missionLabel">
+            MISSION
+          </span>
 
-<h2>OPTIMIZE</h2>
+          <h2>OPTIMIZE</h2>
+          <h2>PLAYER PERFORMANCE</h2>
 
-<h2>PLAYER PERFORMANCE</h2>
-
-<div className="missionLine" />
-
-  </div>
-)}
+          <div className="missionLine" />
+        </div>
+      )}
     </section>
   );
 }

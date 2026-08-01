@@ -1,18 +1,22 @@
-.intro{
-    width:100%;
-    min-height:100vh;
+.intro {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
 
-    background:#05070d;
+  position: relative;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    position:relative;
+  overflow: hidden;
 
-    opacity:0;
-    animation:introFade 3s ease forwards;
+  background: #05070d;
+
+  opacity: 0;
+  animation: introFade 3s ease forwards;
 }
+
 /* ---------- PIXEL BACKGROUND ---------- */
 
 .pixelField {
@@ -138,17 +142,6 @@
 
 /* ---------- PLAY BUTTON ---------- */
 
-.playButtonScene {
-  position: relative;
-  z-index: 10;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 54px 64px;
-}
-
 .playButton {
   display: inline-flex;
   align-items: center;
@@ -204,13 +197,6 @@
   animation: selectorGlow 3.5s ease-in-out infinite;
 }
 
-.playText {
-  display: inline-flex;
-  align-items: center;
-
-  line-height: 1;
-}
-
 .playButton:hover {
   transform: translateY(-3px);
 
@@ -242,205 +228,6 @@
     filter: drop-shadow(0 0 4px rgba(5, 7, 13, 0.35));
   }
 }
-
-/* ---------- INTRO ---------- */
-
-.logoScene{
-
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-.logoScene.show{
-
-    animation:sceneReveal 1s forwards;
-
-}
-
-.logo{
-
-    width:360px;
-
-     margin-top: -100px;
-
-    opacity:0;
-
-    transform:scale(.7);
-
-    animation:logoReveal 1.6s forwards;
-
-    animation-delay:.6s;
-
-}
-
-.logoScene h1{
-
-    margin-top:40px;
-
-    font-family:"Work Sans", sans-serif;
-    font-weight:800;
-    font-size:60px;
-
-    line-height:0.95;
-    letter-spacing:-2px;
-
-    color:#fdf6e3;
-
-    text-align:left;
-
-    opacity:0;
-
-    animation:fadeUp 1s forwards;
-    animation-delay:2.3s;
-
-}
-.logoScene h1 span{
-
-    display:block;
-
-    margin-top:6px;
-
-}
-
-.logoScene p{
-
-    position:absolute;
-    bottom:25px;
-
-    font-family:"Orbitron",sans-serif;
-    font-size:22px;
-
-    letter-spacing:2.5px;
-
-    color:#fac545;
-
-    opacity:1;
-}
-.scrollHint{
-
-    margin-top:70px;
-
-    font-size:18px;
-
-    opacity:0;
-
-    animation:
-
-        fadeUp 1s forwards,
-
-        bounce 1.6s infinite;
-
-    animation-delay:
-
-        4s,
-
-        5s;
-
-}
-
-/* ---------- ANIMATIONS ---------- */
-
-@keyframes sceneReveal{
-
-from{
-
-opacity:0;
-
-}
-
-to{
-
-opacity:1;
-
-}
-
-}
-
-@keyframes particles{
-
-0%{
-
-opacity:0;
-transform:scale(1.4);
-
-}
-
-100%{
-
-opacity:.14;
-transform:scale(1);
-
-}
-
-}
-
-@keyframes logoReveal{
-
-0%{
-
-opacity:0;
-transform:scale(.7);
-
-}
-
-100%{
-
-opacity:1;
-transform:scale(1);
-
-}
-
-}
-
-@keyframes fadeUp{
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-@keyframes bounce{
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(10px);
-
-}
-
-}
 @keyframes introFade{
 
     from{
@@ -452,188 +239,14 @@ transform:translateY(10px);
     }
 
 }
-.cursor{
-    position:absolute;
-    right:-45px;
-    bottom:-12px;
-    font-size:30px;
-    animation:cursorClick 2.8s infinite;
-}
-@keyframes cursorClick{
 
-0%,100%{
-opacity:0;
-transform:translate(20px,20px) scale(1);
-}
+.loadingScreen {
+  width: 100%;
+  min-height: 100svh;
 
-20%{
-opacity:1;
-}
-
-45%{
-transform:translate(0,0) scale(.9);
-}
-
-55%{
-transform:translate(0,0) scale(1);
-}
-
-80%{
-opacity:0;
-}
-
-}
-.intro-logo{
-    width:520px;
-    max-width:80vw;
-    margin-top:50px;
-
-    opacity:0;
-    transform:scale(.8);
-
-animation:logoAppear 1.5s forwards,
-          logoFloat 4s ease-in-out infinite 2s;}
-
-.intro-text{
-    margin-top:35px;
-    text-align:center;
-
-    opacity:0;
-
-    animation:textAppear 1s forwards;
-}
-
-.intro-text h1 {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
-  margin-bottom: 8px;
-  line-height: 1.1;
-}
-.intro-text h2{
-
-    font-size:34px;
-
-    color:white;
-
-    font-weight:700;
-
-    letter-spacing:3px;
-
-}
-
-.intro-text p {
-  font-size: 1.2rem;
-  color: #d6d6d6;
-  margin-top: 10px;
-}
-@keyframes logoAppear{
-
-0%{
-opacity:0;
-transform:scale(.75);
-filter:blur(8px);
-}
-
-100%{
-opacity:1;
-transform:scale(1);
-filter:blur(0);
-}
-
-}
-
-@keyframes textAppear{
-
-from{
-opacity:0;
-transform:translateY(25px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-@keyframes logoFloat{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-6px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
-
-}
-.logo-loader{
-
-    width:260px;
-    height:5px;
-
-    margin:18px auto 0;
-
-    background:#1f1f1f;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-}
-
-.logo-loader-fill{
-
-    width:0%;
-
-    height:100%;
-
-    background:#F5C34D;
-
-    animation:loadingLoop 2.5s ease-in-out infinite;
-
-}@keyframes loadingLoop{
-
-    0%{
-
-        width:0%;
-
-    }
-
-    45%{
-
-        width:100%;
-
-    }
-
-    55%{
-
-        width:100%;
-
-    }
-
-    100%{
-
-        width:0%;
-
-    }
-
-}
-
-.loadingScreen{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
-    height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pixelSpinner{
@@ -771,44 +384,6 @@ transform:translateY(0);
 
   to {
     opacity: 0;
-  }
-}
-@media (max-width: 600px) {
-  .playButton {
-    width: 100%;
-    min-width: 0;
-    min-height: 82px;
-
-    gap: 13px;
-
-    padding: 20px 22px;
-
-    font-size: clamp(18px, 5vw, 24px);
-    letter-spacing: clamp(3px, 1.4vw, 6px);
-  }
-
-  .playSelector {
-    font-size: 16px;
-  }
-}
-@media (max-width: 600px) {
-  .playButton {
-    width: 100%;
-    min-width: 0;
-    min-height: 76px;
-
-    gap: 14px;
-
-    padding: 18px 24px;
-
-    font-size: clamp(18px, 5vw, 23px);
-    letter-spacing: clamp(3px, 1.3vw, 5px);
-  }
-
-  .playSelector {
-    border-top-width: 7px;
-    border-bottom-width: 7px;
-    border-left-width: 12px;
   }
 }
 @media (max-width: 600px) {
