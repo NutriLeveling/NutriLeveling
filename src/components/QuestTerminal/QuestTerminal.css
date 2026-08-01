@@ -1,0 +1,442 @@
+/* =========================================================
+   QUEST TERMINAL
+========================================================= */
+
+.questTerminalSection {
+  position: relative;
+
+  width: 100%;
+  min-height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 18px;
+
+  overflow: hidden;
+
+  padding:
+    clamp(72px, 9vh, 120px)
+    clamp(24px, 5vw, 90px);
+
+  scroll-margin-top: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(245, 195, 77, 0.08),
+      transparent 40%
+    ),
+    #03050a;
+
+  border-top: 1px solid rgba(245, 195, 77, 0.12);
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.questTerminalSection::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(245, 195, 77, 0.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(245, 195, 77, 0.022) 1px,
+      transparent 1px
+    );
+
+  background-size: 44px 44px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 20%,
+    black 82%,
+    transparent
+  );
+}
+
+.questTerminalSection::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.12;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.016) 4px
+  );
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.terminalTopBar {
+  position: relative;
+  z-index: 2;
+
+  width: min(1040px, 100%);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(245, 195, 77, 0.62);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(10px, 0.72vw, 13px);
+  font-weight: 600;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   TERMINAL PANEL
+========================================================= */
+
+.questTerminal {
+  position: relative;
+  z-index: 2;
+
+  width: min(1040px, 100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    clamp(36px, 5vh, 58px)
+    clamp(28px, 5vw, 72px);
+
+  border: 1px solid rgba(245, 195, 77, 0.58);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 195, 77, 0.035),
+      transparent 32%
+    ),
+    rgba(5, 7, 13, 0.96);
+
+  box-shadow:
+    0 0 0 7px rgba(245, 195, 77, 0.016),
+    0 0 44px rgba(245, 195, 77, 0.06),
+    inset 0 0 70px rgba(0, 0, 0, 0.48);
+}
+
+.questTerminal::before,
+.questTerminal::after {
+  content: "";
+
+  position: absolute;
+
+  width: 48px;
+  height: 48px;
+
+  pointer-events: none;
+}
+
+.questTerminal::before {
+  top: -1px;
+  left: -1px;
+
+  border-top: 4px solid #f5c34d;
+  border-left: 4px solid #f5c34d;
+}
+
+.questTerminal::after {
+  right: -1px;
+  bottom: -1px;
+
+  border-right: 4px solid #f5c34d;
+  border-bottom: 4px solid #f5c34d;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.terminalHeader {
+  width: 100%;
+  max-width: 760px;
+
+  text-align: center;
+}
+
+.terminalEyebrow {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: rgba(245, 195, 77, 0.72);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(10px, 0.78vw, 14px);
+  font-weight: 600;
+
+  letter-spacing: clamp(3px, 0.35vw, 5px);
+}
+
+.terminalHeader h2 {
+  margin: 0;
+
+  color: #f5c34d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(36px, 4.5vw, 68px);
+  font-weight: 800;
+
+  line-height: 1;
+  letter-spacing: clamp(4px, 0.55vw, 9px);
+
+  text-shadow:
+    0 0 18px rgba(245, 195, 77, 0.15);
+}
+
+.terminalIntro {
+  max-width: 700px;
+
+  margin:
+    clamp(22px, 3vh, 30px)
+    auto
+    0;
+
+  color: #c9c3b6;
+
+  font-family: "Work Sans", sans-serif;
+  font-size: clamp(16px, 1.15vw, 20px);
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.terminalMeta {
+  width: min(760px, 100%);
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  margin:
+    clamp(28px, 4vh, 42px)
+    0;
+
+  border-top: 1px solid rgba(245, 195, 77, 0.18);
+  border-bottom: 1px solid rgba(245, 195, 77, 0.18);
+}
+
+.terminalMetaItem {
+  display: grid;
+  gap: 8px;
+
+  padding: 20px 22px;
+
+  text-align: center;
+}
+
+.terminalMetaItem + .terminalMetaItem {
+  border-left: 1px solid rgba(245, 195, 77, 0.14);
+}
+
+.terminalMetaItem span {
+  color: rgba(245, 195, 77, 0.52);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(9px, 0.65vw, 12px);
+  font-weight: 600;
+
+  letter-spacing: 2px;
+}
+
+.terminalMetaItem strong {
+  color: #fdf6e3;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.questButton {
+  width: min(720px, 100%);
+  min-height: 72px;
+
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  align-items: center;
+  gap: 18px;
+
+  padding: 16px clamp(22px, 3vw, 40px);
+
+  border: 2px solid #f5c34d;
+  border-radius: 3px;
+
+  background: #f5c34d;
+  color: #05070d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(12px, 1vw, 17px);
+  font-weight: 800;
+
+  letter-spacing: clamp(2px, 0.25vw, 4px);
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 26px rgba(245, 195, 77, 0.13),
+    0 16px 42px rgba(0, 0, 0, 0.38);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.questButton:hover {
+  transform: translateY(-4px);
+
+  background: transparent;
+  color: #f5c34d;
+
+  box-shadow:
+    0 0 38px rgba(245, 195, 77, 0.2),
+    0 20px 50px rgba(0, 0, 0, 0.44);
+}
+
+.questButton:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.questButton:focus-visible {
+  outline: 2px solid #fdf6e3;
+  outline-offset: 6px;
+}
+
+.questButtonIcon,
+.questButtonArrow {
+  display: grid;
+  place-items: center;
+}
+
+.questButtonArrow {
+  font-size: 20px;
+
+  transition: transform 0.25s ease;
+}
+
+.questButton:hover .questButtonArrow {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.terminalNote {
+  margin:
+    16px
+    0
+    0;
+
+  color: rgba(201, 195, 182, 0.52);
+
+  font-family: "Work Sans", sans-serif;
+  font-size: 13px;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .questTerminalSection {
+    padding:
+      72px
+      20px;
+  }
+
+  .terminalTopBar {
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: center;
+  }
+
+  .questTerminal {
+    padding:
+      38px
+      22px;
+  }
+
+  .terminalMeta {
+    grid-template-columns: 1fr;
+  }
+
+  .terminalMetaItem + .terminalMetaItem {
+    border-top: 1px solid rgba(245, 195, 77, 0.14);
+    border-left: 0;
+  }
+
+  .questButton {
+    grid-template-columns: 22px 1fr 22px;
+
+    min-height: 78px;
+
+    padding-inline: 16px;
+
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminalHeader h2 {
+    font-size: 34px;
+    letter-spacing: 3px;
+  }
+
+  .terminalIntro {
+    font-size: 16px;
+  }
+
+  .terminalMetaItem {
+    padding: 16px;
+  }
+}

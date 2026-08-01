@@ -1,0 +1,1177 @@
+/* =========================================
+   WELCOME / ABOUT
+========================================= */
+
+.welcomeSection {
+    position: relative;
+
+    min-height: 100vh;
+    min-height: 100svh;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(520px, 1fr)
+        minmax(680px, 1.08fr);
+
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+    grid-template-areas:
+        "label label"
+        "title description"
+        "cta cta";
+
+    align-items: center;
+
+    column-gap: clamp(28px, 3vw, 60px);
+        row-gap: clamp(48px, 6vh, 80px);
+
+    padding-left: clamp(70px, 6vw, 120px);
+    padding-right: clamp(70px, 6vw, 120px);
+
+    overflow: hidden;
+
+    background: #05070d;
+}
+
+
+/* =========================================
+   TOP LABEL
+========================================= */
+
+.welcomeLabel {
+    position: relative;
+    z-index: 2;
+
+    grid-area: label;
+    justify-self: center;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+    color: #f5c34d;
+
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(18px, 1.25vw, 25px);
+    font-weight: 700;
+
+    line-height: 1;
+    letter-spacing: clamp(5px, 0.55vw, 9px);
+    text-transform: uppercase;
+}
+
+.welcomeLabel::before,
+.welcomeLabel::after {
+    content: "";
+
+    width: clamp(90px, 10vw, 180px);
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(245, 195, 77, 0.85)
+    );
+}
+.welcomeLabel span {
+    display: inline-block;
+}
+
+.welcomeLabel::after {
+    background: linear-gradient(
+        90deg,
+        rgba(245, 195, 77, 0.85),
+        transparent
+    );
+}
+
+
+/* =========================================
+   LARGE LEFT TITLE
+========================================= */
+
+.welcomeTitle {
+    position: relative;
+    z-index: 2;
+
+    grid-area: title;
+
+    width: 100%;
+    max-width: 720px;
+
+    justify-self: start;
+    align-self: center;
+}
+
+.welcomeTitle h2 {
+    width: 100%;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 2vh, 26px);
+
+    color: #fdf6e3;
+
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(96px, 7.7vw, 148px);
+    font-weight: 800;
+
+    line-height: 0.82;
+    letter-spacing: clamp(-8px, -0.4vw, -4px);
+}
+
+.welcomeTitle h2 span {
+    display: block;
+}
+
+/* =========================================
+   RIGHT CONTENT
+========================================= */
+
+.welcomeDescription {
+    position: relative;
+    z-index: 2;
+
+    grid-area: description;
+
+    width: 100%;
+    max-width: 860px;
+
+    justify-self: end;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   ABOUT HEADING
+========================================= */
+
+.aboutHeading {
+    position: relative;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0 0 34px;
+
+    color: #f5c34d;
+
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(30px, 2.1vw, 44px);
+    font-weight: 750;
+
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.aboutHeading::after {
+    content: "";
+
+    display: block;
+
+    width: 90px;
+    height: 1px;
+
+    margin-top: 18px;
+
+    background: linear-gradient(
+        90deg,
+        #f5c34d,
+        rgba(245, 195, 77, 0)
+    );
+}
+
+
+/* =========================================
+   BODY COPY
+========================================= */
+
+.welcomeDescription .aboutParagraph {
+    width: 100%;
+    max-width: none;
+
+    margin: 0 0 24px;
+
+    color: #c9c3b6;
+
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(18px, 1.05vw, 21px);
+    font-weight: 400;
+
+    line-height: 1.58;
+    letter-spacing: -0.012em;
+}
+
+.welcomeDescription .aboutParagraph:last-of-type {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   FOCUS AREA
+========================================= */
+
+.aboutFocus {
+    width: 100%;
+    margin: 34px 0 30px;
+}
+
+.aboutFocus h4 {
+    margin: 0 0 18px;
+
+    color: #f5c34d;
+
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(12px, 0.75vw, 15px);
+    font-weight: 600;
+
+    line-height: 1;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+}
+
+.aboutFocus ul {
+    width: 100%;
+    max-width: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+.aboutFocus li {
+    position: relative;
+
+    width: 100%;
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 13px 18px;
+
+    border: 1px solid rgba(245, 195, 77, 0.18);
+    border-left-color: rgba(245, 195, 77, 0.72);
+
+    background: linear-gradient(
+        90deg,
+        rgba(245, 195, 77, 0.07),
+        rgba(245, 195, 77, 0.015) 55%,
+        transparent
+    );
+
+    color: #fdf6e3;
+
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(16px, 1vw, 19px);
+    font-weight: 500;
+
+    box-sizing: border-box;
+}
+
+.aboutFocus li:hover {
+    transform: translateX(6px);
+
+    border-left-color: #f5c34d;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(245, 195, 77, 0.12),
+            rgba(245, 195, 77, 0.025) 55%,
+            transparent
+        );
+}
+
+.focusIcon {
+    width: 7px;
+    height: 7px;
+
+    flex: 0 0 7px;
+
+    transform: rotate(45deg);
+
+    border: 1px solid #f5c34d;
+
+    background: transparent;
+
+    box-shadow:
+        0 0 10px rgba(245, 195, 77, 0.22);
+}
+
+
+/* =========================================
+   CLOSING STATEMENT
+========================================= */
+
+.aboutClosing {
+    margin: auto 0 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(24px, 1.8vw, 36px);
+    font-weight: 750;
+
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+}
+
+.aboutClosing span:first-child {
+    color: #fdf6e3;
+}
+
+.aboutClosing span:last-child {
+    color: #f5c34d;
+}
+
+
+/* =========================================
+   BACKGROUND TYPOGRAPHY
+========================================= */
+
+.backgroundText {
+    position: absolute;
+    z-index: 0;
+
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+
+    margin: 0;
+
+    transform: translate(-50%, -50%);
+
+    color: #f5c34d;
+
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(150px, 12.5vw, 280px);
+    font-weight: 900;
+
+    line-height: 0.82;
+    letter-spacing: clamp(8px, 1vw, 20px);
+
+    text-align: center;
+    white-space: nowrap;
+
+    opacity: 0.035;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* =========================================
+   CTA
+========================================= */
+
+.welcomeCTA {
+    position: relative;
+    z-index: 2;
+
+    grid-area: cta;
+    justify-self: center;
+
+    margin: 0;
+
+    padding: 15px 28px;
+
+    border: 1px solid rgba(245, 195, 77, 0.65);
+
+    background: rgba(5, 7, 13, 0.5);
+    color: #f5c34d;
+
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(14px, 0.85vw, 16px);
+    font-weight: 700;
+
+    line-height: 1;
+    letter-spacing: 2.5px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.welcomeCTA:hover {
+    background: #f5c34d;
+    color: #05070d;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 24px rgba(245, 195, 77, 0.22);
+}
+
+
+/* =========================================
+   ENTRANCE ANIMATIONS
+========================================= */
+
+.buildReveal {
+    opacity: 0;
+    transform: translateY(45px);
+}
+
+.buildReveal.show {
+    animation:
+        revealBuilds
+        0.9s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+}
+
+@keyframes revealBuilds {
+    from {
+        opacity: 0;
+        transform: translateY(45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   LAPTOP / LOW-HEIGHT SCREENS
+========================================= */
+
+@media (max-height: 880px) and (min-width: 901px) {
+    .welcomeSection {
+        row-gap: 36px;
+
+        padding-top: 65px;
+        padding-bottom: 55px;
+    }
+
+    .welcomeTitle h2 {
+      gap: 14px;
+        font-size: clamp(74px, 6.5vw, 112px);
+    }
+
+    .aboutHeading {
+        font-size: clamp(28px, 2vw, 38px);
+        margin-bottom: 30px;
+    }
+
+    .welcomeDescription .aboutParagraph {
+        font-size: clamp(16px, 1vw, 19px);
+        line-height: 1.48;
+        margin-bottom: 20px;
+    }
+
+    .aboutFocus {
+        margin: 22px 0 22px;
+    }
+
+    .aboutFocus li {
+        min-height: 42px;
+        padding: 10px 15px;
+    }
+
+    .aboutClosing {
+        font-size: clamp(20px, 1.4vw, 28px);
+    }
+}
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
+@media (max-width: 1100px) {
+    .welcomeSection {
+        grid-template-columns:
+            minmax(330px, 0.85fr)
+            minmax(460px, 1.15fr);
+
+        column-gap: clamp(45px, 5vw, 75px);
+
+        padding-left: 6vw;
+        padding-right: 6vw;
+    }
+
+    .welcomeTitle h2 {
+        font-size: clamp(68px, 7vw, 96px);
+    }
+}
+
+@media (max-width: 900px) {
+    .welcomeSection {
+        grid-template-columns: 1fr;
+
+        grid-template-rows:
+            auto
+            auto
+            auto
+            auto;
+
+        grid-template-areas:
+            "label"
+            "title"
+            "description"
+            "cta";
+
+        gap: 42px;
+
+        padding:
+            85px
+            8%
+            75px;
+
+        text-align: left;
+    }
+
+    .welcomeLabel {
+        justify-self: center;
+    }
+
+    .welcomeTitle {
+        height: auto;
+
+        justify-self: stretch;
+        align-self: auto;
+    }
+
+    .welcomeTitle h2 {
+        min-height: 0;
+
+        display: block;
+
+        font-size: clamp(58px, 15vw, 92px);
+        line-height: 0.82;
+
+        text-align: center;
+    }
+
+    .welcomeTitle h2 span {
+        display: block;
+    }
+
+    .welcomeDescription {
+        min-height: 0;
+        max-width: 720px;
+
+        justify-self: center;
+        align-self: auto;
+    }
+
+    .aboutHeading {
+        font-size: clamp(30px, 7vw, 42px);
+    }
+
+    .welcomeDescription .aboutParagraph {
+        font-size: clamp(17px, 4vw, 20px);
+    }
+
+    .aboutClosing {
+        margin-top: 38px;
+
+        font-size: clamp(24px, 6vw, 34px);
+    }
+
+    .backgroundText {
+        font-size: clamp(95px, 23vw, 180px);
+        white-space: normal;
+    }
+}
+
+@media (max-width: 560px) {
+    .welcomeSection {
+        gap: 34px;
+
+        padding:
+            70px
+            22px
+            65px;
+    }
+
+    .welcomeLabel {
+        font-size: 14px;
+        letter-spacing: 4px;
+    }
+
+    .welcomeTitle h2 {
+        font-size: clamp(52px, 17vw, 78px);
+        letter-spacing: -4px;
+    }
+
+    .aboutHeading {
+        margin-bottom: 24px;
+
+        font-size: clamp(29px, 8.5vw, 38px);
+    }
+
+    .aboutHeading::after {
+        margin-top: 18px;
+    }
+
+    .welcomeDescription .aboutParagraph {
+        font-size: 17px;
+        line-height: 1.55;
+    }
+
+    .aboutFocus {
+        margin:24px 0 0px;
+    }
+
+    .aboutFocus h4 {
+        letter-spacing: 0.25em;
+    }
+
+    .aboutFocus li {
+        padding: 13px 14px;
+
+        font-size: 15px;
+        line-height: 1.3;
+    }
+
+    .aboutClosing {
+        gap: 3px;
+        line-height: 1.02;
+        font-size: clamp(23px, 7vw, 31px);
+    }
+
+    .welcomeCTA {
+        width: 100%;
+        max-width: 340px;
+
+        padding: 15px 18px;
+
+        font-size: 12px;
+        letter-spacing: 1.8px;
+    }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .welcomeTitle,
+    .welcomeDescription,
+    .buildReveal {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+    .welcomeReveal,
+    .welcomeDivider,
+    .aboutFocus li {
+        opacity: 1;
+        transform: none;
+        filter: none;
+
+        transition: none;
+        animation: none;
+    }
+}
+
+    .aboutFocus li,
+    .welcomeCTA {
+        transition: none;
+    }
+}
+.aboutHeading,
+.aboutParagraph,
+.aboutFocus,
+.aboutClosing {
+    width: 100%;
+    max-width: none;
+}
+.welcomeDescription::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    inset: -35px -35px;
+
+    background: radial-gradient(
+        circle at center,
+        rgba(5, 7, 13, 0.86),
+        rgba(5, 7, 13, 0.42) 58%,
+        transparent 78%
+    );
+
+    pointer-events: none;
+}
+
+/* =========================================
+   FINAL DESKTOP COMPOSITION OVERRIDES
+   Paste at the END of WelcomeSection.css
+========================================= */
+
+@media (min-width: 1101px) {
+
+    /* Center the complete 3-row composition vertically.
+       This stops WELCOME TO and the CTA from touching
+       the top and bottom edges of the viewport. */
+    .welcomeSection {
+        grid-template-columns:
+            minmax(0, 0.95fr)
+            minmax(0, 1.05fr);
+
+        grid-template-rows:
+            auto
+            auto
+            auto;
+
+        align-content: center;
+        align-items: center;
+
+        column-gap: clamp(64px, 5vw, 105px);
+        row-gap: clamp(38px, 5vh, 68px);
+
+        padding:
+            clamp(58px, 6vh, 90px)
+            clamp(58px, 5vw, 105px);
+    }
+
+    /* =====================================
+       WELCOME TO
+    ===================================== */
+
+    .welcomeLabel {
+        transform: none;
+
+        font-size: clamp(19px, 1.25vw, 25px);
+        font-weight: 700;
+
+        letter-spacing: clamp(6px, 0.55vw, 9px);
+    }
+
+    .welcomeLabel::before,
+    .welcomeLabel::after {
+        width: clamp(120px, 12vw, 220px);
+    }
+
+    /* =====================================
+       LEFT SIDE — NUTRI LEVELING
+    ===================================== */
+
+    .welcomeTitle {
+        width: 100%;
+        max-width: none;
+
+        justify-self: start;
+        align-self: center;
+    }
+
+    .welcomeTitle h2 {
+        width: 100%;
+
+        gap: clamp(12px, 1.5vh, 22px);
+
+        font-size: clamp(104px, 8vw, 158px);
+        line-height: 0.8;
+        letter-spacing: clamp(-9px, -0.45vw, -5px);
+    }
+
+    .welcomeTitle h2 span {
+        width: max-content;
+        max-width: 100%;
+    }
+
+    /* =====================================
+       RIGHT SIDE — ABOUT CONTENT
+    ===================================== */
+
+    .welcomeDescription {
+        width: 100%;
+        max-width: none;
+
+        justify-self: end;
+        align-self: center;
+
+        padding-left: clamp(4px, 0.8vw, 14px);
+    }
+
+    /* =====================================
+       TIGHTER CONTENT RHYTHM
+    ===================================== */
+
+    .aboutHeading {
+        margin-bottom: 20px;
+    }
+
+    .aboutHeading::after {
+        margin-top: 14px;
+    }
+
+    .welcomeDescription .aboutParagraph {
+        margin-bottom: 14px;
+    }
+
+    .welcomeDescription .aboutParagraph:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .aboutFocus {
+        margin:
+            clamp(28px, 3vh, 38px)
+        0
+        clamp(26px, 3vh, 34px);
+    }
+
+    .aboutFocus h4 {
+        margin-bottom: 16px;
+    }
+
+    .aboutFocus ul {
+        gap: 7px;
+    }
+
+    .aboutFocus li {
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+
+
+    /* Keep your preferred two-line closing */
+    .aboutClosing {
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+
+        white-space: normal;
+    }
+
+    /* =====================================
+       CTA — KEEP IT INSIDE THE COMPOSITION
+    ===================================== */
+
+    .welcomeCTA {
+        margin: 0;
+        align-self: center;
+
+        padding: 14px 28px;
+    }
+}
+
+/* =========================================
+   LAPTOP / SHORT VIEWPORT
+========================================= */
+
+@media (max-height: 880px) and (min-width: 1101px) {
+
+    .welcomeSection {
+        row-gap: clamp(26px, 3.5vh, 42px);
+
+        padding-top: 38px;
+        padding-bottom: 38px;
+    }
+
+    .welcomeLabel {
+        font-size: clamp(17px, 1.05vw, 21px);
+    }
+
+    .welcomeTitle h2 {
+        font-size: clamp(88px, 6.8vw, 128px);
+        gap: 10px;
+    }
+
+    .aboutHeading {
+        font-size: clamp(27px, 1.9vw, 36px);
+        margin-bottom: 15px;
+    }
+
+    .aboutHeading::after {
+        margin-top: 11px;
+    }
+
+    .welcomeDescription .aboutParagraph {
+        font-size: clamp(15px, 0.95vw, 18px);
+        line-height: 1.45;
+        margin-bottom: 11px;
+    }
+
+    .aboutFocus {
+        margin: 15px 0 14px;
+    }
+
+    .aboutFocus h4 {
+        margin-bottom: 9px;
+    }
+
+    .aboutFocus ul {
+        gap: 6px;
+    }
+
+    .aboutFocus li {
+        min-height: 38px;
+        padding: 8px 13px;
+    }
+
+    .aboutClosing {
+        font-size: clamp(20px, 1.35vw, 27px);
+    }
+
+    .welcomeCTA {
+        padding: 12px 24px;
+    }
+}
+/* =========================================
+   CINEMATIC STAGGER REVEAL
+========================================= */
+
+.welcomeReveal {
+    opacity: 0;
+
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* Label locks into place first */
+.welcomeReveal--label {
+    transform: translateY(-16px);
+    filter: blur(5px);
+}
+
+
+/* Large left title slides in */
+.welcomeReveal--title {
+    transform: translateX(-65px);
+    filter: blur(4px);
+}
+
+
+/* Heading enters from the right */
+.welcomeReveal--heading {
+    transform: translateX(44px);
+    filter: blur(4px);
+}
+
+
+/* Body copy appears more softly */
+.welcomeReveal--copy {
+    transform: translateY(22px);
+    filter: blur(3px);
+}
+
+
+/* Focus block follows */
+.welcomeReveal--focus {
+    transform: translateY(24px);
+    filter: blur(3px);
+}
+
+
+/* Punchline appears last on the right */
+.welcomeReveal--closing {
+    transform: translateY(20px);
+    filter: blur(3px);
+}
+
+
+/* CTA finishes the sequence */
+.welcomeReveal--cta {
+    transform: translateY(18px);
+    filter: blur(3px);
+}
+
+
+/* Final revealed state */
+.welcomeSection--visible .welcomeReveal {
+    opacity: 1;
+    transform: translate(0, 0);
+    filter: blur(0);
+}
+
+
+/* Timing */
+.welcomeSection--visible .welcomeReveal--label {
+    transition-delay: 0.05s;
+}
+
+.welcomeSection--visible .welcomeReveal--title {
+    transition-delay: 0.2s;
+}
+
+.welcomeSection--visible .welcomeReveal--heading {
+    transition-delay: 0.32s;
+}
+
+.welcomeSection--visible .welcomeReveal--copy {
+    transition-delay: 0.46s;
+}
+
+.welcomeSection--visible .welcomeReveal--focus {
+    transition-delay: 0.62s;
+}
+
+.welcomeSection--visible .welcomeReveal--closing {
+    transition-delay: 0.78s;
+}
+
+.welcomeSection--visible .welcomeReveal--cta {
+    transition-delay: 0.92s;
+}
+
+
+/* Individual focus rows */
+.welcomeSection--visible .aboutFocus li {
+    animation:
+        revealFocusRow
+        0.55s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+}
+
+.welcomeSection--visible .aboutFocus li:nth-child(1) {
+    animation-delay: 0.72s;
+}
+
+.welcomeSection--visible .aboutFocus li:nth-child(2) {
+    animation-delay: 0.82s;
+}
+
+.welcomeSection--visible .aboutFocus li:nth-child(3) {
+    animation-delay: 0.92s;
+}
+
+@keyframes revealFocusRow {
+    from {
+        opacity: 0;
+        transform: translateX(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================================
+   FINAL LABEL / CTA POSITION
+========================================= */
+
+@media (min-width: 1101px) {
+    .welcomeSection--visible .welcomeLabel {
+        transform: translateY(-28px);
+    }
+
+    .welcomeSection--visible .welcomeCTA {
+        transform: translateY(34px);
+    }
+
+    .welcomeSection--visible .welcomeCTA:hover {
+        transform: translateY(31px);
+    }
+}
+
+@media (max-height: 880px) and (min-width: 1101px) {
+    .welcomeSection--visible .welcomeLabel {
+        transform: translateY(-18px);
+    }
+
+    .welcomeSection--visible .welcomeCTA {
+        transform: translateY(22px);
+    }
+
+    .welcomeSection--visible .welcomeCTA:hover {
+        transform: translateY(19px);
+    }
+}
+/* =========================================
+   MICRO SPACING POLISH
+========================================= */
+
+@media (min-width: 1101px) {
+    .welcomeSection--visible .welcomeLabel {
+        transform: translateY(-34px);
+    }
+
+    .welcomeSection--visible .welcomeTitle {
+        transform: translateY(4px);
+    }
+
+    .welcomeSection--visible .welcomeCTA {
+        transform: translateY(40px);
+    }
+
+    .welcomeSection--visible .welcomeCTA:hover {
+        transform: translateY(37px);
+    }
+}
+
+@media (max-height: 880px) and (min-width: 1101px) {
+    .welcomeSection--visible .welcomeLabel {
+        transform: translateY(-22px);
+    }
+
+    .welcomeSection--visible .welcomeTitle {
+        transform: translateY(3px);
+    }
+
+    .welcomeSection--visible .welcomeCTA {
+        transform: translateY(26px);
+    }
+
+    .welcomeSection--visible .welcomeCTA:hover {
+        transform: translateY(23px);
+    }
+}
+
+/* =========================================
+   WELCOME LABEL — MOBILE CENTERING
+========================================= */
+
+@media (max-width: 560px) {
+  .welcomeLabel {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+
+    justify-self: stretch;
+
+    text-align: center;
+  }
+
+  .welcomeLabel span {
+    display: block;
+
+    white-space: nowrap;
+
+    text-align: center;
+  }
+
+  .welcomeLabel::before,
+  .welcomeLabel::after {
+    width: 100%;
+    min-width: 0;
+  }
+}

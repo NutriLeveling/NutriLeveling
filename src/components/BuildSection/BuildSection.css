@@ -1,0 +1,526 @@
+.buildSection {
+  width: 100%;
+  min-height: 100svh;
+      scroll-margin-top: 24px;
+
+  display: flex;
+  align-items: center;
+
+  padding: clamp(72px, 8vh, 110px) clamp(24px, 5vw, 90px);
+
+  background: #05070d;
+  color: #fdf6e3;
+}
+
+.buildSectionInner {
+  width: min(1500px, 100%);
+
+  margin-inline: auto;
+}
+
+.buildHeading {
+  max-width: 880px;
+
+  margin: 0 auto clamp(20px, 5vh, 68px);
+
+  text-align: center;
+}
+
+.buildEyebrow {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #f5c34d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  font-weight: 700;
+  letter-spacing: clamp(3px, 0.4vw, 6px);
+}
+
+.buildSection h2 {
+  margin: 0;
+
+  color: #fdf6e3;
+
+  font-size: clamp(38px, 4vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.buildSubtitle {
+  max-width: 720px;
+
+  margin: 22px auto 0;
+
+  color: #c9c3b6;
+
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.5;
+}
+
+.buildGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: clamp(18px, 1.6vw, 26px);
+}
+
+.buildCard {
+  position: relative;
+
+  height: clamp(350px, 30vh, 350px);
+
+  overflow: hidden;
+
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+
+  background: #090c14;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.buildCard img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.buildCard::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to top,
+    rgba(5, 7, 13, 0.95),
+    rgba(5, 7, 13, 0.18) 62%,
+    transparent
+  );
+}
+
+.buildOverlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: clamp(22px, 2.5vw, 36px);
+}
+
+.buildOverlay h3 {
+  margin: 0;
+
+  color: #fdf6e3;
+
+  font-size: clamp(25px, 2vw, 38px);
+  line-height: 1;
+}
+
+.buildOverlay p {
+  max-width: 620px;
+
+  margin: 14px 0 0;
+
+  color: #d9d9d9;
+
+  font-size: clamp(14px, 1vw, 17px);
+  line-height: 1.55;
+
+  opacity: 0;
+  transform: translateY(14px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.buildCard:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.42),
+    0 0 26px rgba(245, 195, 77, 0.08);
+}
+
+.buildCard:hover img {
+  transform: scale(1.045);
+
+  filter: brightness(0.8);
+}
+
+.buildCard:hover .buildOverlay p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminalAccess {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-top: clamp(36px, 5vh, 62px);
+  padding-top: 28px;
+
+  border-top: 1px solid rgba(245, 195, 77, 0.22);
+}
+
+.terminalAccessStatus {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #c9c3b6;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.terminalAccessDot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #f5c34d;
+
+  box-shadow: 0 0 14px rgba(245, 195, 77, 0.75);
+
+  animation: terminalPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes terminalPulse {
+
+    0%,
+    100% {
+        opacity: 0.45;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.35);
+    }
+}
+
+.terminalAccessButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  min-height: 58px;
+
+  padding: 16px 28px;
+
+  border: 1px solid #f5c34d;
+
+  background: transparent;
+  color: #f5c34d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(11px, 0.9vw, 15px);
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.terminalAccessButton span:last-child {
+  font-size: 20px;
+
+  transition: transform 0.25s ease;
+}
+
+.terminalAccessButton:hover {
+  transform: translateY(-3px);
+
+  background: #f5c34d;
+  color: #05070d;
+
+  box-shadow: 0 0 26px rgba(245, 195, 77, 0.2);
+}
+
+.terminalAccessButton:hover span:last-child {
+  transform: translateX(4px);
+}
+
+.terminalAccessButton:focus-visible {
+  outline: 3px solid #fdf6e3;
+  outline-offset: 5px;
+}
+
+@media (max-width: 1100px) {
+  .buildSection {
+    min-height: auto;
+  }
+
+  .buildCard {
+    height: clamp(240px, 28vw, 320px);
+  }
+}
+
+@media (max-width: 760px) {
+  .buildSection {
+    padding-inline: 20px;
+  }
+
+  .buildGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .buildCard {
+    height: min(64vw, 360px);
+  }
+
+  .buildOverlay p {
+    opacity: 1;
+    transform: none;
+  }
+
+  .terminalAccess {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .terminalAccessStatus {
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .terminalAccessButton {
+    width: 100%;
+  }
+}
+.questTerminalReveal {
+  width: 100%;
+
+  animation: revealQuestTerminal 1.5s ease forwards;
+}
+
+@keyframes revealQuestTerminal {
+0%{
+    opacity:0;
+    transform:translateY(70px);
+}
+
+100%{
+    opacity:1;
+    transform:translateY(0);
+}
+}
+
+.terminalAccessButton:disabled {
+  cursor: default;
+
+  background: rgba(245, 195, 77, 0.1);
+  color: rgba(245, 195, 77, 0.72);
+
+  border-color: rgba(245, 195, 77, 0.42);
+
+  box-shadow: none;
+}
+
+.terminalAccessButton:disabled:hover {
+  transform: none;
+
+  background: rgba(245, 195, 77, 0.1);
+  color: rgba(245, 195, 77, 0.72);
+
+  box-shadow: none;
+}
+
+.terminalAccessButton:disabled span:last-child {
+  transform: none;
+}
+/* =========================================
+   PILLARS → PLAYER BUILD BRIDGE
+========================================= */
+
+.terminalBridge {
+    width: 100%;
+
+    margin-top: clamp(34px, 4vh, 54px);
+}
+
+.terminalBridgeIntro {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: clamp(18px, 2vw, 30px);
+
+    margin-bottom: 25px;
+}
+
+.terminalBridgeIntro p {
+    margin: 0;
+
+    color: rgba(245, 195, 77, 0.9);
+
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(11px, 0.8vw, 15px);
+    font-weight: 750;
+
+    line-height: 1;
+    letter-spacing: clamp(3px, 0.35vw, 6px);
+
+    text-transform: uppercase;
+    text-align: center;
+
+    text-shadow:
+        0 0 10px rgba(245, 195, 77, 0.18);
+}
+
+.terminalBridgeLine {
+    width: 100%;
+    height: 1px;
+    box-shadow:
+        0 0 10px rgba(245, 195, 77, 0.08);
+background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 195, 77, 0.55)
+    
+);
+}
+
+.terminalBridgeLine:last-child {
+    transform: scaleX(-1);
+}
+
+.terminalBridge .terminalAccess {
+    margin-top: 0;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+    .terminalBridge {
+        margin-top: 30px;
+    }
+
+    .terminalBridgeIntro {
+        grid-template-columns: 32px 1fr 32px;
+        gap: 12px;
+
+        margin-bottom: 18px;
+    }
+
+    .terminalBridgeIntro p {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+}
+/* =========================================
+   LARGE DESKTOP WIDTH POLISH
+========================================= */
+
+@media (min-width: 1500px) and (min-height: 881px) {
+  .buildSection {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .buildSectionInner {
+    width: 100%;
+    max-width: 1580px;
+  }
+}
+
+/* =========================================
+   BUILD SECTION ENTRANCE
+========================================= */
+
+.buildHeading,
+.buildCard,
+.terminalBridge {
+  opacity: 0;
+  transform: translateY(34px);
+  filter: blur(3px);
+
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.buildSection--visible .buildHeading,
+.buildSection--visible .buildCard,
+.buildSection--visible .terminalBridge {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.buildSection--visible .buildHeading {
+  transition-delay: 0.08s;
+}
+
+.buildSection--visible .buildCard:nth-child(1) {
+  transition-delay: 0.22s;
+}
+
+.buildSection--visible .buildCard:nth-child(2) {
+  transition-delay: 0.34s;
+}
+
+.buildSection--visible .buildCard:nth-child(3) {
+  transition-delay: 0.46s;
+}
+
+.buildSection--visible .buildCard:nth-child(4) {
+  transition-delay: 0.58s;
+}
+
+.buildSection--visible .terminalBridge {
+  transition-delay: 0.72s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buildHeading,
+  .buildCard,
+  .terminalBridge {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

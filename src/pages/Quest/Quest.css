@@ -1,0 +1,6964 @@
+.quest {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  background: #050505;
+  color: #f4efe6;
+}
+
+.questShell {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding:
+    clamp(72px, 8vh, 108px)
+    24px
+    clamp(56px, 7vh, 90px);
+}
+
+.questBackground {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.questBackground::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:0;
+
+transition:
+opacity .7s ease,
+background .7s ease;
+
+background:
+
+radial-gradient(
+circle at 15% 20%,
+var(--hero-glow),
+transparent 42%
+),
+
+radial-gradient(
+circle at 82% 22%,
+var(--hero-glow),
+transparent 44%
+),
+
+radial-gradient(
+circle at 50% 90%,
+var(--hero-glow),
+transparent 60%
+);
+
+}
+
+.questGlow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+
+  filter: blur(120px);
+  opacity: 0.22;
+}
+
+.questGlowOne {
+  top: -180px;
+  left: -120px;
+
+  background: rgba(117, 89, 255, 0.5);
+  animation: questFloatOne 14s ease-in-out infinite alternate;
+}
+
+.questGlowTwo {
+  right: -170px;
+  bottom: -180px;
+
+  width: 520px;
+  height: 520px;
+
+  background: rgba(117, 89, 255, 0.24);
+
+  filter: blur(110px);
+
+  opacity: 0.15;
+
+  animation: questFloatTwo 18s ease-in-out infinite alternate;
+}
+
+.questGrid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 64px 64px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9),
+    transparent 90%
+  );
+}
+
+.questNoise {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.045;
+
+  background-image:
+    repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      rgba(255, 255, 255, 0.18) 1px,
+      transparent 2px
+    );
+
+  background-size: 8px 8px;
+}
+
+@keyframes questFloatOne {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(100px, 80px, 0) scale(1.12);
+  }
+}
+
+@keyframes questFloatTwo {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-90px, -70px, 0) scale(1.08);
+  }
+}
+.questIntro {
+  position: relative;
+  width: min(100%, 1080px);
+  min-height: auto;
+}
+
+.questIntroEyebrow {
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.52);
+
+  font-size: 0.80rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.questIntroLine {
+  width: 100%;
+  height: 1px;
+  margin-top: 16px;
+
+  background: rgba(244, 239, 230, 0.14);
+}
+
+.questIntroContent {
+  display:grid;
+
+grid-template-columns:
+1fr
+340px;
+
+column-gap:80px;
+    position: relative;
+  z-index: 2;
+
+  max-width: 760px;
+  margin-top: clamp(52px, 6vh, 78px);
+}
+
+.questIntroLabel {
+  margin: 0 0 20px;
+
+  color: rgba(244, 239, 230, 0.52);
+
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.questIntro h1 {
+  margin: 0;
+
+  color: #f4efe6;
+
+  font-size: clamp(3.4rem, 8vw, 7.4rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+.questIntro h1 span {
+  display: block;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.75);
+}
+
+.questIntroDescription {
+  max-width: 560px;
+  margin: 34px 0 0;
+
+  color: rgba(244, 239, 230, 0.68);
+
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.questIntroMeta {
+  display: flex;
+  gap: clamp(34px, 7vw, 90px);
+
+  margin-top: 42px;
+}
+
+.questIntroMeta div {
+  display: grid;
+  gap: 8px;
+}
+
+.questIntroMeta span {
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.questIntroMeta strong {
+  color: #f4efe6;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.questStartButton {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+
+  min-width: 290px;
+  margin-top: 44px;
+  padding: 18px 22px;
+
+  border: 1px solid rgba(244, 239, 230, 0.55);
+  border-radius: 3px;
+
+  background: #f4efe6;
+  color: #090909;
+
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.questStartButton:hover {
+  transform: translateY(-3px);
+
+  background: transparent;
+  color: #f4efe6;
+}
+
+.questStartArrow {
+  font-size: 1rem;
+
+  transition: transform 0.2s ease;
+}
+
+.questStartButton:hover .questStartArrow {
+  transform: translate(4px, -4px);
+}
+
+.questIntroGhost {
+  position: absolute;
+  right: -2vw;
+  bottom: -2vw;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.055);
+
+  font-size: clamp(8rem, 22vw, 20rem);
+  font-weight: 800;
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+
+  user-select: none;
+  pointer-events: none;
+}
+.questInitializing {
+.questLoading {
+  align-self: center;
+}
+  position: relative;
+
+  width: min(92%, 620px);
+  margin: auto;
+
+  text-align: center;
+
+  animation: questInitializingEnter 0.45s ease both;
+}
+
+.questInitializingLabel {
+  display: block;
+
+  color: #f4efe6;
+
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.questInitializingTrack {
+  width: 100%;
+  height: 2px;
+
+  margin: 28px 0 20px;
+
+  overflow: hidden;
+
+  background: rgba(244, 239, 230, 0.12);
+}
+
+.questInitializingFill {
+  height: 100%;
+
+  background: #f4efe6;
+
+  transform-origin: left;
+  animation: questLoad 1.05s ease forwards;
+}
+
+.questInitializing p {
+  margin: 0;
+
+  color: rgba(244, 239, 230, 0.42);
+
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.questScanLine {
+  position: fixed;
+  top: -10%;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 239, 230, 0.8),
+    transparent
+  );
+
+  box-shadow:
+    0 0 20px rgba(244, 239, 230, 0.4),
+    0 0 60px rgba(117, 89, 255, 0.25);
+
+  animation: questScan 1.15s ease-in-out forwards;
+}
+
+@keyframes questLoad {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes questScan {
+  from {
+    top: -10%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  to {
+    top: 110%;
+    opacity: 0;
+  }
+}
+
+@keyframes questInitializingEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.questQuestion {
+  width: min(90%, 1180px);
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.questQuestionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.questEyebrow,
+.questProgress {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.questEyebrow {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.questProgress {
+  color: white;
+}
+
+.questProgress span {
+  margin: 0 5px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.questProgressTrack {
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  margin-bottom: clamp(42px, 7vw, 72px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.questProgressFill {
+  height: 100%;
+  background: white;
+  transition: width 0.45s ease;
+}
+
+.questQuestionContent h2 {
+  max-width: 680px;
+  margin: 0 0 clamp(32px, 5vw, 48px);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.questAnswers {
+  display: grid;
+  gap: 12px;
+}
+
+.questAnswers button {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px 1fr 30px;
+  align-items: center;
+  width: 100%;
+  min-height: 185px;
+  padding: 26px 28px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.025);
+  color: white;
+
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.questAnswers button:hover:not(:disabled) {
+  transform: translateX(6px);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.answerIndex {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.answerText {
+  padding-right: 14px;
+  font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+  line-height: 1.45;
+}
+
+.answerArrow {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.questAnswers button:hover:not(:disabled) .answerArrow {
+  color: white;
+  transform: translate(3px, -3px);
+}
+
+.questAnswers button.selected {
+  transform: scale(0.985);
+  border-color: white;
+  background: white;
+  color: #050505;
+}
+
+.questAnswers button.selected .answerIndex,
+.questAnswers button.selected .answerArrow {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.questAnswers button:disabled {
+  cursor: default;
+}
+
+.questBack {
+  margin-top: 26px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.questBack:hover:not(:disabled) {
+  color: white;
+  transform: translateX(-4px);
+}
+
+@media (max-width: 600px) {
+  .questQuestion {
+    width: min(90%, 780px);
+  }
+
+  .questQuestionContent h2 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .questAnswers button {
+    grid-template-columns: 30px 1fr 20px;
+    min-height: 70px;
+    padding: 13px 14px;
+  }
+
+  .answerArrow {
+    display: none;
+  }
+}
+.questLoading,
+.questResult {
+  width: min(92%, 900px);
+  margin: auto;
+      padding-top: 20px;
+
+  text-align: center;
+}
+
+.questLoading p {
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.questResult img {
+  display: block;
+  width: min(100%, 420px);
+  height: auto;
+  margin: 30px auto;
+  object-fit: contain;
+}
+
+.questResult h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  letter-spacing: 0.08em;
+}
+
+.questResult h2 {
+  margin-bottom: 16px;
+}
+
+.questAnswers button:disabled {
+  cursor: default;
+}
+.questStats {
+  width: min(100%, 500px);
+  margin: 32px auto 0;
+  display: grid;
+  gap: 12px;
+}
+
+.questStat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.questStat span {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+@media (max-width: 700px) {
+  .questShell {
+    padding:
+      72px
+      18px
+      60px;
+  }
+
+  .questIntro {
+    min-height: auto;
+  }
+
+  .questIntroContent {
+    margin-top: 64px;
+  }
+
+  .questIntro h1 {
+    font-size: clamp(3rem, 16vw, 5rem);
+  }
+
+  .questIntroMeta {
+    gap: 30px;
+  }
+
+  .questStartButton {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .questIntroGhost {
+    display: none;
+  }
+}
+@media (min-width: 1440px) {
+  .questShell {
+    padding-top: 82px;
+    padding-bottom: 72px;
+  }
+
+  .questIntroContent {
+    margin-top: 58px;
+  }
+
+  .questIntro {
+    width: min(100%, 1180px);
+  }
+
+  .questQuestion {
+    width: min(88%, 860px);
+  }
+}
+/* =========================================================
+   QUEST INTRO — FINAL TWO-COLUMN COMPOSITION
+   Paste this entire block at the END of Quest.css
+========================================================= */
+
+.questIntro {
+  position: relative;
+
+  width: min(100%, 1120px);
+  min-height: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.questIntroEyebrow {
+  position: relative;
+  z-index: 3;
+
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.5);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.questIntroEyebrow span:first-child {
+  color: rgba(244, 239, 230, 0.64);
+}
+
+.questIntroEyebrow span:last-child {
+  color: rgba(244, 239, 230, 0.76);
+}
+
+.questIntroLine {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  height: 1px;
+  margin-top: 16px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(244, 239, 230, 0.2),
+    rgba(244, 239, 230, 0.08) 72%,
+    rgba(244, 239, 230, 0.18)
+  );
+}
+
+.questIntroContent {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  max-width: none;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
+  align-items: center;
+  gap: clamp(70px, 9vw, 150px);
+
+  margin-top: clamp(48px, 6vh, 72px);
+}
+
+.questIntroLeft {
+  width: 100%;
+  max-width: 700px;
+}
+
+.questIntroLabel {
+  margin: 0 0 18px;
+
+  color: rgba(244, 239, 230, 0.54);
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.questIntro h1 {
+  max-width: 720px;
+  margin: 0;
+
+  color: #f4efe6;
+
+  font-size: clamp(4rem, 6.2vw, 6.8rem);
+  font-weight: 500;
+  line-height: 0.89;
+  letter-spacing: -0.055em;
+}
+
+.questIntro h1 span {
+  display: block;
+  margin-top: 6px;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.55);
+}
+
+.questIntroDescription {
+  max-width: 520px;
+  margin: 32px 0 0;
+
+  color: rgba(244, 239, 230, 0.64);
+
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
+}
+
+.questIntroMeta {
+  display: flex;
+  gap: clamp(42px, 6vw, 84px);
+
+  margin-top: 38px;
+}
+
+.questIntroMeta div {
+  display: grid;
+  gap: 7px;
+}
+
+.questIntroMeta span {
+  color: rgba(244, 239, 230, 0.36);
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.questIntroMeta strong {
+  color: #f4efe6;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* RIGHT SIDE */
+
+.questIntroRight {
+  position: relative;
+
+  width: 100%;
+  max-width: 430px;
+  justify-self: end;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding-top: 12px;
+}
+
+.questSystemStatus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  color: rgba(244, 239, 230, 0.7);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.questStatusDot {
+  position: relative;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #d8c86a;
+  box-shadow:
+    0 0 0 4px rgba(216, 200, 106, 0.08),
+    0 0 18px rgba(216, 200, 106, 0.5);
+}
+
+.questStatusDot::after {
+  content: "";
+
+  position: absolute;
+  inset: -5px;
+
+  border: 1px solid rgba(216, 200, 106, 0.24);
+  border-radius: 50%;
+
+  animation: questStatusPulse 2.1s ease-out infinite;
+}
+
+.questStartButton {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 94px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  margin: 0;
+  padding: 0 30px;
+
+  border: 1px solid rgba(244, 239, 230, 0.7);
+  border-radius: 2px;
+
+  background: #f4efe6;
+  color: #080808;
+
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 0.28s ease,
+    color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.questStartButton::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: #111111;
+
+  transform: translateX(-102%);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.questStartButton::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 34%;
+  height: 2px;
+
+  background: #d8c86a;
+
+  transform-origin: right;
+  transition: width 0.35s ease;
+}
+
+.questStartButton:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(244, 239, 230, 0.9);
+  color: #f4efe6;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.42),
+    0 0 34px rgba(216, 200, 106, 0.08);
+}
+
+.questStartButton:hover::before {
+  transform: translateX(0);
+}
+
+.questStartButton:hover::after {
+  width: 100%;
+}
+
+.questStartButton:active {
+  transform: translateY(-1px) scale(0.985);
+}
+
+.questStartArrow {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 50%;
+
+  font-size: 1rem;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.questStartButton:hover .questStartArrow {
+  transform: translate(3px, -3px) rotate(8deg);
+  border-color: rgba(244, 239, 230, 0.35);
+}
+
+.questStatusText {
+  margin: 15px 0 0;
+
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.questStatusText::before {
+  content: "//";
+  margin-right: 9px;
+
+  color: rgba(216, 200, 106, 0.72);
+}
+
+/* GHOST WORD */
+
+.questIntroGhost {
+  position: absolute;
+  right: -1vw;
+  bottom: -7vw;
+  z-index: 1;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.075);
+
+  font-size: clamp(9rem, 19vw, 18rem);
+  font-weight: 800;
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/* EXTRA DEPTH */
+
+.questBackground::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 58% 45%,
+      rgba(244, 239, 230, 0.025),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 72% 32%,
+      rgba(216, 200, 106, 0.025),
+      transparent 24%
+    );
+
+  pointer-events: none;
+}
+
+@keyframes questStatusPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+
+  70%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* LARGE MONITORS */
+
+@media (min-width: 1440px) {
+  .questIntro {
+    width: min(100%, 1180px);
+  }
+
+  .questIntroContent {
+    grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+    gap: 140px;
+    margin-top: 58px;
+  }
+
+  .questIntroRight {
+    max-width: 440px;
+  }
+
+  .questStartButton {
+    min-height: 104px;
+    padding-inline: 34px;
+  }
+}
+
+/* LAPTOPS / SMALL DESKTOP */
+
+@media (max-width: 1050px) {
+  .questIntroContent {
+    grid-template-columns: minmax(0, 1.2fr) minmax(270px, 0.8fr);
+    gap: 48px;
+  }
+
+  .questIntro h1 {
+    font-size: clamp(3.8rem, 7vw, 5.5rem);
+  }
+
+  .questIntroRight {
+    max-width: 350px;
+  }
+
+  .questStartButton {
+    min-height: 84px;
+    padding-inline: 24px;
+  }
+}
+
+/* TABLET + MOBILE */
+
+@media (max-width: 800px) {
+  .questIntroContent {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 46px;
+
+    margin-top: 54px;
+  }
+
+  .questIntroLeft {
+    max-width: 100%;
+  }
+
+  .questIntroRight {
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+
+    padding-top: 0;
+  }
+
+  .questStartButton {
+    width: 100%;
+    min-height: 82px;
+  }
+
+  .questIntroGhost {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .questIntroContent {
+    gap: 38px;
+    margin-top: 44px;
+  }
+
+  .questIntro h1 {
+    font-size: clamp(3.2rem, 15vw, 4.4rem);
+  }
+
+  .questIntroDescription {
+    margin-top: 26px;
+  }
+
+  .questIntroMeta {
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .questSystemStatus {
+    margin-bottom: 14px;
+  }
+
+  .questStartButton {
+    min-height: 76px;
+    padding-inline: 20px;
+
+    font-size: 0.68rem;
+  }
+
+  .questStartArrow {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+}
+/* QUEST INTRO — META MOVED TO RIGHT COLUMN */
+
+.questIntroContent {
+  align-items: stretch;
+}
+
+.questIntroLeft,
+.questIntroRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.questIntroLeft {
+  justify-content: flex-start;
+}
+
+.questIntroRight {
+  justify-content: center;
+}
+
+.questIntroMetaRight {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+
+  margin-top: 30px;
+  padding-top: 24px;
+
+  border-top: 1px solid rgba(244, 239, 230, 0.12);
+}
+
+.questIntroMetaRight div {
+  display: grid;
+  gap: 8px;
+}
+
+.questIntroMetaRight span {
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.questIntroMetaRight strong {
+  color: #f4efe6;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.questStatusText {
+  display: none;
+}
+
+@media (min-width: 801px) {
+  .questIntroRight {
+    min-height: 100%;
+    padding-top: 62px;
+    padding-bottom: 2px;
+  }
+}
+
+@media (max-width: 800px) {
+  .questIntroMetaRight {
+    margin-top: 24px;
+    padding-top: 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .questIntroMetaRight {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+/* =========================================================
+   QUEST ANSWER CARDS — FINAL 2x2 GRID PASS
+   Paste at the END of Quest.css
+========================================================= */
+
+.questQuestion {
+  width: min(94%, 1120px);
+  margin: 0 auto;
+  padding-top: 2px;
+}
+
+.questQuestionTop {
+  margin-bottom: 12px;
+}
+
+.questProgressTrack {
+  height: 2px;
+  margin-bottom: clamp(40px, 5vw, 62px);
+
+  background: rgba(244, 239, 230, 0.1);
+}
+
+.questProgressFill {
+  position: relative;
+
+  background: linear-gradient(
+    90deg,
+    #d8c86a,
+    #f4efe6
+  );
+
+  box-shadow:
+    0 0 14px rgba(216, 200, 106, 0.16);
+
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.questProgressFill::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #f4efe6;
+  box-shadow:
+    0 0 0 4px rgba(216, 200, 106, 0.08),
+    0 0 16px rgba(216, 200, 106, 0.45);
+
+  transform: translate(50%, -50%);
+}
+
+.questQuestionContent h2 {
+  max-width: 900px;
+  margin: 0 0 clamp(30px, 4vw, 44px);
+
+  color: #f4efe6;
+
+  font-size: clamp(2rem, 3.8vw, 3.9rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+
+  animation: questQuestionEnter 0.48s ease both;
+}
+
+.questAnswers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  transition:
+  transform 180ms ease,
+  border-color 180ms ease,
+  background-color 180ms ease,
+  box-shadow 180ms ease;
+}
+
+.questAnswers button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  min-height: 128px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+
+  padding: 20px 22px 18px;
+
+  border: 1px solid rgba(244, 239, 230, 0.13);
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 239, 230, 0.035),
+      rgba(244, 239, 230, 0.012)
+    );
+
+  color: #f4efe6;
+
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.018);
+
+  opacity: 0;
+  transform: translateY(18px);
+
+  animation:
+    questAnswerEnter 0.5s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+
+  animation-delay: var(--answer-delay);
+
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s ease,
+    color 0.28s ease;
+}
+
+.questAnswers button::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 18% 12%,
+      rgba(216, 200, 106, 0.09),
+      transparent 38%
+    );
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.questAnswers button::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(244, 239, 230, 0.08),
+      transparent 45%
+    );
+
+  transform: translateX(-105%);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.answerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.answerIndex {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid rgba(244, 239, 230, 0.16);
+  border-radius: 50%;
+
+  color: rgba(244, 239, 230, 0.56);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.answerArrow {
+  color: rgba(244, 239, 230, 0.28);
+
+  font-size: 1rem;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.answerText {
+  display: block;
+
+  max-width: 92%;
+  margin-top: 20px;
+  padding: 0;
+
+  color: rgba(244, 239, 230, 0.88);
+
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+}
+
+.answerLine {
+  display: block;
+
+  width: 34px;
+  height: 2px;
+  margin-top: 16px;
+
+  background: rgba(244, 239, 230, 0.13);
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.questAnswers button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  border-color: rgba(244, 239, 230, 0.42);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 239, 230, 0.07),
+      rgba(244, 239, 230, 0.022)
+    );
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 32px rgba(216, 200, 106, 0.035);
+}
+
+.questAnswers button:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.questAnswers button:hover:not(:disabled)::after {
+  transform: translateX(0);
+}
+
+.questAnswers button:hover:not(:disabled) .answerIndex {
+  border-color: rgba(216, 200, 106, 0.7);
+
+  background: rgba(216, 200, 106, 0.11);
+  color: #f4efe6;
+
+  transform: scale(1.05);
+}
+
+.questAnswers button:hover:not(:disabled) .answerArrow {
+  color: #d8c86a;
+
+  transform: translate(4px, -4px) rotate(8deg);
+}
+
+.questAnswers button:hover:not(:disabled) .answerLine {
+  width: 100%;
+
+  background: #d8c86a;
+}
+
+.questAnswers button.selected {
+  transform: scale(0.985);
+
+  border-color: #f4efe6;
+
+  background: #f4efe6;
+  color: #080808;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(216, 200, 106, 0.1);
+}
+
+.questAnswers button.selected::before,
+.questAnswers button.selected::after {
+  opacity: 0;
+  transform: none;
+}
+
+.questAnswers button.selected .answerIndex {
+  border-color: rgba(0, 0, 0, 0.14);
+
+  background: #080808;
+  color: #f4efe6;
+}
+
+.questAnswers button.selected .answerText {
+  color: #080808;
+}
+
+.questAnswers button.selected .answerArrow {
+  color: #080808;
+
+  transform: translate(3px, -3px);
+}
+
+.questAnswers button.selected .answerLine {
+  width: 100%;
+
+  background: #d8c86a;
+}
+
+.questAnswers button:disabled {
+  cursor: default;
+}
+
+.questAnswers button:disabled:not(.selected) {
+  opacity: 0.42;
+}
+
+.questBack {
+  margin-top: 28px;
+}
+
+@keyframes questQuestionEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes questAnswerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (min-width: 1600px) {
+
+    .questQuestion{
+        width:min(95vw,1500px);
+    }
+
+    .questQuestionContent h2{
+        max-width:1100px;
+    }
+
+    .questAnswers{
+        gap:22px;
+    }
+
+    .questAnswers button{
+        min-height:165px;
+    }
+
+}
+
+/* TABLETS */
+
+@media (max-width: 760px) {
+  .questAnswers {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .questAnswers button {
+    min-height: 128px;
+  }
+
+  .answerText {
+    margin-top: 22px;
+  }
+
+  .questQuestionContent h2 {
+    margin-bottom: 30px;
+
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 520px) {
+  .questQuestion {
+    width: 100%;
+  }
+
+  .questAnswers button {
+    min-height: 116px;
+    padding: 16px 17px 15px;
+  }
+
+  .answerIndex {
+    width: 30px;
+    height: 30px;
+  }
+
+  .answerText {
+    max-width: 100%;
+    margin-top: 18px;
+
+    font-size: 0.98rem;
+  }
+
+  .answerLine {
+    margin-top: 18px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .questQuestionContent h2,
+  .questAnswers button {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .questAnswers button,
+  .questAnswers button::after,
+  .answerIndex,
+  .answerArrow,
+  .answerLine {
+    transition: none;
+  }
+}
+/* =========================================================
+   QUEST INITIALIZING — CINEMATIC ENTRY PASS
+   Paste at the END of Quest.css
+========================================================= */
+
+.questInitializing {
+  position: relative;
+  isolation: isolate;
+
+  width: min(92%, 980px);
+  min-height: 520px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: clamp(38px, 5vw, 64px);
+
+  border: 1px solid rgba(244, 239, 230, 0.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 239, 230, 0.018),
+      rgba(244, 239, 230, 0.004)
+    );
+
+  overflow: hidden;
+
+  animation: questInitializingEnter 0.55s ease both;
+}
+
+.questInitializing::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 50% 44%,
+      rgba(216, 200, 106, 0.06),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 12% 20%,
+      rgba(117, 89, 255, 0.08),
+      transparent 28%
+    );
+}
+
+.questInitializing::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.012) 4px
+    );
+
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.questInitializingHeader {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  right: 28px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.questInitializingCore {
+  width: min(100%, 780px);
+  margin: 0 auto;
+
+  text-align: left;
+}
+
+.questInitializingKicker {
+  margin: 0 0 18px;
+
+  color: rgba(216, 200, 106, 0.72);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+
+  animation: questInitFade 0.45s ease 0.15s both;
+}
+
+.questInitializing h2 {
+  margin: 0;
+
+  color: #f4efe6;
+
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+
+  animation: questInitTitle 0.65s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.2s both;
+}
+
+.questInitializing h2 span {
+  display: block;
+
+  margin-top: 8px;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.56);
+}
+
+.questInitializingTrack {
+  position: relative;
+
+  width: 100%;
+  height: 3px;
+
+  margin: 42px 0 18px;
+
+  overflow: visible;
+
+  background: rgba(244, 239, 230, 0.1);
+}
+
+.questInitializingFill {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #d8c86a,
+    #f4efe6 72%
+  );
+
+  transform-origin: left;
+
+  box-shadow:
+    0 0 18px rgba(216, 200, 106, 0.18);
+
+  animation: questLoad 1.75s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.28s forwards;
+}
+
+.questInitializingFill::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #f4efe6;
+
+  box-shadow:
+    0 0 0 5px rgba(216, 200, 106, 0.08),
+    0 0 18px rgba(216, 200, 106, 0.5);
+
+  transform: translate(50%, -50%);
+}
+
+.questInitializingStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.42);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+
+  animation: questInitFade 0.45s ease 0.7s both;
+}
+
+.questInitializingStatus strong {
+  color: rgba(216, 200, 106, 0.88);
+
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+}
+
+.questInitializingSignals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  margin-top: 34px;
+}
+
+.questInitializingSignals span {
+  position: relative;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(244, 239, 230, 0.1);
+
+  color: rgba(244, 239, 230, 0.34);
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  animation: questSignalEnter 0.42s ease forwards;
+}
+
+.questInitializingSignals span:nth-child(1) {
+  animation-delay: 0.8s;
+}
+
+.questInitializingSignals span:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.questInitializingSignals span:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.questInitializingSignals span:nth-child(4) {
+  animation-delay: 1.4s;
+}
+
+.questInitializingSignals span::before {
+  content: "";
+
+  position: absolute;
+  top: -2px;
+  left: 0;
+
+  width: 18px;
+  height: 3px;
+
+  background: #d8c86a;
+
+  box-shadow:
+    0 0 10px rgba(216, 200, 106, 0.28);
+}
+
+.questInitializingFrame {
+  position: absolute;
+  inset: 16px;
+
+  border:
+    1px solid rgba(244, 239, 230, 0.035);
+
+  pointer-events: none;
+}
+
+.questInitializingFrame::before,
+.questInitializingFrame::after {
+  content: "";
+
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  border-color: rgba(216, 200, 106, 0.28);
+  border-style: solid;
+}
+
+.questInitializingFrame::before {
+  top: -1px;
+  left: -1px;
+
+  border-width: 1px 0 0 1px;
+}
+
+.questInitializingFrame::after {
+  right: -1px;
+  bottom: -1px;
+
+  border-width: 0 1px 1px 0;
+}
+
+.questScanLine {
+  position: fixed;
+  top: -10%;
+  left: 0;
+  z-index: 20;
+
+  width: 100%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 239, 230, 0.95),
+    transparent
+  );
+
+  box-shadow:
+    0 0 22px rgba(244, 239, 230, 0.45),
+    0 0 70px rgba(216, 200, 106, 0.14);
+
+  animation: questScan 2.05s ease-in-out forwards;
+}
+
+@keyframes questInitTitle {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes questInitFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes questSignalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1440px) {
+  .questInitializing {
+    width: min(90%, 1080px);
+    min-height: 580px;
+  }
+
+  .questInitializingCore {
+    width: min(100%, 840px);
+  }
+}
+
+@media (max-width: 760px) {
+  .questInitializing {
+    width: 100%;
+    min-height: 460px;
+
+    padding: 32px 22px;
+  }
+
+  .questInitializingHeader {
+    top: 18px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .questInitializingSignals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+
+  .questInitializing h2 {
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .questInitializingStatus {
+    align-items: flex-start;
+    gap: 18px;
+
+    flex-direction: column;
+  }
+
+  .questInitializingSignals {
+    margin-top: 28px;
+  }
+}
+/* =========================================================
+   QUEST OUTRO — PLAYER BUILD COMPILATION
+   Paste at the END of Quest.css
+========================================================= */
+
+.questLoading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: min(92%, 1040px);
+  min-height: 580px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: clamp(40px, 5vw, 70px);
+
+  border: 1px solid rgba(244, 239, 230, 0.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 239, 230, 0.018),
+      rgba(244, 239, 230, 0.004)
+    );
+
+  text-align: left;
+
+  animation: questOutroEnter 0.55s ease both;
+}
+
+.questLoading::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 62% 42%,
+      rgba(216, 200, 106, 0.07),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(117, 89, 255, 0.08),
+      transparent 30%
+    );
+}
+
+.questLoading::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.012) 4px
+    );
+
+  opacity: 0.46;
+  pointer-events: none;
+}
+
+.questLoadingHeader {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  right: 28px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.questLoadingCore {
+  width: min(100%, 820px);
+  margin: 0 auto;
+}
+
+.questLoadingKicker {
+  margin: 0 0 18px;
+
+  color: rgba(216, 200, 106, 0.74);
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+
+  animation: questOutroFade 0.45s ease 0.12s both;
+}
+
+.questLoading h2 {
+  margin: 0;
+
+  color: #f4efe6;
+
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  font-weight: 500;
+  line-height: 0.91;
+  letter-spacing: -0.05em;
+
+  animation:
+    questOutroTitle 0.7s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.18s both;
+}
+
+.questLoading h2 span {
+  display: block;
+  margin-top: 8px;
+
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244, 239, 230, 0.56);
+}
+
+.questLoadingTrack {
+  position: relative;
+
+  width: 100%;
+  height: 3px;
+
+  margin: 42px 0 18px;
+
+  background: rgba(244, 239, 230, 0.1);
+}
+
+.questLoadingFill {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d8c86a,
+      #f4efe6 74%
+    );
+
+  transform-origin: left;
+
+  box-shadow:
+    0 0 20px rgba(216, 200, 106, 0.2);
+
+  animation:
+    questOutroLoad 2.25s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.3s both;
+}
+
+.questLoadingFill::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #f4efe6;
+
+  box-shadow:
+    0 0 0 5px rgba(216, 200, 106, 0.08),
+    0 0 22px rgba(216, 200, 106, 0.55);
+
+  transform: translate(50%, -50%);
+}
+
+.questLoadingStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: rgba(244, 239, 230, 0.42);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+
+  animation: questOutroFade 0.45s ease 0.68s both;
+}
+
+.questLoadingStatus strong {
+  color: rgba(216, 200, 106, 0.9);
+
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+
+  animation: questOutroPulse 0.85s ease-in-out infinite alternate;
+}
+
+.questLoadingSignals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+
+  margin-top: 36px;
+}
+
+.questLoadingSignals div {
+  position: relative;
+
+  display: grid;
+  gap: 12px;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  animation:
+    questOutroSignalEnter 0.44s ease forwards;
+}
+
+.questLoadingSignals div:nth-child(1) {
+  animation-delay: 0.85s;
+}
+
+.questLoadingSignals div:nth-child(2) {
+  animation-delay: 1.05s;
+}
+
+.questLoadingSignals div:nth-child(3) {
+  animation-delay: 1.25s;
+}
+
+.questLoadingSignals div:nth-child(4) {
+  animation-delay: 1.45s;
+}
+
+.questLoadingSignals span {
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.questLoadingSignals i {
+  position: relative;
+  overflow: hidden;
+
+  display: block;
+
+  width: 100%;
+  height: 2px;
+
+  background: rgba(244, 239, 230, 0.1);
+}
+
+.questLoadingSignals i::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d8c86a,
+      rgba(244, 239, 230, 0.8)
+    );
+
+  transform-origin: left;
+
+  animation:
+    questSignalScan 0.9s ease both;
+}
+
+.questLoadingSignals div:nth-child(1) i::after {
+  animation-delay: 0.9s;
+}
+
+.questLoadingSignals div:nth-child(2) i::after {
+  animation-delay: 1.1s;
+}
+
+.questLoadingSignals div:nth-child(3) i::after {
+  animation-delay: 1.3s;
+}
+
+.questLoadingSignals div:nth-child(4) i::after {
+  animation-delay: 1.5s;
+}
+
+.questLoadingReveal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 42px;
+  padding-top: 22px;
+
+  border-top:
+    1px solid rgba(244, 239, 230, 0.1);
+
+  opacity: 0;
+
+  animation:
+    questRevealStatus 0.45s ease 1.8s forwards;
+}
+
+.questLoadingReveal span {
+  color: rgba(244, 239, 230, 0.38);
+
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.questLoadingReveal strong {
+  color: #f4efe6;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.questLoadingFrame {
+  position: absolute;
+  inset: 16px;
+
+  border:
+    1px solid rgba(244, 239, 230, 0.035);
+
+  pointer-events: none;
+}
+
+.questLoadingFrame::before,
+.questLoadingFrame::after {
+  content: "";
+
+  position: absolute;
+
+  width: 48px;
+  height: 48px;
+
+  border-style: solid;
+  border-color: rgba(216, 200, 106, 0.3);
+}
+
+.questLoadingFrame::before {
+  top: -1px;
+  left: -1px;
+
+  border-width: 1px 0 0 1px;
+}
+
+.questLoadingFrame::after {
+  right: -1px;
+  bottom: -1px;
+
+  border-width: 0 1px 1px 0;
+}
+
+.questLoadingSweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+
+  width: 18%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 239, 230, 0.05),
+      transparent
+    );
+
+  transform: skewX(-14deg);
+
+  animation:
+    questOutroSweep 2.4s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+
+  pointer-events: none;
+}
+
+@keyframes questOutroEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes questOutroTitle {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes questOutroFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes questOutroLoad {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes questOutroSignalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes questSignalScan {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes questRevealStatus {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes questOutroPulse {
+  from {
+    opacity: 0.45;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes questOutroSweep {
+  from {
+    left: -25%;
+  }
+
+  to {
+    left: 115%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .questLoading {
+    width: min(90%, 1120px);
+    min-height: 620px;
+  }
+
+  .questLoadingCore {
+    width: min(100%, 880px);
+  }
+}
+
+@media (max-width: 760px) {
+  .questLoading {
+    width: 100%;
+    min-height: 520px;
+
+    padding: 34px 22px;
+  }
+
+  .questLoadingHeader {
+    top: 18px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .questLoadingSignals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 14px;
+  }
+
+  .questLoading h2 {
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .questLoadingStatus,
+  .questLoadingReveal {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .questLoadingSignals {
+    margin-top: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .questLoading,
+  .questLoadingKicker,
+  .questLoading h2,
+  .questLoadingStatus,
+  .questLoadingSignals div,
+  .questLoadingSignals i::after,
+  .questLoadingReveal,
+  .questLoadingSweep {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+}
+/* SLOWER QUEST INTRO + OUTRO */
+
+.questScanLine {
+  animation-duration: 2.8s;
+}
+
+.questInitializingFill {
+  animation-duration: 2.35s;
+}
+
+.questLoadingFill {
+  animation-duration: 2.9s;
+}
+
+.questLoadingSweep {
+  animation-duration: 3.15s;
+}
+/* =========================================================
+   QUEST — RETRO TYPOGRAPHY ONLY
+   No pixel shapes, no clipped cards
+========================================================= */
+
+/* Small system labels */
+
+.questIntroEyebrow,
+.questIntroLabel,
+.questSystemStatus,
+.questEyebrow,
+.questProgress,
+.questInitializingHeader,
+.questInitializingKicker,
+.questInitializingStatus,
+.questInitializingSignals,
+.questLoadingHeader,
+.questLoadingKicker,
+.questLoadingStatus,
+.questLoadingSignals,
+.questLoadingReveal {
+  font-family:
+    "Obsidian",
+    "Courier New",
+    monospace;
+
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+/* Answer letters only */
+
+.answerIndex {
+  font-family:
+    "Obsidian",
+    "Courier New",
+    monospace;
+
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Loading / protocol status text */
+
+.questInitializingStatus strong,
+.questLoadingStatus strong,
+.questLoadingReveal strong {
+  font-family:
+    "Obsidian",
+    "Courier New",
+    monospace;
+}
+
+/* Keep main headings modern */
+
+.questIntro h1,
+.questQuestionContent h2,
+.questInitializing h2,
+.questLoading h2,
+.questResult h1,
+.answerText,
+.questIntroDescription {
+  font-family: inherit;
+}
+/* ==========================================================
+   QUEST TYPOGRAPHY TEST
+========================================================== */
+
+/* System labels */
+
+.questIntroEyebrow,
+.questIntroLabel,
+.questEyebrow,
+.questProgress,
+.questSystemStatus,
+.questInitializingHeader,
+.questInitializingKicker,
+.questInitializingStatus,
+.questInitializingSignals,
+.questLoadingHeader,
+.questLoadingKicker,
+.questLoadingStatus,
+.questLoadingSignals,
+.questLoadingReveal,
+.questIntroMeta span {
+
+    font-family: "VT323", monospace;
+
+    font-size: 1.1rem;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+/* Small game stamps */
+
+.answerIndex,
+.questStatusDot + span {
+
+    font-family: "Press Start 2P", cursive;
+
+    font-size: .55rem;
+
+    letter-spacing: .08em;
+}
+
+/* Body */
+
+.questIntroDescription,
+.answerText,
+.questStat span,
+.questStat strong,
+.questBack,
+.questStartButton,
+.questIntroMeta strong {
+
+    font-family: "Space Grotesk", sans-serif;
+}
+
+/* Buttons */
+
+.questStartButton span:first-child {
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: .16em;
+}
+
+/* Questions */
+
+.questQuestionContent h2 {
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-weight: 650;
+
+    letter-spacing: -.04em;
+}
+
+/* Hero titles */
+
+.questResult h1,
+.questLoading h2,
+.questInitializing h2,
+.questIntro h1 {
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-weight: 700;
+
+    letter-spacing: -.05em;
+}
+/* =========================================================
+   QUEST RESULT — TWO COLUMN REVEAL
+========================================================= */
+
+.questResult {
+  position: relative;
+  z-index: 2;
+
+  width: min(1180px, 100%);
+  min-height: 680px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  gap: clamp(42px, 6vw, 92px);
+  align-items: center;
+
+  padding: clamp(36px, 5vw, 72px);
+}
+
+/* =========================================================
+   LEFT COLUMN
+========================================================= */
+
+.questResultLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.questResultHeader {
+  width: 100%;
+}
+
+.questResultHeader > span {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  font-family: "VT323", monospace;
+  font-size: 1.15rem;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.questResultHeader h1 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6.8rem);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.075em;
+
+  color: #f5f1e8;
+}
+
+.questResultHeader h2 {
+  margin: 26px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.questResultHeader p {
+  max-width: 590px;
+  margin: 16px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-weight: 400;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.56);
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.questStats {
+  width: 100%;
+  margin-top: 42px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.questStat {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 44px;
+  gap: 18px;
+  align-items: center;
+}
+
+.questStat > span {
+  font-family: "VT323", monospace;
+  font-size: 1.08rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.questStat > strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: right;
+
+  color: #f5f1e8;
+}
+
+.questStatBar {
+  position: relative;
+
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.questStatFill {
+  width: 0;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    rgba(159, 126, 255, 0.78),
+    rgba(225, 213, 255, 0.95)
+  );
+
+  box-shadow: 0 0 18px rgba(154, 112, 255, 0.35);
+
+  transform-origin: left;
+  animation: questStatReveal 1.15s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+
+.questStat:nth-child(2) .questStatFill {
+  animation-delay: 90ms;
+}
+
+.questStat:nth-child(3) .questStatFill {
+  animation-delay: 180ms;
+}
+
+.questStat:nth-child(4) .questStatFill {
+  animation-delay: 270ms;
+}
+
+@keyframes questStatReveal {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.questResultButtons {
+  width: 100%;
+  margin-top: 44px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.questResultButtons button {
+  min-height: 54px;
+  padding: 0 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.questSecondaryButton {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.questSecondaryButton:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #ffffff;
+}
+
+.questPrimaryButton {
+  background: #f3eee4;
+  color: #111111;
+}
+
+.questPrimaryButton:hover {
+  transform: translateY(-2px);
+
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* =========================================================
+   RIGHT COLUMN — GIF FRAME
+========================================================= */
+
+.questResultRight {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.questHeroFrame {
+  position: relative;
+
+  width: min(100%, 470px);
+  aspect-ratio: 0.82;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(132, 90, 230, 0.2),
+      transparent 58%
+    ),
+    rgba(255, 255, 255, 0.025);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.45),
+    inset 0 0 60px rgba(255, 255, 255, 0.025);
+
+  animation: questHeroReveal 850ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+
+.questHeroFrame::before {
+  content: "";
+
+  position: absolute;
+  inset: 18px;
+  z-index: 2;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  pointer-events: none;
+}
+
+.questHeroFrame::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 68%,
+      rgba(7, 7, 8, 0.72) 100%
+    );
+
+  pointer-events: none;
+}
+
+.questHeroFrame img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter: contrast(1.04) saturate(0.9);
+}
+
+.questHeroLabel {
+  position: absolute;
+  left: 30px;
+  bottom: 27px;
+  z-index: 4;
+
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.52rem, 0.7vw, 0.68rem);
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+@keyframes questHeroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.975);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* =========================================================
+   RESULT ENTRANCE
+========================================================= */
+
+.questResultLeft {
+  animation: questResultTextReveal 720ms ease both;
+}
+
+@keyframes questResultTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 960px) {
+  .questResult {
+    grid-template-columns: 1fr;
+    gap: 48px;
+
+    width: min(760px, 100%);
+    padding: 48px 32px 70px;
+  }
+
+  .questResultRight {
+    grid-row: 1;
+  }
+
+  .questHeroFrame {
+    width: min(100%, 520px);
+    aspect-ratio: 1 / 1;
+  }
+
+  .questResultLeft {
+    grid-row: 2;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .questResult {
+    gap: 34px;
+    padding: 28px 18px 52px;
+  }
+
+  .questHeroFrame {
+    width: 100%;
+    aspect-ratio: 0.95;
+  }
+
+  .questHeroFrame::before {
+    inset: 12px;
+  }
+
+  .questHeroLabel {
+    left: 22px;
+    bottom: 21px;
+  }
+
+  .questResultHeader > span {
+    margin-bottom: 14px;
+  }
+
+  .questResultHeader h1 {
+    font-size: clamp(3rem, 16vw, 4.6rem);
+  }
+
+  .questResultHeader h2 {
+    margin-top: 20px;
+  }
+
+  .questStats {
+    margin-top: 34px;
+  }
+
+  .questStat {
+    grid-template-columns: 88px minmax(0, 1fr) 36px;
+    gap: 10px;
+  }
+
+  .questStat > span {
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+  }
+
+  .questResultButtons {
+    margin-top: 36px;
+  }
+
+  .questResultButtons button {
+    width: 100%;
+  }
+}
+/* =========================================================
+   QUEST RESULT — CENTERED HEADER + TWO COLUMN BODY
+========================================================= */
+
+.questResult {
+  width: min(1180px, 100%);
+  min-height: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: clamp(42px, 5vw, 68px);
+
+  padding: clamp(48px, 6vw, 84px);
+}
+
+.questResultHeroHeader {
+  width: min(820px, 100%);
+  margin: 0 auto;
+
+  text-align: center;
+
+  animation: questResultTextReveal 720ms ease both;
+}
+
+.questResultHeroHeader > span {
+  display: block;
+
+  margin-bottom: 18px;
+
+  font-family: "VT323", monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.questResultHeroHeader h1 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+
+  color: #f5f1e8;
+}
+
+.questResultHeroHeader h2 {
+  margin: 28px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.questResultHeroHeader p {
+  max-width: 620px;
+  margin: 15px auto 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.questResultBody {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: clamp(42px, 6vw, 88px);
+  align-items: start;
+}
+
+.questResultLeft {
+  width: 100%;
+}
+
+.questResultSectionTitle,
+.questInsightLabel {
+  display: block;
+
+  font-family: "VT323", monospace;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.questResultSectionTitle {
+  margin-bottom: 19px;
+}
+
+.questResultInsights {
+  margin-top: 40px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 34px;
+}
+
+.questInsightBlock,
+.questUpgradeBlock {
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.questUpgradeBlock {
+  grid-column: 1 / -1;
+}
+
+.questInsightBlock ul {
+  margin: 17px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.questInsightBlock li {
+  position: relative;
+
+  margin-top: 10px;
+  padding-left: 17px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.questInsightBlock li::before {
+  content: "";
+
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+
+  width: 5px;
+  height: 5px;
+
+  background: rgba(204, 180, 255, 0.82);
+}
+
+.questUpgradeBlock p {
+  margin: 17px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.94rem;
+  line-height: 1.65;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.questHeroFrame::after {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 82%,
+      rgba(7, 7, 8, 0.28) 100%
+    );
+}
+
+@media (max-width: 960px) {
+  .questResult {
+    padding: 48px 32px 70px;
+  }
+
+  .questResultBody {
+    grid-template-columns: 1fr;
+  }
+
+  .questResultRight {
+    grid-row: 1;
+  }
+
+  .questResultLeft {
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .questResult {
+    padding: 34px 18px 52px;
+  }
+
+  .questResultInsights {
+    grid-template-columns: 1fr;
+  }
+
+  .questUpgradeBlock {
+    grid-column: auto;
+  }
+}
+/* =========================================================
+   QUEST RESULT — FINAL ALIGNED LAYOUT
+========================================================= */
+
+.questResult {
+ --hero-glow:rgba(0,74,173,.12);
+
+  position: relative;
+  z-index: 2;
+
+  width: min(1180px, 100%);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding:
+    clamp(50px, 6vw, 88px)
+    clamp(24px, 5vw, 70px)
+    clamp(52px, 7vw, 92px);
+
+  color: #f4efe6;
+}
+
+/* Dynamic background accent */
+
+.questResult::before {
+    display:none;
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+
+radial-gradient(
+circle at 18% 18%,
+color-mix(
+in srgb,
+var(--hero-accent) 9%,
+transparent
+),
+transparent 38%
+),
+
+radial-gradient(
+circle at 82% 24%,
+color-mix(
+in srgb,
+var(--hero-accent) 13%,
+transparent
+),
+transparent 42%
+),
+
+radial-gradient(
+circle at 50% 100%,
+color-mix(
+in srgb,
+var(--hero-accent) 7%,
+transparent
+),
+transparent 52%
+);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CENTERED HEADER
+========================================================= */
+
+.questResultHeroHeader{
+    width:100%;
+    max-width:1120px;
+}
+
+.questResultHeroHeader > span {
+  display: block;
+
+  margin-bottom: 16px;
+
+  font-family: "VT323", monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.questResultHeroHeader h1 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(4rem, 7vw, 7.2rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+
+  color: #f5f1e8;
+}
+
+.questResultHeroHeader h2 {
+  margin: 26px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  font-weight: 600;
+
+  color: var(--hero-accent);
+}
+
+.questResultHeroHeader p {
+  max-width: 950px;
+  margin: 14px auto 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.56);
+}
+
+/* =========================================================
+   TWO ALIGNED COLUMNS
+========================================================= */
+
+.questResultBody {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(360px, 1fr);
+
+  gap: clamp(28px, 4vw, 48px);
+  align-items: stretch;
+}
+
+.questResultProfile,
+.questResultVisual {
+  min-width: 0;
+  display: flex;
+}
+
+.questProfilePanel,
+.questHeroFrame {
+  width: 100%;
+  min-height: 520px;
+}
+
+.questProfilePanel {
+  display: flex;
+  flex-direction: column;
+
+  padding: clamp(26px, 3vw, 36px);
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 32%,
+      rgba(255, 255, 255, 0.12)
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 4%,
+        transparent
+      ),
+      transparent 38%
+    ),
+    rgba(255, 255, 255, 0.012);
+}
+
+/* =========================================================
+   PERFORMANCE PROFILE
+========================================================= */
+
+.questResultSectionTitle {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  font-family: "VT323", monospace;
+  font-size: 1.12rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--hero-accent);
+}
+
+.questResultSectionTitle::before,
+.questResultSectionTitle::after {
+  content: "";
+
+  flex: 1;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(
+      in srgb,
+      var(--hero-accent) 65%,
+      transparent
+    )
+  );
+}
+
+.questResultSectionTitle::after {
+  transform: scaleX(-1);
+}
+
+.questStats {
+  width: 100%;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.questStat {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr) 40px;
+  gap: 14px;
+  align-items: center;
+
+  min-height: 44px;
+  padding: 0 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.questStat > span {
+  font-family: "VT323", monospace;
+  font-size: 1.02rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.questStat > strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: right;
+
+  color: #f5f1e8;
+}
+
+.questStatBar {
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.questStatFill {
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    var(--hero-accent),
+    color-mix(
+      in srgb,
+      var(--hero-accent) 52%,
+      white
+    )
+  );
+
+  box-shadow:
+    0 0 14px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 34%,
+      transparent
+    );
+}
+
+/* =========================================================
+   STRENGTHS / WEAKNESSES
+========================================================= */
+
+.questResultInsights {
+  flex: 1;
+
+  margin-top: 26px;
+  padding-top: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.questInsightBlock + .questInsightBlock {
+  padding-left: 28px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.questInsightLabel {
+  display: block;
+
+  font-family: "VT323", monospace;
+  font-size: 1.06rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--hero-accent);
+}
+
+.questInsightBlock ul {
+  margin: 18px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.questInsightBlock li {
+  position: relative;
+
+  margin-top: 12px;
+  padding-left: 17px;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.89rem;
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.questInsightBlock li::before {
+  content: "";
+
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+
+  width: 5px;
+  height: 5px;
+
+  background: var(--hero-accent);
+}
+
+/* =========================================================
+   GIF PANEL
+========================================================= */
+
+.questHeroFrame {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 42%,
+      rgba(255, 255, 255, 0.15)
+    );
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 17%,
+        transparent
+      ),
+      transparent 58%
+    ),
+    rgba(255, 255, 255, 0.018);
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.42),
+    inset 0 0 70px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 5%,
+      transparent
+    );
+}
+
+.questHeroFrame::before {
+  content: "";
+
+  position: absolute;
+  inset: 16px;
+  z-index: 2;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 24%,
+      rgba(255, 255, 255, 0.08)
+    );
+
+  pointer-events: none;
+}
+
+.questHeroFrame::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 70%,
+      rgba(5, 5, 6, 0.28) 100%
+    );
+
+  pointer-events: none;
+}
+
+.questHeroFrame img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =========================================================
+   NEXT UPGRADE — FULL WIDTH BELOW COLUMNS
+========================================================= */
+
+.questUpgradeBlock {
+  width: 100%;
+  margin-top: -35px;
+  padding: clamp(24px, 3vw, 32px);
+
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 34%,
+      rgba(255, 255, 255, 0.13)
+    );
+
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 7%,
+        transparent
+      ),
+      transparent 50%
+    );
+}
+
+.questUpgradeIcon {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--hero-accent);
+
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.25rem;
+
+  color: var(--hero-accent);
+}
+
+.questUpgradeBlock p {
+  margin: 10px 0 0;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+
+  color: rgba(255, 255, 255, 0.74);
+}
+
+/* =========================================================
+   CENTERED BUTTONS
+========================================================= */
+
+.questResultButtons {
+  width: 100%;
+  margin-top: -35px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.questResultButtons button {
+  min-width: 190px;
+  min-height: 54px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 960px) {
+  .questResultBody {
+    grid-template-columns: 1fr;
+  }
+
+  .questProfilePanel,
+  .questHeroFrame {
+    min-height: auto;
+  }
+
+  .questHeroFrame {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 620px) {
+  .questResult {
+    padding:
+      36px 18px
+      54px;
+  }
+
+  .questResultInsights {
+    grid-template-columns: 1fr;
+  }
+
+  .questInsightBlock + .questInsightBlock {
+    padding-left: 0;
+    padding-top: 24px;
+
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .questStat {
+    grid-template-columns: 86px minmax(0, 1fr) 34px;
+    gap: 10px;
+  }
+
+  .questUpgradeBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .questUpgradeIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .questResultButtons button {
+    width: 100%;
+  }
+}
+/* =========================================================
+   QUEST RESULT — FINAL HUD PASS
+   Paste at the very bottom of Quest.css
+========================================================= */
+
+/* ---------------------------------------------------------
+   TIGHTER VERTICAL RHYTHM
+--------------------------------------------------------- */
+
+.questResult {
+  padding-top: clamp(28px, 2vw, 48px);
+  padding-bottom: clamp(34px, 4vw, 56px);
+}
+
+.questResultHeroHeader {
+  margin-bottom: -35px;
+}
+
+.questResultHeroHeader > span {
+  margin-bottom: 10px;
+}
+
+.questResultHeroHeader h2 {
+  margin-top: 18px;
+}
+
+.questResultHeroHeader p {
+  margin-top: 8px;
+}
+
+.questUpgradeBlock {
+  margin-top: -35px;
+}
+
+.questResultButtons {
+  margin-top: -35px;
+}
+
+/* ---------------------------------------------------------
+   TWO-COLUMN AREA
+--------------------------------------------------------- */
+
+.questResultBody {
+  gap: clamp(18px, 2.4vw, 30px);
+}
+
+.questProfilePanel,
+.questHeroFrame {
+  min-height: 500px;
+}
+
+/* ---------------------------------------------------------
+   PROFILE PANEL — TACTICAL HUD
+--------------------------------------------------------- */
+
+.questProfilePanel {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(22px, 2.4vw, 30px);
+
+  border:
+    2px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 38%,
+      rgba(255, 255, 255, 0.12)
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 5%,
+        transparent
+      ),
+      transparent 42%
+    ),
+    rgba(255, 255, 255, 0.01);
+}
+
+.questProfilePanel::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    top left / 70px 1px no-repeat,
+
+    linear-gradient(
+      180deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    top left / 1px 70px no-repeat,
+
+    linear-gradient(
+      270deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    top right / 70px 1px no-repeat,
+
+    linear-gradient(
+      180deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    top right / 1px 70px no-repeat,
+
+    linear-gradient(
+      90deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    bottom left / 70px 1px no-repeat,
+
+    linear-gradient(
+      0deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    bottom left / 1px 70px no-repeat,
+
+    linear-gradient(
+      270deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    bottom right / 70px 1px no-repeat,
+
+    linear-gradient(
+      0deg,
+      var(--hero-accent) 0 26px,
+      transparent 26px
+    )
+    bottom right / 1px 70px no-repeat;
+
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.questProfilePanel::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 7px,
+      rgba(255, 255, 255, 0.012) 8px
+    );
+
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.questProfilePanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------
+   PERFORMANCE TITLE
+--------------------------------------------------------- */
+
+.questResultSectionTitle {
+  margin-bottom: 18px;
+}
+
+.questResultSectionTitle::before,
+.questResultSectionTitle::after {
+  max-width: 72px;
+}
+
+/* ---------------------------------------------------------
+   COMPACT STATS
+--------------------------------------------------------- */
+
+.questStats {
+  gap: 8px;
+}
+
+.questStat {
+  min-height: 40px;
+  padding: 0 12px;
+
+  border:
+    2px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 13%,
+      rgba(255, 255, 255, 0.12)
+    );
+
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.questStatBar {
+  height: 4px;
+}
+
+.questStatFill {
+  box-shadow:
+    0 0 12px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 45%,
+      transparent
+    );
+}
+
+/* ---------------------------------------------------------
+   STRENGTHS / WATCH OUT
+--------------------------------------------------------- */
+
+.questResultInsights {
+  margin-top: 20px;
+  padding-top: 18px;
+  gap: 22px;
+}
+
+.questInsightBlock + .questInsightBlock {
+  padding-left: 22px;
+}
+
+.questInsightBlock ul {
+  margin-top: 12px;
+}
+
+.questInsightBlock li {
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   HERO FRAME — SCANNER HUD
+--------------------------------------------------------- */
+
+.questHeroFrame {
+  isolation: isolate;
+
+  border:
+    2px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 58%,
+      rgba(255, 255, 255, 0.12)
+    );
+
+  background:
+    radial-gradient(
+      circle at 50% 43%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 19%,
+        transparent
+      ),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 5%,
+        transparent
+      ),
+      transparent 38%
+    ),
+    rgba(255, 255, 255, 0.012);
+
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.42),
+    0 0 42px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 9%,
+      transparent
+    ),
+    inset 0 0 70px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 7%,
+      transparent
+    );
+}
+
+/* Four segmented HUD corners + tactical dots */
+
+.questHeroFrame::before {
+  content: "";
+
+  position: absolute;
+  inset: 13px;
+  z-index: 4;
+
+  border: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    top left / 82px 2px no-repeat,
+
+    linear-gradient(
+      180deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    top left / 2px 82px no-repeat,
+
+    linear-gradient(
+      270deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    top right / 82px 2px no-repeat,
+
+    linear-gradient(
+      180deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    top right / 2px 82px no-repeat,
+
+    linear-gradient(
+      90deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    bottom left / 82px 2px no-repeat,
+
+    linear-gradient(
+      0deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    bottom left / 2px 82px no-repeat,
+
+    linear-gradient(
+      270deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    bottom right / 82px 2px no-repeat,
+
+    linear-gradient(
+      0deg,
+      var(--hero-accent) 0 28px,
+      transparent 28px
+    )
+    bottom right / 2px 82px no-repeat,
+
+    radial-gradient(
+      circle,
+      var(--hero-accent) 1.2px,
+      transparent 1.5px
+    )
+    18px 55px / 8px 8px repeat-y,
+
+    radial-gradient(
+      circle,
+      var(--hero-accent) 1.2px,
+      transparent 1.5px
+    )
+    calc(100% - 18px) 55px / 8px 8px repeat-y;
+
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+/* Scanner sweep + soft lower fade */
+
+.questHeroFrame::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 45%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 14%,
+        transparent
+      )
+      49%,
+      transparent 53%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent 6px,
+      rgba(255, 255, 255, 0.016) 7px
+    ),
+    linear-gradient(
+      180deg,
+      transparent 70%,
+      rgba(4, 4, 5, 0.28) 100%
+    );
+
+  background-size:
+    100% 210%,
+    100% 100%,
+    100% 100%;
+
+  animation: questHeroScanner 5.5s linear infinite;
+
+  pointer-events: none;
+}
+
+@keyframes questHeroScanner {
+  0% {
+    background-position:
+      0 -110%,
+      0 0,
+      0 0;
+  }
+
+  100% {
+    background-position:
+      0 210%,
+      0 0,
+      0 0;
+  }
+}
+
+.questHeroFrame img {
+  position: relative;
+  z-index: 1;
+
+  object-fit: cover;
+
+  transition:
+    transform 500ms cubic-bezier(0.2, 0.75, 0.2, 1),
+    filter 500ms ease;
+}
+
+.questHeroFrame:hover img {
+  transform: scale(1.018);
+
+  filter:
+    contrast(1.04)
+    saturate(1.04);
+}
+
+/* ---------------------------------------------------------
+   NEXT UPGRADE — CLOSER + HUD PANEL
+--------------------------------------------------------- */
+
+.questUpgradeBlock {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 92px;
+  padding: 20px 26px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 45%,
+      rgba(255, 255, 255, 0.12)
+    );
+
+  background:
+    radial-gradient(
+      circle at 8% 50%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 13%,
+        transparent
+      ),
+      transparent 28%
+    ),
+    rgba(255, 255, 255, 0.008);
+}
+
+.questUpgradeBlock::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--hero-accent) 0 34px,
+      transparent 34px
+    )
+    top left / 90px 1px no-repeat,
+
+    linear-gradient(
+      270deg,
+      var(--hero-accent) 0 34px,
+      transparent 34px
+    )
+    bottom right / 90px 1px no-repeat;
+
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.questUpgradeBlock > * {
+  position: relative;
+  z-index: 1;
+}
+
+.questUpgradeIcon {
+  position: relative;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 82%,
+      transparent
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--hero-accent) 7%,
+      transparent
+    );
+
+  box-shadow:
+    inset 0 0 18px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 8%,
+      transparent
+    );
+}
+
+.questUpgradeBlock p {
+  margin-top: 7px;
+}
+
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
+
+.questResultButtons button {
+  min-height: 50px;
+}
+
+.questSecondaryButton:hover {
+  border-color: var(--hero-accent);
+
+  box-shadow:
+    inset 0 0 18px
+    color-mix(
+      in srgb,
+      var(--hero-accent) 8%,
+      transparent
+    );
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .questResultHeroHeader {
+    margin-bottom: 22px;
+  }
+
+  .questProfilePanel,
+  .questHeroFrame {
+    min-height: auto;
+  }
+
+  .questHeroFrame {
+    aspect-ratio: 0.92;
+  }
+
+  .questUpgradeBlock {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 620px) {
+  .questResult {
+    padding-top: 24px;
+  }
+
+  .questResultHeroHeader {
+    margin-bottom: 18px;
+  }
+
+  .questHeroFrame::before {
+    inset: 10px;
+  }
+
+  .questUpgradeBlock {
+    padding: 20px;
+  }
+}
+
+/* Stop decorative motion for reduced-motion users */
+
+@media (prefers-reduced-motion: reduce) {
+  .questHeroFrame::after {
+    animation: none;
+  }
+
+  .questHeroFrame img {
+    transition: none;
+  }
+}
+/* =========================================================
+   QUEST RESULT — CLEAN FRAME FIX
+   Paste at the VERY END of Quest.css
+========================================================= */
+
+/* 1. Remove decorative corners from the profile panel */
+
+.questProfilePanel::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 2. Remove corners and dotted lines from the GIF panel */
+
+.questHeroFrame::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 3. Thicker outer border — performance panel */
+
+.questProfilePanel {
+  border: 3px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 58%,
+      rgba(255, 255, 255, 0.16)
+    ) !important;
+}
+
+/* 4. Thicker outer border — GIF panel */
+
+.questHeroFrame {
+  border: 3px solid
+    color-mix(
+      in srgb,
+      var(--hero-accent) 72%,
+      rgba(255, 255, 255, 0.16)
+    ) !important;
+}
+
+/* 5. Restore and keep ONLY the animated scan line */
+
+.questHeroFrame::after {
+  content: "" !important;
+
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  will-change: transform;
+
+  display: block !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 46%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 24%,
+        transparent
+      ) 49%,
+      color-mix(
+  in srgb,
+  var(--hero-accent) 85%,
+  transparent
+) 50%,
+      color-mix(
+        in srgb,
+        var(--hero-accent) 10%,
+        transparent
+      ) 51%,
+      transparent 54%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      transparent 50%,
+      rgba(4, 4, 5, 0.24) 100%
+    );
+
+  opacity: 1;
+
+  animation:
+    questHeroScannerClean 4.8s
+    linear
+    infinite !important;
+
+  pointer-events: none;
+}
+
+@keyframes questHeroScannerClean {
+
+  0% {
+    transform: translateY(-110%);
+  }
+
+  100% {
+    transform: translateY(220%);
+  }
+
+}
+
+/* Keep the character underneath the scanner */
+
+.questHeroFrame img {
+  position: relative;
+  z-index: 1;
+}
+/* =========================================================
+   QUEST — FULL SCREEN DYNAMIC RESULT BACKGROUND
+========================================================= */
+
+.questBackground::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      color-mix(
+        in srgb,
+        var(--result-accent) 13%,
+        transparent
+      ),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 88% 22%,
+      color-mix(
+        in srgb,
+        var(--result-accent) 16%,
+        transparent
+      ),
+      transparent 46%
+    ),
+    radial-gradient(
+      ellipse at 50% 90%,
+      color-mix(
+        in srgb,
+        var(--result-accent) 10%,
+        transparent
+      ),
+      transparent 62%
+    );
+
+  transition:
+    background 700ms ease,
+    opacity 700ms ease;
+}
+
+/* Remove the old small glow around only the result container */
+
+.questResult::before {
+  display: none !important;
+}
+/* Hide the original purple glows ONLY on the result screen */
+
+.questBackground.resultBackground .questGlowOne,
+.questBackground.resultBackground .questGlowTwo {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+/* =========================================================
+   INTRO — REPEATED FULL-SCREEN WATERMARK
+========================================================= */
+
+/* Hide the old single giant watermark */
+.questIntroGhost {
+  display: none;
+}
+
+/* Show repeated watermark ONLY while the intro exists */
+.quest:has(.questIntro)::after {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='760' height='250' viewBox='0 0 760 250'%3E%3Ctext x='5' y='185' fill='none' stroke='%23f4efe6' stroke-opacity='0.20' stroke-width='1.6' font-family='Arial, sans-serif' font-size='185' font-weight='900' letter-spacing='-16'%3EQUEST%3C/text%3E%3C/svg%3E");
+
+background-repeat: repeat;
+background-size: 760px 250px;
+background-position: center top;
+
+opacity: 0.45;
+
+  mask-image: linear-gradient(
+    to bottom,
+  transparent 0%,
+  black 12%,
+  black 88%,
+  transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+  transparent 0%,
+  black 12%,
+  black 88%,
+  transparent 100%
+  );
+}
+/* =========================================================
+   QUEST TERMINAL VISUAL UNIFICATION
+   Paste at the VERY END of Quest.css
+========================================================= */
+
+.quest {
+  --quest-gold: #f5c34d;
+  --quest-cream: #fdf6e3;
+  --quest-muted: #c9c3b6;
+  --quest-bg: #03050a;
+  --quest-panel: rgba(5, 7, 13, 0.96);
+
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(245, 195, 77, 0.09),
+      transparent 42%
+    ),
+    var(--quest-bg);
+
+  color: var(--quest-cream);
+}
+
+
+/* =========================================================
+   BACKGROUND — MATCH QUEST TERMINAL
+========================================================= */
+
+.questBackground {
+  background: transparent;
+}
+
+.questGlowOne,
+.questGlowTwo {
+  display: none;
+}
+
+.questGrid {
+  background-image:
+    linear-gradient(
+      rgba(245, 195, 77, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(245, 195, 77, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 44px 44px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 18%,
+    black 86%,
+    transparent
+  );
+}
+
+.questNoise {
+  opacity: 0.16;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.018) 4px
+  );
+
+  background-size: auto;
+}
+
+
+/* =========================================================
+   MAIN SHELL
+========================================================= */
+
+.questShell {
+  align-items: center;
+
+  padding:
+    clamp(46px, 6vh, 80px)
+    clamp(24px, 5vw, 90px);
+}
+
+
+/* =========================================================
+   INTRO — TERMINAL FRAME
+========================================================= */
+
+.questIntro {
+  width: min(1500px, 100%);
+
+  padding:
+    clamp(30px, 4vh, 52px)
+    clamp(30px, 4vw, 68px);
+
+  border: 2px solid rgba(245, 195, 77, 0.72);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 195, 77, 0.035),
+      transparent 30%
+    ),
+    var(--quest-panel);
+
+  box-shadow:
+    0 0 0 8px rgba(245, 195, 77, 0.02),
+    0 0 55px rgba(245, 195, 77, 0.08),
+    inset 0 0 90px rgba(0, 0, 0, 0.55);
+}
+
+.questIntro::before,
+.questIntro::after {
+  content: "";
+
+  position: absolute;
+
+  width: 72px;
+  height: 72px;
+
+  pointer-events: none;
+}
+
+.questIntro::before {
+  top: -2px;
+  left: -2px;
+
+  border-top: 7px solid var(--quest-gold);
+  border-left: 7px solid var(--quest-gold);
+}
+
+.questIntro::after {
+  right: -2px;
+  bottom: -2px;
+
+  border-right: 7px solid var(--quest-gold);
+  border-bottom: 7px solid var(--quest-gold);
+}
+
+
+/* =========================================================
+   INTRO TOP BAR
+========================================================= */
+
+.questIntroEyebrow {
+  color: rgba(245, 195, 77, 0.72);
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  font-weight: 600;
+
+  letter-spacing: 2px;
+}
+
+.questIntroEyebrow span:first-child,
+.questIntroEyebrow span:last-child {
+  color: inherit;
+}
+
+.questIntroLine {
+  margin-top: 18px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 195, 77, 0.65),
+    transparent
+  );
+}
+
+
+/* =========================================================
+   INTRO LEFT CONTENT
+========================================================= */
+
+.questIntroLabel {
+  color: rgba(245, 195, 77, 0.75);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(12px, 0.85vw, 15px);
+  font-weight: 600;
+
+  letter-spacing: clamp(3px, 0.35vw, 6px);
+}
+
+.questIntro h1 {
+  color: var(--quest-gold);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(3.6rem, 5.4vw, 6.6rem);
+  font-weight: 800;
+
+  line-height: 0.95;
+  letter-spacing: clamp(2px, 0.3vw, 6px);
+
+  text-shadow:
+    0 0 20px rgba(245, 195, 77, 0.18),
+    0 0 45px rgba(245, 195, 77, 0.07);
+}
+
+.questIntro h1 span {
+  margin-top: 10px;
+
+  color: var(--quest-cream);
+
+  -webkit-text-stroke: 0;
+}
+
+.questIntroDescription {
+  color: var(--quest-muted);
+
+  font-family: "Work Sans", sans-serif;
+  font-size: clamp(17px, 1.15vw, 21px);
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   RIGHT SYSTEM PANEL
+========================================================= */
+
+.questIntroRight {
+  padding:
+    clamp(22px, 2.5vw, 34px);
+
+  border: 1px solid rgba(245, 195, 77, 0.2);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 195, 77, 0.065),
+      rgba(245, 195, 77, 0.012)
+    );
+}
+
+.questSystemStatus {
+  color: rgba(245, 195, 77, 0.8);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questStatusDot {
+  background: var(--quest-gold);
+
+  box-shadow:
+    0 0 0 4px rgba(245, 195, 77, 0.08),
+    0 0 18px rgba(245, 195, 77, 0.55);
+}
+
+.questStatusDot::after {
+  border-color: rgba(245, 195, 77, 0.3);
+}
+
+
+/* =========================================================
+   START BUTTON
+========================================================= */
+
+.questStartButton {
+  min-height: 94px;
+
+  border: 2px solid var(--quest-gold);
+  border-radius: 4px;
+
+  background: var(--quest-gold);
+  color: #05070d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(12px, 0.95vw, 16px);
+  font-weight: 800;
+
+  letter-spacing: clamp(2px, 0.25vw, 4px);
+
+  box-shadow:
+    0 0 30px rgba(245, 195, 77, 0.16),
+    0 18px 50px rgba(0, 0, 0, 0.4);
+}
+
+.questStartButton::before {
+  background: #05070d;
+}
+
+.questStartButton::after {
+  background: var(--quest-gold);
+}
+
+.questStartButton:hover {
+  border-color: var(--quest-gold);
+  color: var(--quest-gold);
+
+  box-shadow:
+    0 0 48px rgba(245, 195, 77, 0.24),
+    0 22px 60px rgba(0, 0, 0, 0.5);
+}
+
+.questStartArrow {
+  border-color: rgba(5, 7, 13, 0.24);
+}
+
+.questStartButton:hover .questStartArrow {
+  border-color: rgba(245, 195, 77, 0.45);
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.questIntroMetaRight {
+  border-top-color: rgba(245, 195, 77, 0.18);
+}
+
+.questIntroMetaRight span {
+  color: rgba(245, 195, 77, 0.58);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questIntroMetaRight strong {
+  color: var(--quest-cream);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+
+/* =========================================================
+   GHOST WORD
+========================================================= */
+
+.questIntroGhost {
+  color: var(--quest-gold);
+
+  -webkit-text-stroke: 0;
+
+  opacity: 0.025;
+
+  font-family: "Orbitron", sans-serif;
+}
+
+
+/* =========================================================
+   INITIALIZING / COMPILING STATES
+========================================================= */
+
+.questInitializing,
+.questLoading {
+  width: min(980px, 92%);
+
+  padding:
+    clamp(32px, 5vh, 56px)
+    clamp(28px, 4vw, 58px);
+
+  border: 2px solid rgba(245, 195, 77, 0.72);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 195, 77, 0.04),
+      transparent 34%
+    ),
+    var(--quest-panel);
+
+  box-shadow:
+    0 0 0 8px rgba(245, 195, 77, 0.02),
+    0 0 55px rgba(245, 195, 77, 0.08),
+    inset 0 0 90px rgba(0, 0, 0, 0.55);
+}
+
+.questInitializingHeader,
+.questLoadingHeader {
+  color: rgba(245, 195, 77, 0.72);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questInitializingKicker,
+.questLoadingKicker {
+  color: rgba(245, 195, 77, 0.75);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questInitializingCore h2,
+.questLoadingCore h2 {
+  color: var(--quest-gold);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questInitializingCore h2 span,
+.questLoadingCore h2 span {
+  color: var(--quest-cream);
+}
+
+.questInitializingTrack,
+.questLoadingTrack {
+  background: rgba(245, 195, 77, 0.12);
+}
+
+.questInitializingFill,
+.questLoadingFill {
+  background: linear-gradient(
+    90deg,
+    var(--quest-gold),
+    var(--quest-cream)
+  );
+
+  box-shadow:
+    0 0 16px rgba(245, 195, 77, 0.3);
+}
+
+.questInitializingStatus,
+.questLoadingStatus,
+.questInitializingSignals,
+.questLoadingSignals {
+  font-family: "Orbitron", sans-serif;
+}
+
+.questInitializingStatus strong,
+.questLoadingStatus strong {
+  color: var(--quest-gold);
+}
+
+.questScanLine,
+.questLoadingSweep {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 239, 230, 0.05),
+      transparent
+    );
+
+  box-shadow:
+    0 0 20px rgba(245, 195, 77, 0.4),
+    0 0 60px rgba(245, 195, 77, 0.16);
+}
+
+
+/* =========================================================
+   QUESTIONS — TERMINAL LANGUAGE
+========================================================= */
+
+.questQuestion {
+  width: min(92%, 1180px);
+
+  padding:
+    clamp(26px, 4vh, 44px)
+    clamp(26px, 4vw, 56px);
+
+  border: 2px solid rgba(245, 195, 77, 0.6);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(245, 195, 77, 0.032),
+      transparent 28%
+    ),
+    rgba(5, 7, 13, 0.94);
+
+  box-shadow:
+    0 0 0 8px rgba(245, 195, 77, 0.018),
+    inset 0 0 80px rgba(0, 0, 0, 0.45);
+}
+
+.questEyebrow,
+.questProgress {
+  color: rgba(245, 195, 77, 0.78);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questProgress span {
+  color: rgba(245, 195, 77, 0.3);
+}
+
+.questProgressTrack {
+  background: rgba(245, 195, 77, 0.12);
+}
+
+.questProgressFill {
+  background: linear-gradient(
+    90deg,
+    var(--quest-gold),
+    var(--quest-cream)
+  );
+}
+
+.questQuestionContent h2 {
+  color: var(--quest-cream);
+
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+}
+
+.questAnswers button {
+  border-color: rgba(245, 195, 77, 0.17);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 195, 77, 0.045),
+      rgba(245, 195, 77, 0.012)
+    );
+
+  color: var(--quest-cream);
+}
+
+.questAnswers button:hover:not(:disabled) {
+  border-color: rgba(245, 195, 77, 0.65);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 195, 77, 0.1),
+      rgba(245, 195, 77, 0.025)
+    );
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(245, 195, 77, 0.06);
+}
+
+.answerIndex {
+  border-color: rgba(245, 195, 77, 0.25);
+  color: rgba(245, 195, 77, 0.7);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.answerArrow {
+  color: rgba(245, 195, 77, 0.4);
+}
+
+.answerLine {
+  background: rgba(245, 195, 77, 0.2);
+}
+
+.questAnswers button:hover:not(:disabled) .answerLine {
+  background: var(--quest-gold);
+}
+
+.questAnswers button.selected {
+  border-color: var(--quest-gold);
+
+  background: var(--quest-gold);
+  color: #05070d;
+}
+
+.questAnswers button.selected .answerIndex {
+  background: #05070d;
+  color: var(--quest-gold);
+}
+
+.questBack {
+  color: rgba(245, 195, 77, 0.55);
+
+  font-family: "Orbitron", sans-serif;
+}
+
+.questBack:hover:not(:disabled) {
+  color: var(--quest-gold);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+  .questIntro,
+  .questQuestion,
+  .questInitializing,
+  .questLoading {
+    border-width: 1px;
+  }
+
+  .questIntro {
+    padding:
+      34px
+      22px;
+  }
+
+  .questIntroRight {
+    padding:
+      24px
+      18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .questShell {
+    padding:
+      46px
+      16px;
+  }
+
+  .questIntro h1 {
+    font-size: clamp(2.8rem, 13vw, 4rem);
+  }
+
+  .questQuestion {
+    width: 100%;
+
+    padding:
+      28px
+      18px;
+  }
+  @media (max-width: 620px) {
+  .questUpgradeButton {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .questUpgradeContent {
+    grid-column: 2;
+
+    text-align: left;
+  }
+}
+}
+/* =========================================================
+   QUEST QUESTIONS — FINAL RESPONSIVE COMPOSITION
+   Keep this at the VERY END of Quest.css
+========================================================= */
+
+
+/* =========================================================
+   LAPTOP / SHORT DESKTOP
+   Fit the full question, answers and Previous button
+========================================================= */
+
+@media (
+  min-width: 801px
+) and (
+  max-height: 880px
+) {
+  .questShell {
+    min-height: 100svh;
+
+    align-items: center;
+
+    padding:
+      18px
+      24px;
+  }
+
+  .questQuestion {
+    width: min(94vw, 1220px);
+
+    padding:
+      20px
+      30px;
+  }
+
+  .questQuestionTop {
+    margin-bottom: 8px;
+  }
+
+  .questProgressTrack {
+    margin-bottom: 24px;
+  }
+
+  .questQuestionContent h2 {
+    max-width: 820px;
+
+    margin-bottom: 24px;
+
+    font-size: clamp(2rem, 3.35vw, 3.15rem);
+    line-height: 1.02;
+  }
+
+  .questAnswers {
+    gap: 12px;
+  }
+
+  .questAnswers button {
+    min-height: 112px;
+
+    padding:
+      14px
+      18px
+      13px;
+  }
+
+  .answerIndex {
+    width: 28px;
+    height: 28px;
+  }
+
+  .answerText {
+    margin-top: 14px;
+
+    font-size: clamp(0.9rem, 1.15vw, 1.04rem);
+    line-height: 1.35;
+  }
+
+  .answerLine {
+    margin-top: 11px;
+  }
+
+  .questBack {
+    margin-top: 12px;
+    padding-bottom: 0;
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP / MONITOR
+   Spread the complete bordered frame
+========================================================= */
+
+@media (
+  min-width: 1440px
+) and (
+  min-height: 881px
+) {
+  .questShell {
+    padding:
+      clamp(42px, 5vh, 64px)
+      42px;
+  }
+
+  .questQuestion {
+    width: min(calc(100vw - 120px), 1500px);
+
+    padding:
+      clamp(30px, 3vh, 42px)
+      clamp(42px, 4vw, 68px);
+  }
+
+  .questQuestionContent h2 {
+    max-width: 1050px;
+
+    font-size: clamp(3.2rem, 4vw, 4.6rem);
+  }
+
+  .questAnswers {
+    gap: 18px;
+  }
+
+  .questAnswers button {
+    min-height: 158px;
+
+    padding:
+      22px
+      26px
+      20px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA-WIDE MONITORS
+========================================================= */
+
+@media (
+  min-width: 1800px
+) and (
+  min-height: 881px
+) {
+  .questQuestion {
+    width: min(calc(100vw - 150px), 1620px);
+  }
+}
+/* =========================================================
+   QUEST TRANSITIONS — LIGHT FULL-SCREEN SYSTEM MODE
+   Keep this at the VERY END of Quest.css
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   FULL-SCREEN TRANSITION WRAPPERS
+--------------------------------------------------------- */
+
+.questInitializing,
+.questLoading {
+  position: relative;
+
+  width: 100%;
+  min-height: calc(100svh - 36px);
+
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(72px, 9vh, 110px)
+    clamp(70px, 8vw, 150px);
+
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  overflow: visible;
+  text-align: left;
+}
+
+
+/* Remove every remaining internal panel surface */
+
+.questInitializing::before,
+.questInitializing::after,
+.questLoading::before,
+.questLoading::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* Remove old card frames completely */
+
+.questInitializingFrame,
+.questLoadingFrame {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   VIEWPORT BORDER
+--------------------------------------------------------- */
+
+.questShell:has(.questInitializing)::before,
+.questShell:has(.questLoading)::before {
+  content: "";
+
+  position: fixed;
+  inset: 18px;
+  z-index: 30;
+
+  border: 1px solid rgba(245, 195, 77, 0.42);
+
+  pointer-events: none;
+}
+
+
+/* Minimal viewport corner markers */
+
+.questShell:has(.questInitializing)::after,
+.questShell:has(.questLoading)::after {
+  content: "";
+
+  position: fixed;
+  inset: 34px;
+  z-index: 31;
+
+  background:
+    linear-gradient(
+      var(--quest-gold),
+      var(--quest-gold)
+    )
+    left top / 48px 1px no-repeat,
+
+    linear-gradient(
+      var(--quest-gold),
+      var(--quest-gold)
+    )
+    left top / 1px 48px no-repeat,
+
+    linear-gradient(
+      var(--quest-gold),
+      var(--quest-gold)
+    )
+    right bottom / 48px 1px no-repeat,
+
+    linear-gradient(
+      var(--quest-gold),
+      var(--quest-gold)
+    )
+    right bottom / 1px 48px no-repeat;
+
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   TOP SYSTEM HEADER
+--------------------------------------------------------- */
+
+.questInitializingHeader,
+.questLoadingHeader {
+  position: fixed;
+
+  top: 42px;
+  left: clamp(48px, 4vw, 80px);
+  right: clamp(48px, 4vw, 80px);
+
+  z-index: 32;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CONTENT
+--------------------------------------------------------- */
+
+.questInitializingCore,
+.questLoadingCore {
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(260px, 0.8fr);
+
+  column-gap: clamp(70px, 8vw, 150px);
+  align-items: center;
+}
+
+
+/* Main content stays in left column */
+
+.questInitializingCore > *,
+.questLoadingCore > * {
+  grid-column: 1;
+}
+
+
+/* Title */
+
+.questInitializing h2,
+.questLoading h2 {
+  max-width: 760px;
+
+  font-size: clamp(3.2rem, 5vw, 5.5rem);
+  line-height: 0.92;
+}
+
+
+/* Lighter kicker */
+
+.questInitializingKicker,
+.questLoadingKicker {
+  margin-bottom: 14px;
+
+  font-size: 0.7rem;
+  opacity: 0.72;
+}
+
+
+/* Progress bar */
+
+.questInitializingTrack,
+.questLoadingTrack {
+  width: min(100%, 760px);
+
+  margin:
+    clamp(28px, 4vh, 42px)
+    0
+    16px;
+}
+
+
+/* Status row */
+
+.questInitializingStatus,
+.questLoadingStatus {
+  width: min(100%, 760px);
+
+  font-size: 0.72rem;
+}
+
+
+/* Signal rows lighter and wider */
+
+.questInitializingSignals,
+.questLoadingSignals {
+  width: min(100%, 760px);
+
+  margin-top: 28px;
+}
+
+
+/* Reduce visual chatter in the result transition */
+
+.questLoadingReveal {
+  width: min(100%, 760px);
+
+  margin-top: 26px;
+
+  opacity: 0.7;
+}
+
+
+/* ---------------------------------------------------------
+   FULL-PAGE SCAN EFFECTS
+--------------------------------------------------------- */
+
+.questScanLine,
+.questLoadingSweep {
+  position: fixed;
+  left: 0;
+
+  width: 100vw;
+}
+
+
+/* =========================================================
+   LAPTOP / SHORT DESKTOP
+========================================================= */
+
+@media (
+  min-width: 801px
+) and (
+  max-height: 950px
+) {
+  .questInitializing,
+  .questLoading {
+    min-height: calc(100svh - 28px);
+
+    padding:
+      66px
+      clamp(54px, 7vw, 110px)
+      34px;
+  }
+
+  .questInitializingCore,
+  .questLoadingCore {
+    max-width: 1040px;
+
+    grid-template-columns:
+      minmax(0, 1.25fr)
+      minmax(180px, 0.75fr);
+
+    column-gap: 64px;
+  }
+
+  .questInitializing h2,
+  .questLoading h2 {
+    max-width: 680px;
+
+    font-size: clamp(3rem, 4.7vw, 4.7rem);
+  }
+
+  .questInitializingHeader,
+  .questLoadingHeader {
+    top: 30px;
+    left: 36px;
+    right: 36px;
+  }
+
+  .questShell:has(.questInitializing)::before,
+  .questShell:has(.questLoading)::before {
+    inset: 14px;
+  }
+
+  .questShell:has(.questInitializing)::after,
+  .questShell:has(.questLoading)::after {
+    inset: 28px;
+  }
+
+  .questInitializingSignals,
+  .questLoadingSignals {
+    margin-top: 20px;
+  }
+
+  .questLoadingReveal {
+    margin-top: 20px;
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (
+  min-width: 1600px
+) and (
+  min-height: 951px
+) {
+  .questInitializingCore,
+  .questLoadingCore {
+    max-width: 1380px;
+
+    grid-template-columns:
+      minmax(0, 1.15fr)
+      minmax(340px, 0.85fr);
+
+    column-gap: 160px;
+  }
+
+  .questInitializing h2,
+  .questLoading h2 {
+    max-width: 820px;
+  }
+}
+/* =========================================================
+   QUEST — FINAL TRANSITION + INTRO REFINEMENT
+   Keep at the VERY END of Quest.css
+========================================================= */
+
+
+/* =========================================================
+   BEGIN YOUR QUEST — DESCRIPTION BASELINE
+========================================================= */
+
+@media (min-width: 1100px) {
+  .questIntroContent {
+    align-items: stretch;
+  }
+
+  .questIntroLeft {
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .questIntroDescription {
+    width: max-content;
+    max-width: none;
+
+    margin-top: auto;
+    padding-top: 34px;
+
+    white-space: nowrap;
+  }
+
+  .questIntroRight {
+    align-self: stretch;
+  }
+}
+
+
+/* =========================================================
+   TRANSITIONS — WIDER, LIGHTER, LESS CHATTY
+========================================================= */
+
+.questInitializingCore,
+.questLoadingCore {
+  width: min(calc(100vw - 220px), 1320px);
+  max-width: none;
+
+  display: block;
+
+  margin-inline: auto;
+}
+
+
+/* Keep the two-line title structure,
+   but each individual line stays unbroken */
+
+.questInitializing h2,
+.questLoading h2 {
+  width: 100%;
+  max-width: none;
+}
+
+.questInitializing h2 span,
+.questLoading h2 span {
+  display: block;
+
+  width: max-content;
+  max-width: 100%;
+
+  white-space: nowrap;
+}
+
+
+/* Initial transition no longer needs a kicker */
+
+.questInitializingKicker {
+  display: none;
+}
+
+
+/* Header contains only one useful label */
+
+.questInitializingHeader,
+.questLoadingHeader {
+  justify-content: flex-start;
+}
+
+
+/* Wider and stronger loading bars */
+
+.questInitializingTrack,
+.questLoadingTrack {
+  width: 100%;
+  height: 7px;
+
+  margin-top: clamp(30px, 4vh, 44px);
+  margin-bottom: 18px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(245, 195, 77, 0.2);
+
+  background:
+    rgba(245, 195, 77, 0.075);
+}
+
+.questInitializingFill,
+.questLoadingFill {
+  height: 100%;
+
+  box-shadow:
+    0 0 12px rgba(245, 195, 77, 0.4),
+    0 0 30px rgba(245, 195, 77, 0.16);
+}
+
+
+/* Status follows the same width as the bar */
+
+.questInitializingStatus,
+.questLoadingStatus {
+  width: 100%;
+}
+
+
+/* Signals also use the available composition width */
+
+.questInitializingSignals,
+.questLoadingSignals,
+.questLoadingReveal {
+  width: 100%;
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (
+  min-width: 801px
+) and (
+  max-height: 950px
+) {
+  .questInitializingCore,
+  .questLoadingCore {
+    width: min(calc(100vw - 190px), 1180px);
+  }
+
+  .questInitializing h2,
+  .questLoading h2 {
+    font-size: clamp(2.8rem, 4.25vw, 4.2rem);
+  }
+
+  .questInitializingTrack,
+  .questLoadingTrack {
+    height: 6px;
+
+    margin-top: 28px;
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (
+  min-width: 1600px
+) and (
+  min-height: 951px
+) {
+  .questInitializingCore,
+  .questLoadingCore {
+    width: min(calc(100vw - 300px), 1420px);
+  }
+
+  .questInitializing h2,
+  .questLoading h2 {
+    font-size: clamp(3.4rem, 4.5vw, 5.6rem);
+  }
+
+  .questInitializingTrack,
+  .questLoadingTrack {
+    height: 8px;
+  }
+}
+.questUpgradeButton {
+  width: 100%;
+
+  color: inherit;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.questUpgradeButton:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--hero-accent);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px
+      color-mix(
+        in srgb,
+        var(--hero-accent) 12%,
+        transparent
+      );
+}
+
+.questUpgradeContent {
+  min-width: 0;
+}
+
+.questUpgradeArrow {
+  margin-left: auto;
+
+  color: var(--hero-accent);
+
+  font-size: 1.2rem;
+
+  transition: transform 0.25s ease;
+}
+
+.questUpgradeButton:hover .questUpgradeArrow {
+  transform: translate(4px, -4px);
+}
+/* =========================================================
+   QUEST TRANSITION STATUS TYPOGRAPHY
+========================================================= */
+
+.questLoadingReveal {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.questInitializingStatus strong,
+.questLoadingStatus strong,
+.questLoadingReveal strong {
+  color: var(--quest-gold);
+
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+.questUpgradeButton {
+  position: relative;
+
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 58px;
+  align-items: center;
+  gap: 24px;
+
+  color: inherit;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.questUpgradeIcon {
+  grid-column: 1;
+
+  justify-self: start;
+}
+
+.questUpgradeContent {
+  grid-column: 2;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.questUpgradeContent p {
+  max-width: 900px;
+  margin:
+    10px
+    auto
+    0;
+}
+
+.questUpgradeContent p {
+  white-space: pre-line;
+}
+
+.questIntroBack {
+  position: relative;
+  z-index: 3;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.65rem;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  color: rgba(245, 195, 77, 0.72);
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(11px, 0.8vw, 14px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 2px;
+}
+
+.questIntroBack:hover {
+  border-color: var(--quest-gold);
+  color: var(--quest-gold);
+}
+
+@media (max-width: 768px) {
+  .questIntroBack {
+    top: 1.25rem;
+    left: 1.25rem;
+    font-size: 0.64rem;
+  }
+}
+.questIntroTopbar {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+/* =========================================
+   QUEST PAGE ENTRANCE
+========================================= */
+
+.questPageEntrance {
+  animation:
+    questPageReveal 0.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+.questPageEntrance .questShell {
+  animation:
+    questShellReveal 1s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.12s
+    both;
+}
+
+.questPageEntrance .questBackground {
+  animation:
+    questBackgroundReveal 1.2s
+    ease
+    both;
+}
+
+@keyframes questPageReveal {
+  0% {
+    opacity: 0;
+    background-color: #05070d;
+  }
+
+  35% {
+    opacity: 1;
+    background-color: #05070d;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes questShellReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(34px) scale(0.99);
+    filter: blur(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes questBackgroundReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .questPageEntrance,
+  .questPageEntrance .questShell,
+  .questPageEntrance .questBackground {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   QUEST — FINAL MOBILE FIT
+   Keep this at the absolute end of Quest.css
+========================================================= */
+
+@media (max-width: 600px) {
+
+  /* -------------------------------------------------------
+     GENERAL QUEST VIEWPORT
+  ------------------------------------------------------- */
+
+  .quest {
+    width: 100%;
+    min-height: 100svh;
+
+    overflow-x: hidden;
+  }
+
+  .questShell {
+    width: 100%;
+    min-height: 100svh;
+
+    padding:
+      28px
+      18px
+      48px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* -------------------------------------------------------
+     QUEST INTRO TOPBAR
+  ------------------------------------------------------- */
+
+  .questIntro {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .questIntroTopbar {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 14px;
+  }
+
+  .questIntroBack {
+    position: static;
+
+    top: auto;
+    left: auto;
+
+    max-width: 155px;
+
+    align-items: flex-start;
+
+    font-size: 0.56rem;
+    line-height: 1.45;
+    letter-spacing: 0.1em;
+
+    text-align: left;
+  }
+
+  .questIntroEyebrow {
+    min-width: 0;
+
+    font-size: 0.58rem;
+    line-height: 1.45;
+    letter-spacing: 0.1em;
+
+    text-align: right;
+  }
+
+  .questIntroEyebrow span {
+    display: block;
+  }
+
+  .questIntroLine {
+    margin-top: 14px;
+  }
+
+
+  /* -------------------------------------------------------
+     QUEST INTRO CONTENT
+  ------------------------------------------------------- */
+
+  .questIntroContent {
+    width: 100%;
+    max-width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+    margin-top: 34px;
+  }
+
+  .questIntroLeft,
+  .questIntroRight {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .questIntroLabel {
+    margin-bottom: 1px;
+
+    font-size: 0.66rem;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+  }
+
+  .questIntro h1 {
+    width: 100%;
+    max-width: 100%;
+
+    font-size: clamp(2.75rem, 12.4vw, 3.8rem);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+
+    overflow-wrap: normal;
+  }
+
+  .questIntro h1 span {
+    margin-top: 5px;
+  }
+
+  .questIntroDescription {
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 24px;
+
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .questIntroRight {
+    padding: 8px;
+
+    box-sizing: border-box;
+  }
+
+  .questSystemStatus {
+    margin-bottom: 14px;
+  }
+
+  .questStartButton {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 76px;
+
+    padding-inline: 18px;
+    gap: 14px;
+
+    box-sizing: border-box;
+  }
+
+  .questIntroMetaRight {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 20px;
+    padding-top: 18px;
+  }
+
+    .questIntroMetaRight span {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+
+  /* -------------------------------------------------------
+     BOTH TRANSITION SCREENS
+  ------------------------------------------------------- */
+
+  .questInitializing,
+  .questLoading {
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100svh - 32px);
+
+    padding:
+      72px
+      34px
+      48px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  .questInitializingCore,
+  .questLoadingCore {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    margin: 0;
+  }
+
+  .questInitializingHeader,
+  .questLoadingHeader {
+    position: fixed;
+
+    top: 34px;
+    right: 42px;
+    left: 42px;
+
+    width: auto;
+    min-width: 0;
+
+    font-size: 0.6rem;
+    line-height: 1.35;
+    letter-spacing: 0.11em;
+  }
+
+  .questInitializing h2,
+  .questLoading h2 {
+    width: 100%;
+    max-width: 100%;
+
+    font-size: clamp(1.95rem, 8.2vw, 2.75rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+
+  .questInitializing h2 span,
+  .questLoading h2 span {
+    width: 100%;
+    max-width: 100%;
+
+    white-space: normal;
+  }
+
+  .questInitializingTrack,
+  .questLoadingTrack {
+    width: 100%;
+    max-width: 100%;
+
+    height: 5px;
+
+    margin-top: 28px;
+  }
+
+  .questInitializingStatus,
+  .questLoadingStatus {
+    width: 100%;
+
+    align-items: flex-start;
+    gap: 10px;
+
+    font-size: 0.64rem;
+    line-height: 1.35;
+  }
+
+  .questInitializingSignals,
+  .questLoadingSignals {
+    width: 100%;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 14px;
+
+    margin-top: 28px;
+  }
+
+  .questInitializingSignals span,
+  .questLoadingSignals span {
+    min-width: 0;
+
+    font-size: 0.58rem;
+    line-height: 1.35;
+    letter-spacing: 0.1em;
+
+    overflow-wrap: anywhere;
+  }
+
+  .questLoadingReveal {
+    width: 100%;
+
+    margin-top: 24px;
+  }
+
+
+  /* -------------------------------------------------------
+     TRANSITION VIEWPORT FRAME
+  ------------------------------------------------------- */
+
+  .questShell:has(.questInitializing)::before,
+  .questShell:has(.questLoading)::before {
+    inset: 14px;
+  }
+
+  .questShell:has(.questInitializing)::after,
+  .questShell:has(.questLoading)::after {
+    inset: 28px;
+
+    background:
+      linear-gradient(
+        var(--quest-gold),
+        var(--quest-gold)
+      )
+      left top / 30px 1px no-repeat,
+
+      linear-gradient(
+        var(--quest-gold),
+        var(--quest-gold)
+      )
+      left top / 1px 30px no-repeat,
+
+      linear-gradient(
+        var(--quest-gold),
+        var(--quest-gold)
+      )
+      right bottom / 30px 1px no-repeat,
+
+      linear-gradient(
+        var(--quest-gold),
+        var(--quest-gold)
+      )
+      right bottom / 1px 30px no-repeat;
+  }
+}
+
+@media (max-width: 620px) {
+  .questStat {
+    grid-template-columns: 100px minmax(0, 1fr) 34px;
+    gap: 10px;
+  }
+
+  .questStat span {
+    min-width: 0;
+
+    font-size: 0.85rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+
+    white-space: nowrap;
+  }
+
+  @media (max-width: 620px) {
+  .questUpgradeBlock,
+  .questUpgradeButton {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+
+    padding: 18px;
+  }
+
+  .questUpgradeIcon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 1rem;
+  }
+
+  .questUpgradeContent {
+    grid-column: 2;
+
+    min-width: 0;
+
+    text-align: left;
+  }
+
+  .questUpgradeContent p {
+    width: 100%;
+    max-width: none;
+
+    margin: 7px 0 0;
+
+    font-size: 0.92rem;
+    line-height: 1.5;
+
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .questUpgradeArrow {
+    display: none;
+  }
+}
+
+}
+
+/* =========================================================
+   QUEST — TABLET POLISH
+   768 × 1024
+========================================================= */
+
+@media (min-width: 701px) and (max-width: 800px) {
+
+  /* -------------------------------------------------------
+     INTRO TOPBAR ALIGNMENT
+  ------------------------------------------------------- */
+
+  .questIntroTopbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .questIntroBack {
+    position: static;
+
+    top: auto;
+    left: auto;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin: 0;
+
+    font-size: 0.64rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+
+    white-space: nowrap;
+  }
+
+  .questIntroEyebrow {
+    display: flex;
+    align-items: center;
+
+    margin: 0;
+
+    font-size: 0.64rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+
+    white-space: nowrap;
+  }
+
+  .questIntroLine {
+    margin-top: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     INITIAL + FINAL TRANSITION FRAME
+  ------------------------------------------------------- */
+
+  .questShell:has(.questInitializing)::before,
+  .questShell:has(.questLoading)::before {
+    top: 18px;
+    right: 18px;
+    bottom: 28px;
+    left: 18px;
+  }
+
+  .questShell:has(.questInitializing)::after,
+  .questShell:has(.questLoading)::after {
+    top: 34px;
+    right: 34px;
+    bottom: 44px;
+    left: 34px;
+  }
+}

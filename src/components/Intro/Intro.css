@@ -1,0 +1,910 @@
+.intro{
+    width:100%;
+    min-height:100vh;
+
+    background:#05070d;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+    opacity:0;
+    animation:introFade 3s ease forwards;
+}
+/* ---------- PIXEL BACKGROUND ---------- */
+
+.pixelField {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pixelLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  background: #fac545;
+
+  pointer-events: none;
+}
+
+.pixelLayerOne {
+  width: 4px;
+  height: 4px;
+
+  opacity: 0.5;
+
+  box-shadow:
+    7vw 12vh 0 #fac545,
+    18vw 28vh 0 #fac545,
+    31vw 14vh 0 #fac545,
+    44vw 32vh 0 #fac545,
+    57vw 10vh 0 #fac545,
+    69vw 26vh 0 #fac545,
+    82vw 16vh 0 #fac545,
+    93vw 34vh 0 #fac545,
+
+    11vw 52vh 0 #fac545,
+    24vw 68vh 0 #fac545,
+    38vw 58vh 0 #fac545,
+    51vw 76vh 0 #fac545,
+    63vw 54vh 0 #fac545,
+    76vw 70vh 0 #fac545,
+    88vw 56vh 0 #fac545,
+    96vw 82vh 0 #fac545,
+
+    5vw 88vh 0 #fac545,
+    17vw 78vh 0 #fac545,
+    29vw 92vh 0 #fac545,
+    42vw 84vh 0 #fac545,
+    58vw 94vh 0 #fac545,
+    72vw 86vh 0 #fac545,
+    84vw 90vh 0 #fac545;
+
+  animation: pixelFieldFade 9s ease-in-out infinite;
+}
+
+.pixelLayerTwo {
+  width: 7px;
+  height: 7px;
+
+  opacity: 0.28;
+
+  box-shadow:
+    13vw 20vh 0 #fac545,
+    36vw 24vh 0 #fac545,
+    64vw 18vh 0 #fac545,
+    87vw 25vh 0 #fac545,
+
+    8vw 63vh 0 #fac545,
+    33vw 72vh 0 #fac545,
+    67vw 64vh 0 #fac545,
+    91vw 74vh 0 #fac545,
+
+    20vw 87vh 0 #fac545,
+    48vw 90vh 0 #fac545,
+    78vw 84vh 0 #fac545;
+
+  animation: pixelFieldFade 12s ease-in-out infinite reverse;
+}
+
+.pixelLayerThree {
+  width: 3px;
+  height: 3px;
+
+  opacity: 0.2;
+
+  box-shadow:
+    3vw 40vh 0 #fac545,
+    15vw 44vh 0 #fac545,
+    27vw 36vh 0 #fac545,
+    40vw 48vh 0 #fac545,
+    60vw 40vh 0 #fac545,
+    74vw 46vh 0 #fac545,
+    86vw 39vh 0 #fac545,
+    98vw 50vh 0 #fac545,
+
+    22vw 8vh 0 #fac545,
+    48vw 6vh 0 #fac545,
+    76vw 8vh 0 #fac545,
+
+    14vw 96vh 0 #fac545,
+    35vw 98vh 0 #fac545,
+    66vw 96vh 0 #fac545,
+    90vw 94vh 0 #fac545;
+
+  animation: pixelFieldFade 15s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+@keyframes pixelFieldFade {
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ---------- PLAY BUTTON ---------- */
+
+.playButtonScene {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 54px 64px;
+}
+
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  position: relative;
+  z-index: 10;
+
+  min-width: 200px;
+  min-height: 70px;
+
+  padding: 22px 48px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #fac545;
+  color: #05070d;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 7px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 28px rgba(250, 197, 69, 0.18),
+    0 0 60px rgba(250, 197, 69, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.playSelector {
+  width: 0;
+  height: 0;
+
+  flex: 0 0 auto;
+
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 17px solid #05070d;
+
+  transform: translateY(0);
+
+  opacity: 0.88;
+
+  filter: drop-shadow(0 0 0 rgba(5, 7, 13, 0));
+
+  animation: selectorGlow 3.5s ease-in-out infinite;
+}
+
+.playText {
+  display: inline-flex;
+  align-items: center;
+
+  line-height: 1;
+}
+
+.playButton:hover {
+  transform: translateY(-3px);
+
+  filter: brightness(1.035);
+
+  box-shadow:
+    0 0 34px rgba(250, 197, 69, 0.28),
+    0 0 75px rgba(250, 197, 69, 0.12);
+}
+
+.playButton:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.playButton:focus-visible {
+  outline: 3px solid #fdf6e3;
+  outline-offset: 7px;
+}
+
+@keyframes selectorGlow {
+  0%,
+  100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 0 rgba(5, 7, 13, 0));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(5, 7, 13, 0.35));
+  }
+}
+
+/* ---------- INTRO ---------- */
+
+.logoScene{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.logoScene.show{
+
+    animation:sceneReveal 1s forwards;
+
+}
+
+.logo{
+
+    width:360px;
+
+     margin-top: -100px;
+
+    opacity:0;
+
+    transform:scale(.7);
+
+    animation:logoReveal 1.6s forwards;
+
+    animation-delay:.6s;
+
+}
+
+.logoScene h1{
+
+    margin-top:40px;
+
+    font-family:"Work Sans", sans-serif;
+    font-weight:800;
+    font-size:60px;
+
+    line-height:0.95;
+    letter-spacing:-2px;
+
+    color:#fdf6e3;
+
+    text-align:left;
+
+    opacity:0;
+
+    animation:fadeUp 1s forwards;
+    animation-delay:2.3s;
+
+}
+.logoScene h1 span{
+
+    display:block;
+
+    margin-top:6px;
+
+}
+
+.logoScene p{
+
+    position:absolute;
+    bottom:25px;
+
+    font-family:"Orbitron",sans-serif;
+    font-size:22px;
+
+    letter-spacing:2.5px;
+
+    color:#fac545;
+
+    opacity:1;
+}
+.scrollHint{
+
+    margin-top:70px;
+
+    font-size:18px;
+
+    opacity:0;
+
+    animation:
+
+        fadeUp 1s forwards,
+
+        bounce 1.6s infinite;
+
+    animation-delay:
+
+        4s,
+
+        5s;
+
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes sceneReveal{
+
+from{
+
+opacity:0;
+
+}
+
+to{
+
+opacity:1;
+
+}
+
+}
+
+@keyframes particles{
+
+0%{
+
+opacity:0;
+transform:scale(1.4);
+
+}
+
+100%{
+
+opacity:.14;
+transform:scale(1);
+
+}
+
+}
+
+@keyframes logoReveal{
+
+0%{
+
+opacity:0;
+transform:scale(.7);
+
+}
+
+100%{
+
+opacity:1;
+transform:scale(1);
+
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(10px);
+
+}
+
+}
+@keyframes introFade{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+.cursor{
+    position:absolute;
+    right:-45px;
+    bottom:-12px;
+    font-size:30px;
+    animation:cursorClick 2.8s infinite;
+}
+@keyframes cursorClick{
+
+0%,100%{
+opacity:0;
+transform:translate(20px,20px) scale(1);
+}
+
+20%{
+opacity:1;
+}
+
+45%{
+transform:translate(0,0) scale(.9);
+}
+
+55%{
+transform:translate(0,0) scale(1);
+}
+
+80%{
+opacity:0;
+}
+
+}
+.intro-logo{
+    width:520px;
+    max-width:80vw;
+    margin-top:50px;
+
+    opacity:0;
+    transform:scale(.8);
+
+animation:logoAppear 1.5s forwards,
+          logoFloat 4s ease-in-out infinite 2s;}
+
+.intro-text{
+    margin-top:35px;
+    text-align:center;
+
+    opacity:0;
+
+    animation:textAppear 1s forwards;
+}
+
+.intro-text h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.intro-text h2{
+
+    font-size:34px;
+
+    color:white;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+}
+
+.intro-text p {
+  font-size: 1.2rem;
+  color: #d6d6d6;
+  margin-top: 10px;
+}
+@keyframes logoAppear{
+
+0%{
+opacity:0;
+transform:scale(.75);
+filter:blur(8px);
+}
+
+100%{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+}
+
+}
+
+@keyframes textAppear{
+
+from{
+opacity:0;
+transform:translateY(25px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+@keyframes logoFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+.logo-loader{
+
+    width:260px;
+    height:5px;
+
+    margin:18px auto 0;
+
+    background:#1f1f1f;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.logo-loader-fill{
+
+    width:0%;
+
+    height:100%;
+
+    background:#F5C34D;
+
+    animation:loadingLoop 2.5s ease-in-out infinite;
+
+}@keyframes loadingLoop{
+
+    0%{
+
+        width:0%;
+
+    }
+
+    45%{
+
+        width:100%;
+
+    }
+
+    55%{
+
+        width:100%;
+
+    }
+
+    100%{
+
+        width:0%;
+
+    }
+
+}
+
+.loadingScreen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+.pixelSpinner{
+    position:relative;
+
+    width:88px;
+    height:88px;
+
+    animation:pixelSpin 2s steps(8,end) infinite;
+}
+
+.pixelSpinner span{
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    background:#fac545;
+}
+
+.pixelSpinner span:nth-child(1){top:0;left:39px;}
+.pixelSpinner span:nth-child(2){top:11px;right:11px;}
+.pixelSpinner span:nth-child(3){top:39px;right:0;}
+.pixelSpinner span:nth-child(4){right:11px;bottom:11px;}
+.pixelSpinner span:nth-child(5){bottom:0;left:39px;}
+.pixelSpinner span:nth-child(6){bottom:11px;left:11px;}
+.pixelSpinner span:nth-child(7){top:39px;left:0;}
+.pixelSpinner span:nth-child(8){top:11px;left:11px;}
+
+@keyframes pixelSpin{
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+/* ---------- MISSION ---------- */
+
+.missionScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  opacity: 0;
+
+  animation:
+    missionFadeIn 0.8s ease forwards,
+    missionFadeOut 0.6s ease 2.5s forwards;
+}
+
+.missionScreen span {
+  color: #f5c34d;
+  letter-spacing: 6px;
+  font-size: 25px;
+  margin-bottom: 24px;
+  font-family: "Orbitron", sans-serif;
+}
+
+.missionScreen h2 {
+  font-size: 65px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  color: #fdf6e3;
+  margin: 6px 0;
+}
+
+.missionLine{
+
+    width:min(620px,75vw);
+    height:3px;
+
+    margin:34px 0;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(245,195,77,.22),
+        transparent
+    );
+}
+
+.missionLabel{
+
+    opacity:0;
+
+    animation:fadeUp .5s ease .15s forwards;
+}
+
+.missionScreen h2:first-of-type{
+
+    opacity:0;
+
+    animation:fadeUp .6s ease .45s forwards;
+}
+
+.missionScreen h2:last-of-type{
+
+    opacity:0;
+
+    animation:fadeUp .6s ease .75s forwards;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(16px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes missionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes missionFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@media (max-width: 600px) {
+  .playButton {
+    width: 100%;
+    min-width: 0;
+    min-height: 82px;
+
+    gap: 13px;
+
+    padding: 20px 22px;
+
+    font-size: clamp(18px, 5vw, 24px);
+    letter-spacing: clamp(3px, 1.4vw, 6px);
+  }
+
+  .playSelector {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .playButton {
+    width: 100%;
+    min-width: 0;
+    min-height: 76px;
+
+    gap: 14px;
+
+    padding: 18px 24px;
+
+    font-size: clamp(18px, 5vw, 23px);
+    letter-spacing: clamp(3px, 1.3vw, 5px);
+  }
+
+  .playSelector {
+    border-top-width: 7px;
+    border-bottom-width: 7px;
+    border-left-width: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .pixelLayerOne {
+    opacity: 0.34;
+  }
+
+  .pixelLayerTwo {
+    opacity: 0.2;
+  }
+
+  .pixelLayerThree {
+    opacity: 0.14;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixelLayer {
+    animation: none;
+  }
+}
+
+/* =========================================
+   INTRO — MOBILE FIXES FINAL
+   Keep this block at the end of the file
+   ========================================= */
+
+@media (max-width: 600px) {
+  .intro {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    padding-inline: 30px;
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  /* PRESS START */
+
+  .playButton {
+    width: min(100%, 360px);
+    max-width: calc(100vw - 32px);
+    min-width: 0;
+    min-height: 76px;
+
+    box-sizing: border-box;
+
+    padding: 18px 22px;
+    gap: 14px;
+
+    font-size: clamp(18px, 5.4vw, 23px);
+    letter-spacing: clamp(2px, 1vw, 5px);
+    line-height: 1.2;
+  }
+
+  .playSelector {
+    border-top-width: 9px;
+    border-bottom-width: 9px;
+    border-left-width: 13px;
+  }
+
+  /* MISSION */
+
+  .missionScreen {
+    width: 100%;
+    max-width: 100%;
+
+    padding-inline: 0px;
+    box-sizing: border-box;
+  }
+
+  .missionScreen span {
+    margin-bottom: 18px;
+
+    font-size: clamp(16px, 5vw, 21px);
+    letter-spacing: clamp(3px, 1.2vw, 5px);
+  }
+
+  .missionScreen h2 {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 5px 0;
+
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.005em;
+
+    text-align: center;
+    white-space: normal;
+  }
+
+  .missionLine {
+    width: min(100%, 340px);
+    margin: 26px 0;
+  }
+}
