@@ -49,13 +49,13 @@ function Home({
           <WelcomeSection onRevealBuilds={handleRevealBuilds} />
 
           {showBuilds && (
-            <div
-              ref={buildsRef}
-              className="buildReveal show"
-            >
-              <BuildSection onOpenQuest={onOpenQuest} />
-            </div>
-          )}
+  <div
+    ref={buildsRef}
+    className="buildReveal show"
+  >
+    <BuildSection onOpenQuest={onOpenQuest} />
+  </div>
+)}
         </>
       )}
     </>
