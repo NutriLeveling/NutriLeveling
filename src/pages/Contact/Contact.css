@@ -43,12 +43,8 @@
 ======================================================= */
 
 .contactHero{
-    overflow:hidden;
-}
-
-.contactHero{
     position:relative;
-
+    overflow:hidden;
     display:flex;
     justify-content:center;
 
@@ -92,20 +88,6 @@
     text-align:center;
 
     gap:1.5rem;
-}
-
-.contactHeroCircle{
-
-    width:10px;
-    height:10px;
-
-    border-radius:50%;
-
-    background:#C9A75C;
-
-    box-shadow:
-        0 0 12px rgba(201,167,92,.55),
-        0 0 30px rgba(201,167,92,.25);
 }
 
 .contactHero h1{
@@ -685,10 +667,4 @@
 .contactForm input::placeholder,
 .contactForm textarea::placeholder {
     font-style: italic;
-}
-
-@media (min-width: 700px) {
-  .contactHero h2 {
-    white-space: nowrap;
-  }
 }
