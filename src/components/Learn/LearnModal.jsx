@@ -33,14 +33,11 @@ function LearnModal({ item, onClose }) {
    * Reset the closing state every time
    * a new article or video opens.
    */
-  useLayoutEffect(() => {
+useLayoutEffect(() => {
   if (!item) return;
 
   if (closeTimerRef.current) {
-    window.clearTimeout(
-      closeTimerRef.current
-    );
-
+    window.clearTimeout(closeTimerRef.current);
     closeTimerRef.current = null;
   }
 
@@ -52,7 +49,7 @@ function LearnModal({ item, onClose }) {
    * Escape key and body scroll lock.
    */
   useEffect(() => {
-    if (!item) return undefined;
+    if (!item) return;
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
