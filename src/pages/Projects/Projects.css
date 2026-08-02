@@ -65,35 +65,6 @@
 
 }
 
-.projectsEyebrowRow {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.7rem;
-  font-family: "Orbitron", sans-serif;
-}
-
-.projectsEyebrowDot {
-  width: 6px;
-  height: 6px;
-
-  background: #6f9c99;
-
-  border-radius: 2px;
-}
-
-.projectsEyebrow {
-  margin: 0;
-
-  font-size: 0.78rem;
-  font-weight: 600;
-
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-
-  color: rgba(242, 244, 243, 0.58);
-}
-
 .projectsHero h1 {
   position: relative;
   isolation: isolate;
@@ -187,21 +158,14 @@
   gap: clamp(1.25rem, 2.2vw, 2rem);
 }
 
-@media(max-width:900px){
-
-.projectsGrid{
-
-grid-template-columns:1fr;
-
-}
+@media (max-width: 900px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
 
   .projectsHero {
     align-items: flex-start;
     text-align: left;
-  }
-
-  .projectsEyebrowRow {
-    justify-content: flex-start;
   }
 
   .projectsDivider {
@@ -212,9 +176,7 @@ grid-template-columns:1fr;
       transparent
     );
   }
-}
 
-@media (max-width: 900px) {
   .projectCard {
     min-height: 470px;
   }
@@ -650,8 +612,7 @@ grid-template-columns:1fr;
 
   margin: 0 0 0 auto;
 
-  font-size:
-    clamp(1.2rem, 1.5vw, 1.2rem);
+  font-size: 1.2rem;
 
   line-height: 1.65;
 
@@ -875,7 +836,7 @@ grid-template-columns:1fr;
 .projectModalPartner img {
   width: auto;
   max-width: 200px;
-  height: 90px;
+  height: 120px;
 
   object-fit: contain;
 
@@ -891,13 +852,13 @@ grid-template-columns:1fr;
 }
 
 .projectModalPartner span {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
 
-  line-height: 1.4;
+  line-height: 2.5;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-
-  color: rgba(242, 244, 243, 0.48);
+  font-family: "space grotesk", sans-serif;
+  color: rgba(242, 244, 243, 0.67);
 }
 
 .projectModalFunding {
@@ -1257,10 +1218,10 @@ color: var(--projects-accent);
 
   /* Prevent all horizontal scrolling */
 
-  .projectsHero h1{
-    font-size:clamp(2rem,10vw,2rem);
-    line-height:.88;
-  }
+.projectsHero h1 {
+  font-size: 2rem;
+  line-height: 0.88;
+}
 
   .projectModalBackdrop {
     width: 100%;
@@ -1452,10 +1413,8 @@ color: var(--projects-accent);
     margin-inline: auto;
   }
 
-  @media (max-width: 700px) {
   .projectsHero::before,
   .projectsHero h1::before {
     display: none;
   }
-}
 }

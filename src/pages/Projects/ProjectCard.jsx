@@ -31,7 +31,7 @@ function ProjectCard({ project, onOpen }) {
             src={project.cover}
             alt={project.coverAlt}
             style={{
-              objectFit: project.coverFit || "cover"
+              objectFit: project.coverFit || "cover",
     }}
           />
         ) : (

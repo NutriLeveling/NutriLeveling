@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 function ProjectModal({ project, onClose }) {
   const [isClosing, setIsClosing] =
     useState(false);
 
-  const requestClose = () => {
-    if (isClosing) {
-      return;
-    }
+const requestClose = useCallback(() => {
+  if (isClosing) return;
 
-    setIsClosing(true);
+  setIsClosing(true);
 
-    window.setTimeout(() => {
-      onClose();
-    }, 260);
-  };
+  window.setTimeout(() => {
+    onClose();
+  }, 260);
+}, [isClosing, onClose]);
 
   useEffect(() => {
     const previousOverflow =
@@ -39,7 +41,7 @@ function ProjectModal({ project, onClose }) {
         handleKeyDown
       );
     };
-  }, []);
+  }, [requestClose]);
 
   return (
     <div
@@ -89,7 +91,7 @@ function ProjectModal({ project, onClose }) {
               src={project.cover}
               alt={project.coverAlt}
               style={{
-                objectFit: project.coverFit || "cover"
+                objectFit: project.coverFit || "cover",
     }}
             />
 
