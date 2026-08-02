@@ -330,11 +330,12 @@ column-gap:80px;
   user-select: none;
   pointer-events: none;
 }
-.questInitializing {
+
+.questInitializing,
 .questLoading {
-  align-self: center;
-}
   position: relative;
+
+  align-self: center;
 
   width: min(92%, 620px);
   margin: auto;
@@ -342,16 +343,6 @@ column-gap:80px;
   text-align: center;
 
   animation: questInitializingEnter 0.45s ease both;
-}
-
-.questInitializingLabel {
-  display: block;
-
-  color: #f4efe6;
-
-  font-size: clamp(0.8rem, 2vw, 1rem);
-  font-weight: 700;
-  letter-spacing: 0.24em;
 }
 
 .questInitializingTrack {
@@ -573,10 +564,6 @@ column-gap:80px;
   color: rgba(0, 0, 0, 0.55);
 }
 
-.questAnswers button:disabled {
-  cursor: default;
-}
-
 .questBack {
   margin-top: 26px;
   padding: 8px 0;
@@ -650,9 +637,6 @@ column-gap:80px;
   margin-bottom: 16px;
 }
 
-.questAnswers button:disabled {
-  cursor: default;
-}
 .questStats {
   width: min(100%, 500px);
   margin: 32px auto 0;
@@ -1038,24 +1022,6 @@ column-gap:80px;
   border-color: rgba(244, 239, 230, 0.35);
 }
 
-.questStatusText {
-  margin: 15px 0 0;
-
-  color: rgba(244, 239, 230, 0.38);
-
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.questStatusText::before {
-  content: "//";
-  margin-right: 9px;
-
-  color: rgba(216, 200, 106, 0.72);
-}
-
 /* GHOST WORD */
 
 .questIntroGhost {
@@ -1278,10 +1244,6 @@ column-gap:80px;
   font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-}
-
-.questStatusText {
-  display: none;
 }
 
 @media (min-width: 801px) {
@@ -5587,7 +5549,7 @@ opacity: 0.45;
       28px
       18px;
   }
-  @media (max-width: 620px) {
+
   .questUpgradeButton {
     grid-template-columns: 48px minmax(0, 1fr);
     gap: 16px;
@@ -5595,10 +5557,8 @@ opacity: 0.45;
 
   .questUpgradeContent {
     grid-column: 2;
-
     text-align: left;
   }
-}
 }
 /* =========================================================
    QUEST QUESTIONS — FINAL RESPONSIVE COMPOSITION
@@ -6145,10 +6105,10 @@ opacity: 0.45;
 .questLoading h2 span {
   display: block;
 
-  width: max-content;
+  width: 100%;
   max-width: 100%;
 
-  white-space: nowrap;
+  white-space: normal;
 }
 
 

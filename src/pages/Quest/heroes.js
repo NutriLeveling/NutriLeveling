@@ -6,7 +6,7 @@ import catalystGif from "../../assets/heroes/catalyst.gif";
 export const heroes = {
   strategist: {
     name: "The Strategist",
-      accent: "#004aad",
+    accent: "#004aad",
     tagline: "Every move has a purpose.",
     description:
       "You play with intention, structure, and smart decision-making. Your edge comes from focus, pattern recognition, and staying in control when pressure rises.",
@@ -66,7 +66,7 @@ export const heroes = {
       "You build performance on a strong foundation. You are reliable, disciplined, and difficult to break over long sessions, even if your style is not always the most explosive.",
 
     strengths: [
-      "Endurace",
+      "Endurance",
       "Recovery awareness",
       "Discipline",
       "Stability and control",

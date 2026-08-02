@@ -14,14 +14,14 @@ const Quest = ({ onBackHome, onOpenContact }) => {
   const [playerStats, setPlayerStats] = useState(null);
   const [isStarting, setIsStarting] = useState(false);
 
-  const handleStart = () => {
-    setIsStarting(true);
+const handleStart = () => {
+  setIsStarting(true);
 
-    setTimeout(() => {
-  setStarted(true);
-  setIsStarting(false);
-}, 3000);
-  };
+  setTimeout(() => {
+    setStarted(true);
+    setIsStarting(false);
+  }, 3000);
+};
 
 const handleAnswer = (answer, index) => {
   if (selectedAnswer !== null) return;
@@ -31,10 +31,9 @@ const handleAnswer = (answer, index) => {
   const updatedAnswers = [...answers];
 
   updatedAnswers[currentQuestion] = {
-    answerIndex: index,
-    archetypes: answer.archetypes,
-    stats: answer.stats,
-  };
+  archetypes: answer.archetypes,
+  stats: answer.stats,
+};
 
   setAnswers(updatedAnswers);
 
