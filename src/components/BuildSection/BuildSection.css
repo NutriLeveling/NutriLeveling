@@ -71,7 +71,7 @@
 .buildCard {
   position: relative;
 
-  height: clamp(350px, 30vh, 350px);
+  height: 350px;
 
   overflow: hidden;
 
@@ -158,8 +158,6 @@
 .buildCard:hover {
   transform: translateY(-6px);
 
-  border-color: rgba(255, 255, 255, 0.55);
-
   box-shadow:
     0 20px 55px rgba(0, 0, 0, 0.42),
     0 0 26px rgba(245, 195, 77, 0.08);
@@ -181,10 +179,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-
-  margin-top: clamp(36px, 5vh, 62px);
   padding-top: 28px;
-
   border-top: 1px solid rgba(245, 195, 77, 0.22);
 }
 
@@ -291,81 +286,6 @@
   }
 }
 
-@media (max-width: 760px) {
-  .buildSection {
-    padding-inline: 20px;
-  }
-
-  .buildGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .buildCard {
-    height: min(64vw, 360px);
-  }
-
-  .buildOverlay p {
-    opacity: 1;
-    transform: none;
-  }
-
-  .terminalAccess {
-    flex-direction: column;
-
-    align-items: stretch;
-  }
-
-  .terminalAccessStatus {
-    justify-content: center;
-
-    text-align: center;
-  }
-
-  .terminalAccessButton {
-    width: 100%;
-  }
-}
-.questTerminalReveal {
-  width: 100%;
-
-  animation: revealQuestTerminal 1.5s ease forwards;
-}
-
-@keyframes revealQuestTerminal {
-0%{
-    opacity:0;
-    transform:translateY(70px);
-}
-
-100%{
-    opacity:1;
-    transform:translateY(0);
-}
-}
-
-.terminalAccessButton:disabled {
-  cursor: default;
-
-  background: rgba(245, 195, 77, 0.1);
-  color: rgba(245, 195, 77, 0.72);
-
-  border-color: rgba(245, 195, 77, 0.42);
-
-  box-shadow: none;
-}
-
-.terminalAccessButton:disabled:hover {
-  transform: none;
-
-  background: rgba(245, 195, 77, 0.1);
-  color: rgba(245, 195, 77, 0.72);
-
-  box-shadow: none;
-}
-
-.terminalAccessButton:disabled span:last-child {
-  transform: none;
-}
 /* =========================================
    PILLARS → PLAYER BUILD BRIDGE
 ========================================= */
@@ -423,32 +343,59 @@ background: linear-gradient(
     transform: scaleX(-1);
 }
 
-.terminalBridge .terminalAccess {
-    margin-top: 0;
-}
-
-
 /* =========================================
    MOBILE
 ========================================= */
 
 @media (max-width: 760px) {
-    .terminalBridge {
-        margin-top: 30px;
-    }
+  .buildSection {
+    padding-inline: 20px;
+  }
 
-    .terminalBridgeIntro {
-        grid-template-columns: 32px 1fr 32px;
-        gap: 12px;
+  .buildGrid {
+    grid-template-columns: 1fr;
+  }
 
-        margin-bottom: 18px;
-    }
+  .buildCard {
+    height: min(64vw, 360px);
+  }
 
-    .terminalBridgeIntro p {
-        font-size: 9px;
-        letter-spacing: 2px;
-    }
+  .buildOverlay p {
+    opacity: 1;
+    transform: none;
+  }
+
+  .terminalBridge {
+    margin-top: 30px;
+  }
+
+  .terminalBridgeIntro {
+    grid-template-columns: 32px 1fr 32px;
+    gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+  .terminalBridgeIntro p {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .terminalAccess {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .terminalAccessStatus {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .terminalAccessButton {
+    width: 100%;
+  }
 }
+
 /* =========================================
    LARGE DESKTOP WIDTH POLISH
 ========================================= */

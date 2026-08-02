@@ -41,7 +41,7 @@ export default function BuildSection({ onOpenQuest }) {
   useEffect(() => {
     const section = sectionRef.current;
 
-    if (!section) return undefined;
+    if (!section) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -76,9 +76,10 @@ export default function BuildSection({ onOpenQuest }) {
 
           <h2>THE PILLARS BEHIND THE PLAYER</h2>
 
-          <p className="buildSubtitle">
-            How NutriLeveling approaches esports nutrition, recovery, performance.
-          </p>
+        <p className="buildSubtitle">
+          How NutriLeveling approaches esports nutrition, recovery,
+          and performance.
+        </p>
         </div>
 
         <div className="buildGrid">
