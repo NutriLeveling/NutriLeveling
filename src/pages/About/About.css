@@ -189,6 +189,7 @@ font-family: "Orbitron", sans-serif;
 
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* =========================================================
@@ -506,10 +507,6 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   50% {
     transform: translateY(-7px);
   }
-}
-
-.aboutCopy {
-  position: relative;
 }
 
 .aboutCopy::before {
