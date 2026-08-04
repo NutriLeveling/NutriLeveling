@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 import "./BuildSection.css";
 
-import nutrition from "../../assets/images/nutrition.png";
-import science from "../../assets/images/science.png";
-import wellbeing from "../../assets/images/wellbeing.png";
-import unfiltered from "../../assets/images/unfiltered.png";
+import nutrition from "../../assets/images/nutrition.webp";
+import science from "../../assets/images/science.webp";
+import wellbeing from "../../assets/images/wellbeing.webp";
+import unfiltered from "../../assets/images/unfiltered.webp";
 
 const builds = [
   {
