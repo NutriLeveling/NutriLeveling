@@ -27,6 +27,63 @@ export const learnCategories = {
 
 export const learnContent = [
 {
+  id: "personalized-esports-nutrition-review",
+  type: "article",
+  category: "Science Lab",
+  featured: true,
+  publication: true,
+
+  fullTitle:
+  "Personalized Nutrition, Lifestyle, and Supplementation Strategies to Support Cognitive Performance and Well-Being in Esports Athletes: A Narrative Review",
+  
+  title: "Personalized Performance in Esports",
+
+  description:
+    "My peer-reviewed narrative review on personalized nutrition, lifestyle, and supplementation strategies for esports athletes.",
+
+  duration: "JOURNAL ARTICLE",
+
+  journal: "Nutrients",
+  citation: "Nutrients 2026, 18(6), 981",
+  publicationUrl:
+    "https://doi.org/10.3390/nu18060981",
+
+  content: [
+    {
+      type: "paragraphs",
+      paragraphs: [
+        "Esports require sustained cognitive attention, rapid decision-making, motor precision, effective stress regulation, and resilience to mental and physical fatigue. At the same time, competitive gaming environments are often characterized by prolonged sedentary behavior, extensive screen exposure, irregular schedules, and psychological pressure, which may negatively affect both performance and long-term health.",
+
+        "As esports ecosystems expand into universities, community clubs, and grassroots initiatives, understanding how lifestyle factors support sustainable participation and wellbeing becomes increasingly important. Nutrition, hydration, sleep, and physical activity are well-established contributors to cognitive performance and overall health in traditional sport, yet their role in esports remains relatively underexplored.",
+      ],
+    },
+
+    {
+      type: "tip",
+      label: "RESEARCH CONTEXT",
+      title: "Supporting Sustainable Performance",
+      text:
+        "A narrative review of the current literature examining personalized nutrition, supplementation, and lifestyle strategies relevant to esports athletes.",
+    },
+
+    {
+      type: "paragraphs",
+      paragraphs: [
+        "The review synthesizes evidence on how dietary patterns, hydration practices, and targeted supplementation may influence cognitive performance, fatigue management, and overall wellbeing in competitive gaming contexts.",
+
+        "By identifying research gaps and outlining future directions, the publication contributes to the development of evidence-based strategies to support health, cognitive performance, and sustainable engagement in esports.",
+      ],
+    },
+
+    {
+      type: "publication",
+      label: "PUBLICATION",
+      text:
+        "Published in Nutrients, 2026, Volume 18, Issue 6 (Article 981).",
+    },
+  ],
+},
+  {
   id: "pre-game-fueling",
   type: "article",
   category: "Nutrition XP",

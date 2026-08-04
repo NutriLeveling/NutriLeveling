@@ -1012,7 +1012,6 @@ padding:
   text-transform: uppercase;
 }
 
-
 /* =========================
    VERTICAL DIVIDER
    ========================= */
@@ -2452,6 +2451,54 @@ padding:
   text-wrap: balance;
 }
 
+.learnArticlePublication {
+  padding: clamp(22px, 3vw, 34px);
+
+  border: 1px solid rgba(232, 201, 79, 0.22);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(232, 201, 79, 0.06),
+      rgba(255, 255, 255, 0.015)
+    );
+}
+
+.learnArticlePublication p {
+  margin: 12px 0 0;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  line-height: 1.6;
+}
+
+.learnPublicationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 18px;
+
+  color: var(--learn-gold);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.learnPublicationLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.learnPublicationLink:focus-visible {
+  outline: 2px solid var(--learn-gold);
+  outline-offset: 4px;
+}
+
 
 /* =========================
    MOBILE
@@ -3234,5 +3281,67 @@ border:
   .learnEditorialStatusDot {
     width: 4px;
     height: 4px;
+  }
+}
+
+/* =========================================
+   FEATURED ARTICLE
+========================================= */
+
+.learnEditorialItem--featured {
+  background:
+    linear-gradient(
+      100deg,
+      rgba(232, 201, 79, 0.11),
+      rgba(232, 201, 79, 0.035) 38%,
+      transparent 78%
+    ),
+    var(--learn-panel);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 201, 79, 0.3),
+    inset 4px 0 0 var(--learn-gold),
+    inset 0 0 34px rgba(232, 201, 79, 0.035);
+}
+
+.learnEditorialItem--featured::before {
+  opacity: 1;
+
+  background:
+    radial-gradient(
+      circle at 12% 50%,
+      rgba(232, 201, 79, 0.16),
+      transparent 34%
+    );
+}
+
+.learnEditorialItem--featured .learnEditorialIndex,
+.learnEditorialItem--featured .learnEditorialType {
+  color: var(--learn-gold);
+}
+
+.learnEditorialItem--featured .learnEditorialMain h3 {
+  color: #fff6d8;
+}
+
+.learnEditorialItem--featured .learnEditorialDuration {
+  color: rgba(232, 201, 79, 0.68);
+}
+
+@media (hover: hover) {
+  .learnEditorialItem--featured:hover {
+    background:
+      linear-gradient(
+        100deg,
+        rgba(232, 201, 79, 0.16),
+        rgba(232, 201, 79, 0.055) 42%,
+        transparent 80%
+      ),
+      #111;
+
+    box-shadow:
+      inset 0 0 0 1px rgba(232, 201, 79, 0.46),
+      inset 4px 0 0 var(--learn-gold),
+      inset 0 0 46px rgba(232, 201, 79, 0.065);
   }
 }

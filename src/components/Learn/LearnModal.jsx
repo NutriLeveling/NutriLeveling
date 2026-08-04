@@ -155,9 +155,9 @@ useLayoutEffect(() => {
                 {item.category}
               </span>
 
-              <h2 id="learn-modal-title">
-                {item.title}
-              </h2>
+<h2 id="learn-modal-title">
+  {item.fullTitle || item.title}
+</h2>
 
               <p className="learnModalDescription">
                 {item.description}
@@ -181,110 +181,110 @@ useLayoutEffect(() => {
             )}
           </div>
 
-          {item.type === "article" && (
-            <article className="learnArticle">
-              {item.content?.map(
-                (block, blockIndex) => {
-                  if (
-                    block.type ===
-                    "paragraphs"
-                  ) {
-                    return (
-                      <div
-                        className="learnArticleText"
-                        key={`paragraphs-${blockIndex}`}
-                      >
-                        {block.paragraphs?.map(
-                          (
-                            paragraph,
-                            paragraphIndex
-                          ) => (
-                            <p
-                              key={`paragraph-${blockIndex}-${paragraphIndex}`}
-                            >
-                              {paragraph}
-                            </p>
-                          )
-                        )}
-                      </div>
-                    );
-                  }
+{item.type === "article" && (
+  <article className="learnArticle">
+    {item.content?.map((block, blockIndex) => {
+      if (block.type === "paragraphs") {
+        return (
+          <div
+            className="learnArticleText"
+            key={`paragraphs-${blockIndex}`}
+          >
+            {block.paragraphs?.map(
+              (paragraph, paragraphIndex) => (
+                <p
+                  key={`paragraph-${blockIndex}-${paragraphIndex}`}
+                >
+                  {paragraph}
+                </p>
+              )
+            )}
+          </div>
+        );
+      }
 
-                  if (block.type === "tip") {
-                    return (
-                      <aside
-                        className="learnArticleTip"
-                        key={`tip-${blockIndex}`}
-                      >
-                        {block.label && (
-                          <span className="learnArticleTipLabel">
-                            {block.label}
-                          </span>
-                        )}
+      if (block.type === "tip") {
+        return (
+          <aside
+            className="learnArticleTip"
+            key={`tip-${blockIndex}`}
+          >
+            {block.label && (
+              <span className="learnArticleTipLabel">
+                {block.label}
+              </span>
+            )}
 
-                        {block.title && (
-                          <h3>
-                            {block.title}
-                          </h3>
-                        )}
+            {block.title && <h3>{block.title}</h3>}
 
-                        {block.text && (
-                          <p>{block.text}</p>
-                        )}
-                      </aside>
-                    );
-                  }
+            {block.text && <p>{block.text}</p>}
+          </aside>
+        );
+      }
 
-                  if (block.type === "list") {
-                    return (
-                      <ul
-                        className="learnArticleList"
-                        key={`list-${blockIndex}`}
-                      >
-                        {block.items?.map(
-                          (
-                            listItem,
-                            itemIndex
-                          ) => (
-                            <li
-                              key={`list-${blockIndex}-${itemIndex}`}
-                            >
-                              <span
-                                aria-hidden="true"
-                              />
+      if (block.type === "list") {
+        return (
+          <ul
+            className="learnArticleList"
+            key={`list-${blockIndex}`}
+          >
+            {block.items?.map((listItem, itemIndex) => (
+              <li key={`list-${blockIndex}-${itemIndex}`}>
+                <span aria-hidden="true" />
 
-                              <p>
-                                {listItem}
-                              </p>
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    );
-                  }
+                <p>{listItem}</p>
+              </li>
+            ))}
+          </ul>
+        );
+      }
 
-                  if (
-                    block.type === "quote"
-                  ) {
-                    return (
-                      <blockquote
-                        className="learnArticleQuote"
-                        key={`quote-${blockIndex}`}
-                      >
-                        <span className="learnArticleQuoteLabel">
-                          FINAL TAKE
-                        </span>
+      if (block.type === "quote") {
+        return (
+          <blockquote
+            className="learnArticleQuote"
+            key={`quote-${blockIndex}`}
+          >
+            <span className="learnArticleQuoteLabel">
+              FINAL TAKE
+            </span>
 
-                        <p>{block.text}</p>
-                      </blockquote>
-                    );
-                  }
+            <p>{block.text}</p>
+          </blockquote>
+        );
+      }
 
-                  return null;
-                }
-              )}
-            </article>
-          )}
+      if (block.type === "publication") {
+        return (
+          <div
+            className="learnArticlePublication"
+            key={`publication-${blockIndex}`}
+          >
+            <span className="learnArticleQuoteLabel">
+              {block.label}
+            </span>
+
+            <p>{block.text}</p>
+
+            {item.publicationUrl && (
+              <a
+                className="learnPublicationLink"
+                href={item.publicationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Read Full Publication</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+        );
+      }
+
+      return null;
+    })}
+  </article>
+)}
 
           {item.type === "video" && (
             <div className="learnVideo">

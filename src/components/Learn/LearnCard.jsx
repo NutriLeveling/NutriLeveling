@@ -1,8 +1,11 @@
 function LearnCard({ item, index, onOpen }) {
   const formattedIndex = String(index + 1).padStart(2, "0");
 
-  const actionLabel =
-    item.type === "video" ? "WATCH" : "READ";
+const actionLabel = item.publication
+  ? "EXPLORE"
+  : item.type === "video"
+    ? "WATCH"
+    : "READ";
 
   return (
     <button
@@ -27,7 +30,9 @@ function LearnCard({ item, index, onOpen }) {
 
         <div className="learnEditorialMeta">
           <span className="learnEditorialType">
-            {item.type}
+            {item.publication
+            ? "Featured Article"
+            : item.type}
           </span>
 
           <span className="learnEditorialCategory">
