@@ -39,23 +39,35 @@ function About({ onBackHome }) {
 
           <div className="aboutText">
             <p>
-              Hi, I’m Loizos — a dietitian, nutritionist, and the
+              Hi, I’m Loizos, a dietitian, nutritionist, and the
               founder of NutriLeveling. I hold a Bachelor’s degree
               in Nutrition and Dietetics from the European
               University of Cyprus, and I currently work at
               Bredde-e-sport Alliansen in Norway as an esports
-              nutrition advisor and research assistant.
+              nutrition advisor and research assistant.   Through NutriLeveling, my goal is to make
+  evidence-based nutrition and wellbeing more relevant,
+  practical, and accessible for the gaming and esports
+  world. 
             </p>
 
-            <p>
-              Through NutriLeveling, my goal is to make
-              evidence-based nutrition and wellbeing more relevant,
-              practical, and accessible for the gaming and esports
-              world. My work also extends to people with similarly
-              demanding cognitive lifestyles, helping translate
-              science into habits that support focus, consistency,
-              recovery, and long-term health.
-            </p>
+<p>
+This commitment also extends to research,
+  including my peer-reviewed narrative review on
+  personalized nutrition, lifestyle, and supplementation
+  strategies for esports athletes, published in{" "}
+  <a
+    href="https://doi.org/10.3390/nu18060981"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="aboutPublicationLink"
+  >
+    <em>Nutrients</em>
+  </a>
+  . Beyond esports, I also work with individuals who have similarly
+  demanding cognitive lifestyles, helping translate
+  science into practical habits that support focus, consistency,
+  recovery, and long-term health.
+</p>
           </div>
 
           <div className="aboutMeta">

@@ -806,3 +806,26 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
     transition: none;
   }
 }
+
+.aboutPublicationLink {
+  color: inherit;
+
+  text-decoration-line: underline;
+  text-decoration-color: rgba(245, 195, 77, 0.62);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.aboutPublicationLink:hover {
+  color: #f5c34d;
+  text-decoration-color: #f5c34d;
+}
+
+.aboutPublicationLink:focus-visible {
+  outline: 2px solid #f5c34d;
+  outline-offset: 4px;
+}
