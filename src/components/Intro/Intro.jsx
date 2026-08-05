@@ -71,14 +71,14 @@ function Intro({ onComplete }) {
         <div className="missionScreen">
           <div className="missionLine" />
 
-          <span className="missionLabel">
-            MISSION
-          </span>
+<span className="missionLabel">
+  MISSION
+</span>
 
-          <h2>OPTIMIZE</h2>
-          <h2>PLAYER PERFORMANCE</h2>
+<h2>OPTIMIZE</h2>
+<h2>PLAYER PERFORMANCE</h2>
 
-          <div className="missionLine" />
+<div className="missionLine" />
         </div>
       )}
     </section>

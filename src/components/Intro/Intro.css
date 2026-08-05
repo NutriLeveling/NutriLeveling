@@ -458,25 +458,25 @@
   }
 
   .missionScreen span {
-    margin-bottom: 18px;
+    margin-bottom: 12px;
 
     font-size: clamp(16px, 5vw, 21px);
     letter-spacing: clamp(3px, 1.2vw, 5px);
   }
 
-  .missionScreen h2 {
-    width: 100%;
-    max-width: 100%;
+.missionScreen h2 {
+  width: 100%;
+  max-width: 100%;
 
-    margin: 5px 0;
+  margin: 2px 0;
 
-    font-size: clamp(2rem, 9vw, 3rem);
-    line-height: 1;
-    letter-spacing: -0.005em;
+  font-size: 2rem;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
 
-    text-align: center;
-    white-space: normal;
-  }
+  text-align: center;
+  white-space: normal;
+}
 
   .missionLine {
     width: min(100%, 340px);

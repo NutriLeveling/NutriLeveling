@@ -6,10 +6,17 @@ const navigationItems = [
     label: "ABOUT",
     action: "about",
   },
-  {
-    label: "NUTRILEVELING FRAMEWORK",
-    action: "performance",
-  },
+{
+  label: "NUTRILEVELING FRAMEWORK",
+  mobileLabel: (
+    <>
+      NUTRILEVELING
+      <br />
+      FRAMEWORK
+    </>
+  ),
+  action: "performance",
+},
   {
     label: "BEGIN YOUR QUEST",
     action: "quest",
@@ -130,7 +137,13 @@ function Hero({
                   aria-hidden="true"
                 />
 
-                <span>{item.label}</span>
+<span className="heroNavigationLabel heroNavigationLabelDesktop">
+  {item.label}
+</span>
+
+<span className="heroNavigationLabel heroNavigationLabelMobile">
+  {item.mobileLabel || item.label}
+</span>
               </button>
             ))}
           </nav>

@@ -115,7 +115,7 @@
   color: rgba(253, 246, 227, 0.58);
 
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(9px, 0.72vw, 12px);
+  font-size: clamp(14px, 0.9vw, 12px);
   font-weight: 500;
 
   letter-spacing: clamp(1.2px, 0.15vw, 2.3px);
@@ -582,8 +582,8 @@
 }
 
 .heroNavigationButton {
-  font-size: 9px;
-  letter-spacing: 1.2px;
+  font-size: 10.5px;
+  letter-spacing: 1.25px;
 }
 }
 
@@ -633,26 +633,25 @@
     margin-bottom:75px;
 }
 
-.heroNavigation{
+  .heroNavigation {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    justify-content: space-between;
 
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    row-gap: 25px;
+    column-gap: 30px;
 
-    gap:25px 50px;
+    align-items: center;
+  }
 
-    align-items:center;
-}
+  .heroNavigationButton {
+    width: auto;
+    justify-content: flex-start;
 
-.heroNavigationButton{
-
-    justify-content:flex-start;
-
-    font-size:10px;
-
-    letter-spacing:1.15px;
-
-    gap:8px;
-}
+    font-size: 12px;
+    letter-spacing: 1px;
+    gap: 8px;
+  }
 
 .heroLogo{
 
@@ -730,7 +729,7 @@
     minmax(0, 1.18fr)
     minmax(0, 1.50fr);
 
-  gap: 12px 8px;
+  gap: 16px 12px;
 }
 
   .heroNavigationButton,
@@ -744,9 +743,9 @@
 
     gap: 7px;
 
-    padding: 6px 0;
+    padding: 8px 0;
 
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 1.1px;
     text-align: left;
   }
@@ -814,6 +813,18 @@
     right: 16px;
     bottom: 18px;
   }
+
+  .heroNavigationLabel {
+    white-space: normal;
+  }
+
+  .heroNavigationLabelDesktop {
+  display: none;
+}
+
+.heroNavigationLabelMobile {
+  display: inline-block;
+}
 }
 /* =========================================================
    SMALL MOBILE
@@ -826,12 +837,13 @@
   }
 
 .heroNavigation {
-  gap: 7px 12px;
+  gap: 8px 40px;
 }
 
-.heroNavigationButton {
-  font-size: 7px;
-  letter-spacing: 0.9px;
+  .heroNavigationButton,
+  .heroNavigationButton:last-child {
+  font-size: 10px;
+  letter-spacing: 1.1px;
 }
 }
 /* =========================================================
@@ -888,11 +900,23 @@
   }
 
   .heroNavigationButton {
-    font-size: 6.7px;
+    font-size: 7.5px;
     letter-spacing: 0.75px;
   }
 
   .heroLogo {
     width: min(215px, 66vw);
   }
+}
+
+.heroNavigationLabel {
+  line-height: 1.25;
+}
+
+.heroNavigationLabelDesktop {
+  display: inline-block;
+}
+
+.heroNavigationLabelMobile {
+  display: none;
 }
