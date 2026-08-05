@@ -569,7 +569,7 @@
 
     margin:
       18px
-      clamp(18px, 5vw, 26px)
+      clamp(8px, 1vw, 12px)
       0;
   }
 
@@ -580,10 +580,11 @@
   }
 
   .contactTopRight {
-    gap: 0.45rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.11em;
+    gap: 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
     white-space: nowrap;
+    margin-right: 5px;
   }
 
   .contactHeroCircle {
