@@ -155,11 +155,11 @@ const handleReturnToMain = () => {
       onClick={() => onBackHome?.()}
     >
       <span aria-hidden="true">←</span>
-      <span>Back to NutriLeveling</span>
+      <span>EXIT QUEST</span>
     </button>
 
     <div className="questIntroEyebrow">
-      <span>NUTRILEVELING TERMINAL v1.0</span>
+      <span>QUEST v1.0</span>
     </div>
 
   </div>
