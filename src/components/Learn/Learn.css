@@ -397,7 +397,6 @@ text-shadow:
   white-space: nowrap;
 }
 
-
 /* =========================
    HERO — TABLET
    ========================= */
@@ -411,7 +410,6 @@ text-shadow:
     display: none;
   }
 }
-
 
 /* =========================
    HERO — MOBILE
@@ -427,7 +425,7 @@ text-shadow:
 
   .learnBackButton span:last-child {
     gap: 7px;
-    font-size: 0.50rem;
+    font-size: 0.60rem;
     letter-spacing: 0.005em;
     white-space: nowrap;
   }
@@ -2991,8 +2989,8 @@ padding:
 
   .learnPageLabel {
     flex-shrink: 0;
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
+    font-size: 0.60rem;
+    letter-spacing: 0.005em;
     white-space: nowrap;
   }
 }
