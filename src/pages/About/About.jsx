@@ -39,7 +39,7 @@ function About({ onBackHome }) {
 
           <div className="aboutText">
             <p>
-              Hi, I’m Loizos, a dietitian, nutritionist, and the
+              Hi, I’m Loizos Georgiou, a dietitian, nutritionist, and the
               founder of NutriLeveling. I hold a Bachelor’s degree
               in Nutrition and Dietetics from the European
               University of Cyprus, and I currently work at
