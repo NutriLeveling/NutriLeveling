@@ -38,7 +38,7 @@ const handleCloseModal = () => {
           className="learnBackButton"
           onClick={onBackHome}
         >
-          <span aria-hidden="true">←</span>
+          <span aria-hidden="true">◀</span>
           <span>RETURN TO NUTRILEVELING</span>
         </button>
 

@@ -565,6 +565,7 @@
 
 @media (max-width: 560px) {
   .contactTopBar {
+    align-items: center;
     gap: 1rem;
 
     margin:
@@ -574,17 +575,37 @@
   }
 
   .contactBackButton {
-    gap: 7px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
     font-size: 0.62rem;
+    line-height: 1;
     letter-spacing: 0.09em;
   }
 
+  .contactBackButton > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0.72rem;
+    line-height: 1;
+  }
+
   .contactTopRight {
+    display: inline-flex;
+    align-items: center;
+
     gap: 0.55rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.09em;
-    white-space: nowrap;
+
     margin-right: 5px;
+
+    font-size: 0.62rem;
+    line-height: 1;
+    letter-spacing: 0.09em;
+
+    white-space: nowrap;
   }
 
   .contactHeroCircle {

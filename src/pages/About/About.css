@@ -689,7 +689,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
     min-height: 100vh;
     height: auto;
 
-    overflow: visible;
+    overflow-x: clip;
   }
 
   .aboutMain {
@@ -731,7 +731,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   .aboutPage {
     padding:
       20px
-      19px
+      18px
       30px;
   }
 
@@ -794,6 +794,59 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
     width: 82px;
   }
+  /* TOPBAR */
+.aboutTopbar,
+.learnTopbar,
+.projectsTopbar {
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.aboutBackButton,
+.learnBackButton,
+.projectsBackButton {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+}
+
+/* ARROW */
+.aboutBackButton > span:first-child,
+.learnBackButton > span:first-child,
+.projectsBackButton > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+
+  transform: translateY(-1px);
+}
+
+/* RIGHT SIDE */
+.aboutPageLabel,
+.learnPageLabel,
+.projectsPageLabel {
+  position: static;
+  top: auto;
+
+  flex-shrink: 0;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+
+  white-space: nowrap;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {

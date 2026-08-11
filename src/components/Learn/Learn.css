@@ -450,7 +450,7 @@ text-shadow:
   }
 
   .learnHero h1 {
-    font-size: clamp(2.55rem, 12.8vw, 4.7rem);
+    font-size: clamp(2.25rem, 11.2vw, 3.8rem);
     line-height: 0.87;
     letter-spacing: -0.065em;
   }
@@ -478,6 +478,58 @@ text-shadow:
     white-space: normal;
     font-size: 0.94rem;
   }
+  /* TOPBAR */
+.aboutTopbar,
+.learnTopbar,
+.projectsTopbar {
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.aboutBackButton,
+.learnBackButton,
+.projectsBackButton {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+}
+
+/* ARROW */
+.aboutBackButton > span:first-child,
+.learnBackButton > span:first-child,
+.projectsBackButton > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.82rem;
+  line-height: 1;
+
+  transform: translateY(-0.01em);
+}
+
+/* RIGHT SIDE */
+.aboutPageLabel,
+.learnPageLabel,
+.projectsPageLabel {
+  position: static;
+  top: auto;
+
+  flex-shrink: 0;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+
+  white-space: nowrap;
+}
 }
 
 

@@ -154,7 +154,7 @@ const handleReturnToMain = () => {
       className="questIntroBack"
       onClick={() => onBackHome?.()}
     >
-      <span aria-hidden="true">←</span>
+      <span aria-hidden="true">◀</span>
       <span>EXIT QUEST</span>
     </button>
 

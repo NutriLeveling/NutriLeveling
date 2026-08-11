@@ -1163,7 +1163,7 @@ opacity:1;
   .projectsPage {
     padding:
       18px
-      clamp(18px, 5vw, 26px);
+      18px;
   }
 
   .projectsTopbar {
@@ -1219,7 +1219,7 @@ color: var(--projects-accent);
   /* Prevent all horizontal scrolling */
 
 .projectsHero h1 {
-  font-size: 2rem;
+  font-size: clamp(2.25rem, 11.2vw, 3.8rem);
   line-height: 0.88;
 }
 
@@ -1417,4 +1417,56 @@ color: var(--projects-accent);
   .projectsHero h1::before {
     display: none;
   }
+  /* TOPBAR */
+.aboutTopbar,
+.learnTopbar,
+.projectsTopbar {
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.aboutBackButton,
+.learnBackButton,
+.projectsBackButton {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+}
+
+/* ARROW */
+.aboutBackButton > span:first-child,
+.learnBackButton > span:first-child,
+.projectsBackButton > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-size: 0.82rem;
+  line-height: 1;
+
+  transform: translateY(-0.01em);
+}
+
+/* RIGHT SIDE */
+.aboutPageLabel,
+.learnPageLabel,
+.projectsPageLabel {
+  position: static;
+  top: auto;
+
+  flex-shrink: 0;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+
+  white-space: nowrap;
+}
 }
