@@ -34,7 +34,7 @@ export const learnContent = [
   publication: true,
 
   fullTitle:
-  "Personalized Nutrition, Lifestyle, and Supplementation Strategies to Support Cognitive Performance and Well-Being in Esports Athletes: A Narrative Review",
+  "Nutrition, Lifestyle, and Cognitive Performance in Esports",
   
   title: "Personalized Performance in Esports",
 
