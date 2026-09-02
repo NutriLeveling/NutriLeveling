@@ -4,11 +4,17 @@ import LearnCard from "./LearnCard";
 import LearnModal from "./LearnModal";
 import { learnContent } from "./learnData";
 
+import GlobalTopBar from "../GlobalTopBar/GlobalTopBar";
+
 import "./Learn.css";
 
 const filters = ["all", "article", "video"];
 
-function Learn({ onBackHome }) {
+function Learn({
+  onBackHome,
+  onNavigate,
+  currentPage,
+}) {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -32,18 +38,10 @@ const handleCloseModal = () => {
 
   return (
     <main className="learnPage">
-      <header className="learnTopbar">
-        <button
-          type="button"
-          className="learnBackButton"
-          onClick={onBackHome}
-        >
-          <span aria-hidden="true">◀</span>
-          <span>RETURN TO NUTRILEVELING</span>
-        </button>
-
-        <span className="learnPageLabel">KNOWLEDGE HUB</span>
-      </header>
+<GlobalTopBar
+  currentPage={currentPage}
+  onNavigate={onNavigate}
+/>
 
       <section className="learnHero">
         <div

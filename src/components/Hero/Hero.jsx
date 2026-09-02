@@ -3,23 +3,12 @@ import "./Hero.css";
 
 const navigationItems = [
   {
+    label: "HOME",
+    action: "home",
+  },
+  {
     label: "ABOUT",
     action: "about",
-  },
-{
-  label: "NUTRILEVELING FRAMEWORK",
-  mobileLabel: (
-    <>
-      NUTRILEVELING
-      <br />
-      FRAMEWORK
-    </>
-  ),
-  action: "performance",
-},
-  {
-    label: "BEGIN YOUR QUEST",
-    action: "quest",
   },
   {
     label: "KNOWLEDGE HUB",
@@ -28,6 +17,10 @@ const navigationItems = [
   {
     label: "PROJECTS",
     action: "projects",
+  },
+  {
+    label: "QUEST",
+    action: "quest",
   },
   {
     label: "CONTACT",
@@ -78,38 +71,38 @@ function Hero({
     });
   };
 
-  const handleNavigation = (item) => {
-    switch (item.action) {
-      case "about":
-        onOpenAbout?.();
-        break;
+const handleNavigation = (item) => {
+  switch (item.action) {
+    case "home":
+      scrollToSection("home");
+      break;
 
-      case "performance":
-        onRevealBuilds?.();
-        break;
+    case "about":
+      onOpenAbout?.();
+      break;
 
-      case "quest":
-        onOpenQuest?.();
-        break;
+    case "quest":
+      onOpenQuest?.();
+      break;
 
-      case "learn":
-        onOpenLearn?.();
-        break;
+    case "learn":
+      onOpenLearn?.();
+      break;
 
-      case "projects":
-        onOpenProjects?.();
-        break;
+    case "projects":
+      onOpenProjects?.();
+      break;
 
-      case "contact":
-        onOpenContact?.();
-        break;
+    case "contact":
+      onOpenContact?.();
+      break;
 
-      default:
-        if (item.target) {
-          scrollToSection(item.target);
-        }
-    }
-  };
+    default:
+      if (item.target) {
+        scrollToSection(item.target);
+      }
+  }
+};
 
   return (
     <section className="hero" id="home">
@@ -125,25 +118,26 @@ function Hero({
             aria-label="Main navigation"
           >
             {navigationItems.map((item, index) => (
-              <button
-                key={item.label}
-                type="button"
-                className="heroNavigationButton"
-                style={{ "--nav-index": index }}
-                onClick={() => handleNavigation(item)}
-              >
+<button
+  key={item.label}
+  type="button"
+  className={`heroNavigationButton ${
+    item.action === "home"
+      ? "heroNavigationButtonActive"
+      : ""
+  }`}
+  style={{ "--nav-index": index }}
+  onClick={() => handleNavigation(item)}
+>
                 <span
                   className="heroNavigationMarker"
                   aria-hidden="true"
                 />
 
-<span className="heroNavigationLabel heroNavigationLabelDesktop">
+<span className="heroNavigationLabel">
   {item.label}
 </span>
 
-<span className="heroNavigationLabel heroNavigationLabelMobile">
-  {item.mobileLabel || item.label}
-</span>
               </button>
             ))}
           </nav>

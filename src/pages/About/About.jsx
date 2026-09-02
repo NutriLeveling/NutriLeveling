@@ -1,6 +1,11 @@
 import "./About.css";
+import GlobalTopBar from "../../components/GlobalTopBar/GlobalTopBar";
 
-function About({ onBackHome }) {
+function About({
+  onBackHome,
+  onNavigate,
+  currentPage,
+}) {
   return (
     <main className="aboutPage">
       <div className="aboutBackground" aria-hidden="true">
@@ -9,20 +14,10 @@ function About({ onBackHome }) {
         <div className="aboutGrid" />
       </div>
 
-      <header className="aboutTopbar">
-        <button
-          type="button"
-          className="aboutBackButton"
-          onClick={onBackHome}
-        >
-          <span aria-hidden="true">◀</span>
-          <span>RETURN TO NUTRILEVELING</span>
-        </button>
-
-        <span className="aboutPageLabel">
-          ABOUT
-        </span>
-      </header>
+<GlobalTopBar
+  currentPage={currentPage}
+  onNavigate={onNavigate}
+/>
 
       <section className="aboutMain">
         <div className="aboutCopy">

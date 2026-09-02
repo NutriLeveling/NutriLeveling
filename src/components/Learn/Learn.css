@@ -3,6 +3,7 @@
    PART 1 — PAGE / TOPBAR / HERO
    ====================================================== */
 
+
 /* =========================
    PAGE
    ========================= */
@@ -15,12 +16,13 @@
   --learn-muted: rgba(244, 241, 232, 0.58);
   --learn-border: rgba(255, 255, 255, 0.055);
 
+  width: 100%;
   min-height: 100vh;
 
   padding:
-    clamp(22px, 3vw, 44px)
-    clamp(22px, 5vw, 82px)
-    clamp(60px, 8vw, 110px);
+    0
+    0
+    clamp(24px, 3vh, 36px);
 
   overflow-x: hidden;
 
@@ -37,67 +39,6 @@
 
 
 /* =========================
-   TOPBAR
-   ========================= */
-
-.learnTopbar {
-  position: relative;
-  z-index: 10;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding-bottom: clamp(15px, 1.8vh, 21px);
-
-  border-bottom: 1px solid var(--learn-border);
-}
-
-.learnBackButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-
-  padding: 0;
-
-  color: rgba(255, 255, 255, 0.64);
-  background: none;
-  border: 0;
-
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.7rem, 0.76vw, 0.84rem);
-  font-weight: 700;
-  letter-spacing: 0.13em;
-
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.learnBackButton:hover {
-  color: var(--learn-text);
-  transform: translateX(-3px);
-}
-
-.learnBackButton:focus-visible {
-  outline: 2px solid var(--learn-gold);
-  outline-offset: 7px;
-}
-
-.learnPageLabel {
-  color: var(--learn-gold);
-
-  font-size: clamp(0.76rem, 0.76vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.17em;
-  font-family: "Orbitron", sans-serif;
-  text-transform: uppercase;
-}
-
-
-/* =========================
    HERO
    ========================= */
 
@@ -105,16 +46,16 @@
   position: relative;
 
   width: 100%;
-  max-width: none;
 
   padding:
-    clamp(82px, 10vh, 130px)
-    0
-    clamp(28px, 3.5vh, 42px);
+    clamp(58px, 8vh, 100px)
+    var(--site-gutter)
+    clamp(32px, 4vh, 48px);
 
   overflow: hidden;
 
-  border-bottom: 1px solid var(--learn-border);
+  border-bottom:
+    1px solid var(--learn-border);
 
   isolation: isolate;
 }
@@ -122,6 +63,8 @@
 .learnHeroContent {
   position: relative;
   z-index: 2;
+
+  width: 100%;
 }
 
 
@@ -161,11 +104,14 @@
 .learnHero::after {
   position: absolute;
   z-index: -1;
+
   top: 16%;
   right: 4%;
 
   width: min(42vw, 680px);
   aspect-ratio: 1;
+
+  content: "";
 
   background:
     radial-gradient(
@@ -174,10 +120,9 @@
       transparent 68%
     );
 
-  content: "";
-
   pointer-events: none;
 }
+
 
 /* =========================
    HERO EYEBROW
@@ -186,9 +131,13 @@
 .learnHeroEyebrowRow {
   display: flex;
   align-items: center;
+
   gap: 18px;
-  font-family: "space grotesk", sans-serif;
-  margin-bottom: clamp(25px, 3.5vh, 42px);
+
+  margin-bottom:
+    clamp(22px, 3vh, 34px);
+
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .learnEyebrow {
@@ -198,6 +147,7 @@
 
   font-size: 0.88rem;
   font-weight: 700;
+
   letter-spacing: 0.22em;
 }
 
@@ -214,37 +164,48 @@
       rgba(232, 201, 79, 0)
     );
 
-  box-shadow: 0 0 15px rgba(232, 201, 79, 0.2);
+  box-shadow:
+    0 0 15px rgba(232, 201, 79, 0.2);
 }
 
 
 /* =========================
-   HERO TITLE
+   HERO TITLE ROW
    ========================= */
 
 .learnHeroTitleRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: clamp(30px, 5vw, 90px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: clamp(28px, 5vw, 90px);
 
   width: 100%;
 }
 
-.learnHero h1 {
+.learnHeroTitleRow h1 {
+  flex:
+    1
+    1
+    auto;
+
   min-width: 0;
   max-width: none;
 
   margin: 0;
 
-  font-size: clamp(3.45rem, 6.25vw, 8rem);
+  font-size:
+    clamp(2.8rem, 4.15vw, 5.4rem);
+
   font-weight: 800;
-  line-height: 0.82;
-  letter-spacing: -0.072em;
-text-shadow:
-    0 0 12px rgba(255,255,255,.06),
-    0 0 32px rgba(255,255,255,.04);
-  white-space: normal;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.045em;
+
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.06),
+    0 0 32px rgba(255, 255, 255, 0.04);
 }
 
 .learnHeroTitleLine {
@@ -257,9 +218,9 @@ text-shadow:
 }
 
 .learnHeroTitleLine + .learnHeroTitleLine {
-  margin-top: 0.13em;
+  margin-top: 0.11em;
 }
- 
+
 .learnHeroTitlePixel {
   display: inline-block;
 
@@ -267,10 +228,10 @@ text-shadow:
 
   color: var(--learn-gold);
 
-    text-shadow:
-        0 0 14px rgba(232,201,79,.45),
-        0 0 36px rgba(232,201,79,.22),
-        0 0 70px rgba(232,201,79,.12);
+  text-shadow:
+    0 0 14px rgba(232, 201, 79, 0.45),
+    0 0 36px rgba(232, 201, 79, 0.22),
+    0 0 70px rgba(232, 201, 79, 0.12);
 
   transform: translateY(-0.01em);
 }
@@ -282,13 +243,25 @@ text-shadow:
 
 .learnHeroSignal {
   display: flex;
+  flex:
+    0
+    0
+    auto;
+
   align-items: flex-end;
+
   gap: 7px;
 
   width: max-content;
   height: clamp(72px, 7vw, 112px);
 
-  padding: 0 5px 7px 0;
+  margin-left: auto;
+
+  padding:
+    0
+    5px
+    7px
+    0;
 }
 
 .learnHeroSignal span {
@@ -367,43 +340,80 @@ text-shadow:
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
   gap: 40px;
 
-  margin-top: clamp(38px, 5vh, 62px);
+  width: 100%;
+
+  margin-top:
+    clamp(28px, 4vh, 46px);
 }
 
 .learnHero p {
-  max-width: none;
+  max-width: 760px;
 
   margin: 0;
 
   color: var(--learn-muted);
 
-  font-size: clamp(0.96rem, 1.05vw, 1.16rem);
-  line-height: 1.7;
+  font-size:
+    clamp(1rem, 1.05vw, 1.18rem);
 
-  white-space: nowrap;
+  line-height: 1.55;
+
+  white-space: normal;
 }
 
 .learnHeroCode {
   padding-bottom: 4px;
 
   color: rgba(255, 255, 255, 0.2);
-  font-family: "space grotesk", sans-serif;
+
+  font-family: "Space Grotesk", sans-serif;
+
   font-size: 0.7rem;
   font-weight: 700;
+
   letter-spacing: 0.19em;
 
   white-space: nowrap;
 }
 
-/* =========================
-   HERO — TABLET
-   ========================= */
+
+/* ======================================================
+   SHORT LAPTOP / SHORT DESKTOP
+   ====================================================== */
+
+@media (min-width: 801px) and (max-height: 850px) {
+  .learnHero {
+    padding-top: clamp(42px, 6vh, 68px);
+    padding-bottom: clamp(26px, 3vh, 36px);
+  }
+
+  .learnHeroEyebrowRow {
+    margin-bottom: 20px;
+  }
+
+  .learnHeroFooter {
+    margin-top: 24px;
+  }
+
+  .learnHero p {
+    font-size:
+      clamp(0.96rem, 1vw, 1.08rem);
+
+    line-height: 1.5;
+  }
+}
+
+
+/* ======================================================
+   TABLET
+   ====================================================== */
 
 @media (max-width: 1100px) {
-  .learnHero h1 {
-    font-size: clamp(3.2rem, 7.2vw, 6rem);
+  .learnHeroTitleRow {
+    gap: 30px;
   }
 
   .learnHeroSignal {
@@ -411,34 +421,17 @@ text-shadow:
   }
 }
 
-/* =========================
-   HERO — MOBILE
-   ========================= */
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
 
 @media (max-width: 800px) {
-  .learnPage {
-    padding:
-      20px
-      18px
-      70px;
-  }
-
-  .learnBackButton span:last-child {
-    gap: 7px;
-    font-size: 0.60rem;
-    letter-spacing: 0.005em;
-    white-space: nowrap;
-  }
-
   .learnHero {
     padding:
       22px
-      0
+      var(--site-gutter)
       60px;
-  }
-
-  .learnHeroCode {
-    display: none;
   }
 
   .learnHeroEyebrowRow {
@@ -449,15 +442,17 @@ text-shadow:
     display: block;
   }
 
-  .learnHero h1 {
-    font-size: clamp(2.25rem, 11.2vw, 3.8rem);
+  .learnHeroTitleRow h1 {
+    font-size:
+      clamp(2.25rem, 11.2vw, 3.8rem);
+
     line-height: 0.87;
+
     letter-spacing: -0.065em;
   }
 
   .learnHeroTitleLine {
     width: auto;
-
     white-space: normal;
   }
 
@@ -469,83 +464,31 @@ text-shadow:
     display: block;
 
     margin-top: 32px;
-    margin-bottom:-42px;
-
   }
 
   .learnHero p {
     max-width: 520px;
-    white-space: normal;
+
     font-size: 0.94rem;
+    line-height: 1.55;
   }
-  /* TOPBAR */
-.aboutTopbar,
-.learnTopbar,
-.projectsTopbar {
-  align-items: center;
-}
 
-/* LEFT SIDE */
-.aboutBackButton,
-.learnBackButton,
-.projectsBackButton {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 5px;
-
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
-}
-
-/* ARROW */
-.aboutBackButton > span:first-child,
-.learnBackButton > span:first-child,
-.projectsBackButton > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.82rem;
-  line-height: 1;
-
-  transform: translateY(-0.01em);
-}
-
-/* RIGHT SIDE */
-.aboutPageLabel,
-.learnPageLabel,
-.projectsPageLabel {
-  position: static;
-  top: auto;
-
-  flex-shrink: 0;
-
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
-
-  white-space: nowrap;
-}
+  .learnHeroCode {
+    display: none;
+  }
 }
 
 
-/* =========================
+/* ======================================================
    REDUCED MOTION
-   ========================= */
+   ====================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .learnHeroSignal span {
     animation: none;
   }
-
-  .learnBackButton {
-    transition-duration: 0.01ms;
-  }
 }
+
 /* ======================================================
    LEARN
    PART 2 — LIBRARY HEADER / FILTERS
@@ -559,7 +502,9 @@ text-shadow:
 .learnLibrary {
   position: relative;
 
-  padding-top: 0;
+  padding:
+    0
+    var(--site-gutter);
 }
 
 
@@ -3035,16 +2980,6 @@ padding:
       clamp(1.4rem, 6.6vw, 2.1rem);
   }
 
-  .learnTopbar {
-    gap: 0.5rem;
-  }
-
-  .learnPageLabel {
-    flex-shrink: 0;
-    font-size: 0.60rem;
-    letter-spacing: 0.005em;
-    white-space: nowrap;
-  }
 }
 
 /* =========================================
@@ -3241,52 +3176,6 @@ border:
     0 0 70px rgba(232, 201, 79, 0.10);
 }
 
-/* =========================================================
-   KNOWLEDGE HUB — TABLET TOPBAR POLISH
-   768 × 1024
-========================================================= */
-
-@media (min-width: 701px) and (max-width: 800px) {
-  .learnTopbar {
-    align-items: center;
-    gap: 24px;
-  }
-
-  .learnBackButton {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    flex-shrink: 1;
-    min-width: 0;
-
-    font-size: 0.64rem;
-    line-height: 1;
-    letter-spacing: 0.12em;
-
-    white-space: nowrap;
-  }
-
-  .learnBackButton span:last-child {
-    display: inline;
-
-    font-size: inherit;
-    line-height: inherit;
-    letter-spacing: inherit;
-
-    white-space: nowrap;
-  }
-
-  .learnPageLabel {
-    flex-shrink: 0;
-
-    font-size: 0.64rem;
-    line-height: 1;
-    letter-spacing: 0.12em;
-
-    white-space: nowrap;
-  }
-}
 .learnEditorialStatus {
   display: inline-flex;
   align-items: center;
@@ -3394,4 +3283,90 @@ border:
       inset 4px 0 0 var(--learn-gold),
       inset 0 0 46px rgba(232, 201, 79, 0.065);
   }
+
+  /* ======================================================
+   LEARN — RESPONSIVE HERO REFINEMENT
+   ====================================================== */
+
+/* TITLE + SIGNAL MUST STAY SIDE BY SIDE */
+.learnHeroTitleRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 90px);
+
+  width: 100%;
+}
+
+.learnHeroTitleRow h1 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* KEEP SIGNAL ON THE RIGHT */
+.learnHeroSignal {
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+/* MORE STABLE DESKTOP TITLE SCALE */
+@media (min-width: 1101px) {
+  .learnHero h1 {
+    font-size: clamp(4rem, 6.6vw, 7.5rem);
+  }
+}
+
+/* SHORT LAPTOP / SHORT DESKTOP */
+@media (min-width: 801px) and (max-height: 850px) {
+  .learnHero {
+    padding-top: clamp(54px, 7vh, 82px);
+    padding-bottom: clamp(22px, 2.5vh, 32px);
+  }
+
+  .learnHeroEyebrowRow {
+    margin-bottom: clamp(20px, 2.5vh, 30px);
+  }
+
+  .learnHeroFooter {
+    margin-top: clamp(24px, 3vh, 36px);
+  }
+
+  .learnHero p {
+    font-size: clamp(0.9rem, 1vw, 1.05rem);
+    line-height: 1.55;
+  }
+}
+
+/* TABLET / MOBILE */
+@media (max-width: 1100px) {
+  .learnHeroSignal {
+    display: none;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+  .learnHeroTitleRow {
+    display: block;
+  }
+}
+
+/* ======================================================
+   LEARN — HERO TYPOGRAPHY ALIGNMENT
+   ====================================================== */
+
+.learnHero h1 {
+  font-size: clamp(2.8rem, 4.15vw, 5.4rem);
+}
+
+/* Give the hero footer enough room to breathe */
+.learnHeroFooter {
+  margin-top: clamp(30px, 4vh, 48px);
+}
+
+.learnHeroFooter p {
+  white-space: normal;
+  max-width: 760px;
+}
 }

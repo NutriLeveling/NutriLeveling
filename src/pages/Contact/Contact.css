@@ -1,686 +1,792 @@
+/* =======================================================
+   CONTACT
+   Responsive global-shell layout
+   ======================================================= */
+
+
+/* =======================================================
+   PAGE
+   ======================================================= */
 
 .contactPage {
-  --contact-gold: #C9A75C;
+  --contact-gold: #c9a75c;
+  --contact-red: #c95b57;
 
   position: relative;
   isolation: isolate;
 
+  width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  color: #f4f1e8;
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  display: flex;
-  flex-direction: column;
-
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-.contactPage::before{
 
-    content:"";
+/* =======================================================
+   PAGE OVERLAY
+   ======================================================= */
 
-    position:absolute;
-    inset:0;
+.contactPage::before {
+  content: "";
 
-    background:
+  position: absolute;
+  z-index: -1;
+  inset: 0;
 
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(201,167,92,.05),
-            transparent 45%
-        ),
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(201, 167, 92, 0.05),
+      transparent 45%
+    ),
+    rgba(7, 7, 7, 0.86);
 
-        rgba(7,7,7,.86);
-
-    z-index:-1;
+  pointer-events: none;
 }
+
+
+/* =======================================================
+   GLOBAL TOP BAR — CONTACT THEME
+   ======================================================= */
+
+.contactPage > .globalTopBar {
+  border-top-color:
+    rgba(245, 195, 77, 0.72);
+
+  border-bottom-color:
+    rgba(245, 195, 77, 0.72);
+}
+
+.contactPage > .globalTopBar
+.globalTopBarButton:hover,
+.contactPage > .globalTopBar
+.globalTopBarButton:focus-visible {
+  color:
+    #f5c34d;
+}
+
+.contactPage > .globalTopBar
+.globalTopBarButton::after {
+  background:
+    #f5c34d;
+}
+
+.contactPage > .globalTopBar
+.globalTopBarButtonActive {
+  color:
+    #f5c34d;
+}
+
+
+/* =======================================================
+   MAIN CONTACT LAYOUT
+   ======================================================= */
+
+.contactMainLayout {
+  width: min(
+    calc(100% - (2 * var(--site-gutter))),
+    1650px
+  );
+
+  min-height:
+    calc(100dvh - 72px);
+
+  margin-inline: auto;
+
+  padding:
+    clamp(30px, 4vh, 54px)
+    0
+    clamp(40px, 5vh, 64px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(440px, 1fr);
+
+  align-items: center;
+
+  gap:
+    clamp(40px, 5vw, 80px);
+}
+
 
 /* =======================================================
    HERO
-======================================================= */
+   ======================================================= */
 
-.contactHero{
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-
-    padding:
-        clamp(4.8rem, 8vh, 6.5rem)
-        2rem
-        clamp(.75rem, 1.8vh, 1.5rem);
-}
-
-.contactHero::before{
-    content:"";
-
-    position:absolute;
-
-    width:520px;
-    height:520px;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-    opacity:.9;
-    background:radial-gradient(
-        circle,
-        rgba(201,167,92,.10) 0%,
-        transparent 70%
-    );
-
-    filter:blur(70px);
-
-    z-index:-1;
-}
-
-.contactHeroContent{
-    width:min(100%,820px);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    text-align:center;
-
-    gap:1.5rem;
-}
-
-.contactHero h1{
-
-    font-size:clamp(4rem,7vw,6rem);
-
-    font-weight:800;
-
-    line-height:1.25;
-        margin:
-
-        -1.5rem
-        0
-        .5rem;
-}
-
-.contactHero h2 {
-  margin: 0 0 1.1rem;
-  font-size: clamp(1.35rem, 2vw, 1.9rem);
-  font-weight: 800;
-
-  white-space: nowrap;
-}
-
-.contactHeroAccent {
-  color: #c95b57
-}
-
-.contactHero p{
-
-    max-width:700px;
-
-    line-height:1.85;
-
-    font-size:1.08rem;
-
-    opacity:.9;
-}
-
-/* =======================================================
-   FORM
-======================================================= */
-
-.contactForm {
-    position: relative;
-
-    width: min(100%, 720px);
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-
-    gap: clamp(1.35rem, 2vh, 2rem);
-
-    padding:
-        clamp(1.6rem, 2.5vh, 2.2rem)
-        clamp(1.5rem, 3vw, 2.4rem);
-
-    border: 0;
-    border-radius: 28px;
-
-    overflow: hidden;
-    
-    background:
-        linear-gradient(
-            180deg,
-            rgba(20, 20, 20, .82),
-            rgba(10, 10, 10, .90)
-        );
-
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, .45),
-        0 0 0 8px rgba(255, 255, 255, .04),
-        inset 0 2px rgba(255, 255, 255, .05);
-
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-}
-
-.contactForm::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    padding: 3px;
-
-    border-radius: inherit;
-    
-    background:
-        linear-gradient(
-            120deg,
-            rgba(255, 255, 255, .08),
-            rgba(201, 167, 92, .55),
-            rgba(255, 255, 255, .10),
-            rgba(201, 167, 92, .35),
-            rgba(255, 255, 255, .08)
-        );
-
-    background-size: 250% 250%;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    mask-composite: exclude;
-
-    pointer-events: none;
-
-    animation: borderGlow 10s linear infinite;;
-}
-
-.contactFormSection {
-    padding:
-        clamp(2rem, 3vh, 2.5rem)
-        2rem
-        clamp(2rem, 4vh, 3rem);
-
-    display: flex;
-    justify-content: center;
-}
-
-.contactField{
-    display:flex;
-    flex-direction:column;
-    font-family: "space grotesk", sans-serif;
-    gap:1rem;
-}
-
-.contactField label{
-    font-size:.85rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:.12em;
-
-    opacity:0.8;
-}
-
-.contactField input,
-.contactField textarea{
-    width:100%;
-
-    background:transparent;
-
-    border:none;
-    border-bottom:2px solid rgba(255,255,255,.18);
-
-    color:inherit;
-
-    font:inherit;
-
-    padding:
-        .5rem
-        0
-        .2rem;
-
-    outline:none;
-
-    transition:.3s;
-}
-
-.contactField textarea{
-    resize:vertical;
-    min-height:130px;
-}
-
-.contactField input:focus,
-.contactField textarea:focus{
-    border-color:#C9A75C;
-}
-
-.contactField input::placeholder,
-.contactField textarea::placeholder{
-    opacity:.4;
-}
-
-.contactSubmit{
-
-    align-self:center;
-
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-
-    min-width:220px;
-    min-height:55px;
-
-    padding:0 2rem;
-
-    font-family: "space grotesk", sans-serif;
-
-    color:white;
-
-    background:transparent;
-
-    border:2px solid rgba(201,167,92,.35);
-
-    border-radius:999px;
-
-    cursor:pointer;
-
-    transition:.35s ease;
-}
-
-.contactSubmit:hover{
-
-    background:#C9A75C;
-
-    color:#111;
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 12px 28px rgba(201,167,92,.18);
-}
-
-.contactReplyTime{
-    margin-top:-1rem;
-
-    text-align:center;
-    font-family: "space grotesk", sans-serif;
-    opacity:.65;
-    max-width:340px;
-
-    font-size:.9rem;
-    margin-inline:auto;
-
-    line-height:1.7;
-}
-
-/* =======================================================
-   COMPACT LAPTOP HEIGHTS
-======================================================= */
-
-@media (min-width:769px) and (max-height:850px){
-
-    .contactHero{
-        padding:
-            2.6rem
-            2rem
-            .4rem;
-    }
-
-    .contactHeroContent{
-        gap:1rem;
-    }
-
-    .contactHero h1{
-        font-size:clamp(2.7rem,5vw,4rem);
-    }
-
-    .contactHero h2{
-        font-size:clamp(1.1rem,1.7vw,1.45rem);
-    }
-
-    .contactHero p{
-        max-width:620px;
-
-        font-size:.95rem;
-        line-height:1.65;
-    }
-
-    .contactFormSection{
-        padding:
-            1rem
-            2rem
-            1.5rem;
-    }
-
-    .contactForm{
-        gap:1.15rem;
-
-        padding:
-            1.35rem
-            2rem;
-
-        border-radius:22px;
-    }
-
-    .contactField{
-        gap:.1rem;
-    }
-
-    .contactField input,
-    .contactField textarea{
-        padding:
-            .2rem
-            0
-            .45rem;
-    }
-
-    .contactField textarea{
-        min-height:72px;
-        max-height:75px;
-    }
-
-    .contactSubmit{
-        min-height:46px;
-        min-width:200px;
-    }
-
-    .contactReplyTime{
-        margin-top:-.45rem;
-        font-size:.82rem;
-        line-height:1.4;
-    }
-}
-
-@media (min-width:769px) and (max-height:720px){
-
-    .contactHero{
-        padding-top:2.2rem;
-    }
-
-    .contactHeroContent{
-        gap:.45rem;
-    }
-
-    .contactHero h1{
-        font-size:2.8rem;
-        
-    }
-
-    .contactHero p{
-        font-size:0.95rem;
-        line-height:1.2;
-    }
-
-    .contactFormSection{
-        padding-top:1.2rem;
-        padding-bottom:.85rem;
-    }
-
-    .contactForm{
-        gap:.85rem;
-        padding:1.25rem 1.8rem;
-    }
-
-    .contactField textarea{
-        min-height:55px;
-    }
-
-    .contactSubmit{
-        min-height:42px;
-    }
-
-.contactReplyTime{
-
-    display:block;
-
-    margin-top:0.05rem;
-
-    font-size:.8rem;
-
-    line-height:0.5;
-
-    opacity:.6;
-}
-}
-
-.contactHero h1::after{
-    content:"";
-
-    display:block;
-
-    width:75px;
-    height:3px;
-
-    margin:.55rem auto 0;
-
-    background:#C9A75C;
-
-    border-radius:999px;
-
-    opacity:.9;
-}
-
-/* =========================
-   CONTACT TOPBAR
-   ========================= */
-
-.contactTopBar {
+.contactHero {
   position: relative;
-  z-index: 10;
+
+  min-width: 0;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-
-  width: auto;
-
-  margin:
-    clamp(20px, 2.5vh, 32px)
-    clamp(34px, 4.5vw, 88px)
-    0;
-
-  padding-bottom: clamp(15px, 1.8vh, 21px);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.contactBackButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-
-  flex-shrink: 0;
 
   padding: 0;
 
-  color: rgba(255, 255, 255, 0.64);
-  background: none;
+  overflow: visible;
+}
+
+.contactHero::before {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  top: 50%;
+  left: 42%;
+
+  width: 520px;
+  height: 520px;
+
+  transform:
+    translate(-50%, -50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(201, 167, 92, 0.1) 0%,
+      transparent 70%
+    );
+
+  filter: blur(70px);
+
+  opacity: 0.9;
+
+  pointer-events: none;
+}
+
+.contactHeroContent {
+  width: min(100%, 620px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: left;
+
+  transform: translateY(-12px);
+}
+
+
+/* =======================================================
+   HERO TITLE
+   ======================================================= */
+
+.contactHero h1 {
+  margin: 0;
+
+  color: #f7f4ed;
+
+  font-size:
+    clamp(2.8rem, 4.15vw, 5.4rem);
+
+  font-weight: 800;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.045em;
+}
+
+.contactHero h1::after {
+  content: "";
+
+  display: block;
+
+  width: 75px;
+  height: 3px;
+
+  margin:
+    clamp(18px, 2.2vh, 26px)
+    0
+    0;
+
+  background:
+    var(--contact-gold);
+
+  border-radius: 999px;
+
+  opacity: 0.9;
+}
+
+
+/* =======================================================
+   HERO SUBTITLE
+   ======================================================= */
+
+.contactHero h2 {
+  margin: 38px 0 0;
+
+  color: #f4f1e8;
+
+  font-size:
+    clamp(1.35rem, 1.9vw, 1.85rem);
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.025em;
+}
+
+
+.contactHeroAccent {
+  color:
+    var(--contact-red);
+}
+
+
+/* =======================================================
+   HERO DESCRIPTION
+   ======================================================= */
+
+.contactHero p {
+  max-width: 620px;
+
+  margin: 30px 0 0;
+
+  color:
+    rgba(244, 241, 232, 0.78);
+
+  font-size:
+    clamp(1rem, 1.05vw, 1.12rem);
+
+  line-height: 1.75;
+}
+
+
+/* =======================================================
+   FORM SECTION
+   ======================================================= */
+
+.contactFormSection {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  justify-content: flex-end;
+
+  padding: 0;
+}
+
+
+/* =======================================================
+   FORM
+   ======================================================= */
+
+.contactForm {
+  position: relative;
+
+  width: min(100%, 760px);
+
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap:
+    clamp(1.1rem, 1.8vh, 1.7rem);
+
+  padding:
+    clamp(1.6rem, 2.5vh, 2.2rem)
+    clamp(1.5rem, 3vw, 2.4rem);
+
+  border: 0;
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 20, 20, 0.82),
+      rgba(10, 10, 10, 0.9)
+    );
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 8px rgba(255, 255, 255, 0.04),
+    inset 0 2px rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* =======================================================
+   FORM BORDER
+   ======================================================= */
+
+.contactForm::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  padding: 3px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(201, 167, 92, 0.55),
+      rgba(255, 255, 255, 0.1),
+      rgba(201, 167, 92, 0.35),
+      rgba(255, 255, 255, 0.08)
+    );
+
+  background-size:
+    250% 250%;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
+
+  pointer-events: none;
+
+  animation:
+    borderGlow
+    10s
+    linear
+    infinite;
+}
+
+
+/* =======================================================
+   FORM FIELDS
+   ======================================================= */
+
+.contactField {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.7rem;
+
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+}
+
+.contactField label {
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.12em;
+
+  opacity: 0.8;
+}
+
+.contactField input,
+.contactField textarea {
+  width: 100%;
+
+  padding:
+    0.5rem
+    0
+    0.35rem;
+
+  color: inherit;
+
+  background: transparent;
+
   border: 0;
 
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.7rem, 0.76vw, 0.84rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  border-bottom:
+    2px solid
+    rgba(255, 255, 255, 0.18);
+
+  font: inherit;
+
+  outline: none;
+
+  transition:
+    border-color 0.3s ease;
+}
+
+.contactField input:focus,
+.contactField textarea:focus {
+  border-color:
+    var(--contact-gold);
+}
+
+.contactField input::placeholder,
+.contactField textarea::placeholder {
+  opacity: 0.4;
+
+  font-style: italic;
+}
+
+.contactField textarea {
+  resize: vertical;
+
+  min-height: 130px;
+}
+
+
+/* =======================================================
+   SUBMIT BUTTON
+   ======================================================= */
+
+.contactSubmit {
+  align-self: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 220px;
+  min-height: 55px;
+
+  padding:
+    0
+    2rem;
+
+  margin-top: 0.25rem;
+
+  color: #fff;
+
+  background: transparent;
+
+  border:
+    2px solid
+    rgba(201, 167, 92, 0.35);
+
+  border-radius: 999px;
+
+  font-family:
+    "Space Grotesk",
+    sans-serif;
 
   cursor: pointer;
 
   transition:
-    color 180ms ease,
-    transform 180ms ease;
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.contactBackButton:hover {
-  color: var(--contact-gold);
-  transform: translateX(-3px);
+.contactSubmit:hover {
+  color: #111;
+
+  background:
+    var(--contact-gold);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 12px 28px
+    rgba(201, 167, 92, 0.18);
 }
 
-.contactBackButton:focus-visible {
-  outline: 2px solid var(--contact-gold);
-  outline-offset: 7px;
+
+/* =======================================================
+   RESPONSE TIME
+   ======================================================= */
+
+.contactReplyTime {
+  max-width: 340px;
+
+  margin:
+    -0.45rem
+    auto
+    0;
+
+  color:
+    rgba(244, 241, 232, 0.65);
+
+  text-align: center;
+
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+
+  font-size: 0.82rem;
+
+  line-height: 1.5;
 }
 
-.contactTopRight {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.7rem;
 
-  flex-shrink: 0;
-
-  color: var(--contact-gold);
-
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.76rem, 0.76vw, 0.88rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-}
-
-.contactHeroCircle {
-  width: 6px;
-  height: 6px;
-
-  flex: 0 0 auto;
-
-  border-radius: 50%;
-  background: var(--contact-gold);
-
-  box-shadow: 0 0 10px rgba(212, 173, 83, 0.55);
-}
-
-@media (max-width: 560px) {
-  .contactTopBar {
-    align-items: center;
-    gap: 1rem;
-
-    margin:
-      18px
-      clamp(8px, 1vw, 12px)
-      0;
-  }
-
-  .contactBackButton {
-    gap: 5px;
-    font-size: 0.64rem;
-    line-height: 1;
-    letter-spacing: 0.09em;
-  }
-
-  .contactBackButton > span:first-child {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 0.72rem;
-    line-height: 1;
-  }
-
-  .contactTopRight {
-    gap: 0.55rem;
-    font-size: 0.64rem;
-    line-height: 1;
-    letter-spacing: 0.09em;
-    white-space: nowrap;
-    margin-right: 5px;
-  }
-
-  .contactHeroCircle {
-    width: 5px;
-    height: 5px;
-  }
-    .contactHero h1 {
-    font-size: clamp(2.25rem, 11.2vw, 3.8rem);
-  }
-}
-
-@keyframes borderGlow {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 200% 50%;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .contactForm::after {
-        animation: none;
-    }
-}
-
-.contactSubmit:disabled {
-    cursor: wait;
-    opacity: .65;
-    transform: none;
-}
-
-.contactSubmit:disabled:hover {
-    color: white;
-    background: transparent;
-    box-shadow: none;
-    transform: none;
-}
+/* =======================================================
+   FORM STATUS
+   ======================================================= */
 
 .contactStatus {
-    max-width: 480px;
-    margin: -0.2rem auto 0;
+  max-width: 480px;
 
-    text-align: center;
+  margin:
+    -0.2rem
+    auto
+    0;
 
-    font-size: .88rem;
-    line-height: 1.6;
+  text-align: center;
+
+  font-size: 0.88rem;
+
+  line-height: 1.6;
 }
 
 .contactStatusSuccess {
-    color: var(--contact-gold);
+  color:
+    var(--contact-gold);
 }
 
 .contactStatusError {
-    color: #ef9a9a;
+  color:
+    #ef9a9a;
 }
+
+
+/* =======================================================
+   HONEYPOT
+   ======================================================= */
 
 .contactHoneypot {
-    position: absolute !important;
+  position: absolute !important;
 
-    width: 1px !important;
-    height: 1px !important;
+  width: 1px !important;
+  height: 1px !important;
 
-    padding: 0 !important;
-    margin: -1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
 
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
+  overflow: hidden !important;
 
-    border: 0 !important;
+  clip:
+    rect(0, 0, 0, 0) !important;
+
+  white-space: nowrap !important;
+
+  border: 0 !important;
 }
+
+
+/* =======================================================
+   FIELD ERRORS
+   ======================================================= */
 
 .contactField [role="alert"] {
-    margin: -.55rem 0 0;
+  margin:
+    -0.45rem
+    0
+    0;
 
-    color: #ef9a9a;
+  color:
+    #ef9a9a;
 
-    font-size: .78rem;
-    line-height: 1.4;
+  font-size: 0.78rem;
+
+  line-height: 1.4;
 }
 
-.contactForm input::placeholder,
-.contactForm textarea::placeholder {
-    font-style: italic;
+
+/* =======================================================
+   ANIMATED FORM BORDER
+   ======================================================= */
+
+@keyframes borderGlow {
+  0% {
+    background-position:
+      0% 50%;
+  }
+
+  100% {
+    background-position:
+      200% 50%;
+  }
+}
+
+
+/* =======================================================
+   DISABLED SUBMIT
+   ======================================================= */
+
+.contactSubmit:disabled {
+  cursor: wait;
+
+  opacity: 0.65;
+
+  transform: none;
+}
+
+.contactSubmit:disabled:hover {
+  color: #fff;
+
+  background: transparent;
+
+  box-shadow: none;
+
+  transform: none;
+}
+
+/* =======================================================
+   TABLET
+   ======================================================= */
+
+@media (max-width: 1000px) {
+  .contactMainLayout {
+    grid-template-columns: 1fr;
+
+    gap: 42px;
+
+    align-items: stretch;
+  }
+
+  .contactHeroContent {
+    width:
+      min(100%, 760px);
+  }
+
+  .contactFormSection {
+    justify-content: center;
+  }
+
+  .contactForm {
+    width:
+      min(100%, 720px);
+  }
+}
+
+/* =======================================================
+   MOBILE
+   ======================================================= */
+
+@media (max-width: 700px) {
+  .contactMainLayout {
+    padding:
+      34px
+      var(--site-gutter)
+      48px;
+
+    gap: 36px;
+  }
+
+  .contactHero {
+    justify-content: flex-start;
+  }
+
+  .contactHeroContent {
+    width: 100%;
+  }
+
+  .contactHero h1 {
+    font-size:
+      clamp(2.25rem, 11.2vw, 3.8rem);
+
+    line-height: 0.92;
+  }
+
+  .contactHero h2 {
+    margin-top: 24px;
+
+    font-size:
+      clamp(1.2rem, 5vw, 1.55rem);
+
+    line-height: 1.25;
+  }
+
+  .contactHero p {
+    margin-top: 20px;
+
+    font-size: 0.96rem;
+
+    line-height: 1.65;
+  }
+
+  .contactForm {
+    width: 100%;
+
+    padding:
+      1.5rem
+      1.2rem;
+
+    border-radius: 22px;
+
+    gap: 1.15rem;
+  }
+
+  .contactField textarea {
+    min-height: 120px;
+  }
+
+  .contactSubmit {
+    width: 100%;
+
+    min-width: 0;
+  }
+}
+
+
+/* =======================================================
+   SMALL MOBILE
+   ======================================================= */
+
+@media (max-width: 430px) {
+  .contactMainLayout {
+    padding-top: 28px;
+    padding-bottom: 40px;
+
+    gap: 30px;
+  }
+
+  .contactHero h1 {
+    font-size:
+      clamp(2rem, 10.8vw, 3rem);
+  }
+
+  .contactHero h2 {
+    font-size:
+      clamp(1.1rem, 5vw, 1.4rem);
+  }
+
+  .contactHero p {
+    font-size: 0.92rem;
+  }
+
+  .contactForm {
+    padding:
+      1.3rem
+      1rem;
+  }
+}
+
+
+/* =======================================================
+   REDUCED MOTION
+   ======================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .contactForm::after {
+    animation: none;
+  }
+
+  .contactSubmit {
+    transition: none;
+  }
 }

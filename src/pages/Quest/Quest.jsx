@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./Quest.css";
-
+import GlobalTopBar from "../../components/GlobalTopBar/GlobalTopBar";
 import { questions } from "./questions";
 import { heroes } from "./heroes";
 
-const Quest = ({ onBackHome, onOpenContact }) => {
+const Quest = ({
+  onBackHome,
+  onOpenContact,
+  onNavigate,
+  currentPage,
+}) => {
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -142,35 +147,32 @@ const handleReturnToMain = () => {
         <div className="questGrid" />
         <div className="questNoise" />
       </div>
-
+{!started && !isStarting && (
+  <GlobalTopBar
+    currentPage={currentPage}
+    onNavigate={onNavigate}
+  />
+)}
       <div className="questShell">
         {!started && !isStarting ? (
 <div className="questIntro">
 
-  <div className="questIntroTopbar">
+<div className="questIntroTopbar">
 
-    <button
-      type="button"
-      className="questIntroBack"
-      onClick={() => onBackHome?.()}
-    >
-      <span aria-hidden="true">◀</span>
-      <span>EXIT QUEST</span>
-    </button>
+  <p className="questIntroLabel">
+    PERFORMANCE ASSESSMENT
+  </p>
 
-    <div className="questIntroEyebrow">
-      <span>QUEST v1.0</span>
-    </div>
-
+  <div className="questIntroEyebrow">
+    <span>QUEST v1.0</span>
   </div>
+
+</div>
 
   <div className="questIntroLine" />
 
   <div className="questIntroContent">
     <div className="questIntroLeft">
-      <p className="questIntroLabel">
-        PERFORMANCE ASSESSMENT
-      </p>
 
       <h1>
         DISCOVER YOUR

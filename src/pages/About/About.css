@@ -1,22 +1,18 @@
+/* =========================================================
+   ABOUT PAGE
+   Responsive global-shell compatible layout
+   ========================================================= */
+
 .aboutPage {
   --about-gold: #d9b663;
   --about-text: #f3f0e8;
+
   --portrait-width: clamp(400px, 27vw, 520px);
   --portrait-height: calc(var(--portrait-width) * 1.25);
 
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
-  padding:
-    clamp(20px, 2.5vh, 32px)
-    clamp(34px, 4.5vw, 88px);
-
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-
-  overflow: hidden;
 
   color: var(--about-text);
 
@@ -32,6 +28,8 @@
       #0d0f13 50%,
       #08090c 100%
     );
+
+  overflow-x: clip;
 }
 
 /* =========================================================
@@ -92,68 +90,21 @@
   background-size: 48px 48px;
 }
 
+
 /* =========================================================
-   HEADER
+   GLOBAL TOP BAR
+   The bar itself owns its horizontal geometry globally.
+   About does NOT modify it.
    ========================================================= */
 
-.aboutTopbar {
+.aboutPage > .globalTopBar {
   position: relative;
-  z-index: 10;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding-bottom: clamp(15px, 1.8vh, 21px);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  z-index: 20;
 }
 
-.aboutBackButton {
-  padding: 0;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  border: 0;
-
-  color: rgba(243, 240, 232, 0.75);
-  background: transparent;
-
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.76rem, 0.76vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.13em;
-
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.aboutBackButton:hover {
-  color: var(--about-gold);
-  transform: translateX(-3px);
-}
-
-.aboutPageLabel {
-  position: relative;
-  top: 4px;
-font-family: "Orbitron", sans-serif;
-  color: var(--about-gold);
-
-  font-size: clamp(0.76rem, 0.76vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.17em;
-
-  line-height: 2;
-  text-transform: uppercase;
-}
 
 /* =========================================================
-   MAIN LAYOUT
+   MAIN CONTENT SHELL
    ========================================================= */
 
 .aboutMain {
@@ -161,57 +112,60 @@ font-family: "Orbitron", sans-serif;
   z-index: 2;
 
   width: 100%;
-  min-height: 0;
+  max-width: none;
+
+  margin: 0;
+
+  min-height: calc(100svh - 50px);
+
+  padding:
+    clamp(42px, 5vh, 64px)
+    var(--site-gutter)
+    clamp(60px, 7vh, 100px);
 
   display: grid;
+
   grid-template-columns:
     minmax(0, 1.26fr)
     minmax(var(--portrait-width), 0.74fr);
 
   align-items: center;
 
-  gap: clamp(52px, 5vw, 104px);
+  justify-content: center;
 
-  padding:
-    clamp(28px, 3.5vh, 52px)
-    0;
+  gap: clamp(52px, 5vw, 104px);
 }
 
-/*
-  H aristeri stili kai to portrait exoun akrivws to idio ypsos.
-  Etsi top kai bottom einai mathematically aligned.
-*/
+
+/* =========================================================
+   COPY
+   ========================================================= */
 
 .aboutCopy {
   min-width: 0;
   width: 100%;
-  height: var(--portrait-height);
 
   display: flex;
   flex-direction: column;
+
   position: relative;
 }
 
-/* =========================================================
-   TITLE
-   ========================================================= */
-
 .aboutTitle {
   margin: 0;
-
   width: 100%;
 
   color: #f5f2eb;
 
   font-size: clamp(2.8rem, 4.15vw, 5.4rem);
   font-weight: 800;
+
   line-height: 0.94;
   letter-spacing: -0.045em;
 }
 
 .aboutTitle span {
   display: block;
-
   margin-top: 9px;
 
   color: var(--about-gold);
@@ -237,6 +191,7 @@ font-family: "Orbitron", sans-serif;
     0 0 12px rgba(217, 182, 99, 0.16);
 }
 
+
 /* =========================================================
    PARAGRAPHS
    ========================================================= */
@@ -247,6 +202,7 @@ font-family: "Orbitron", sans-serif;
   margin-top: clamp(26px, 3vh, 38px);
 
   display: grid;
+
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
@@ -254,21 +210,26 @@ font-family: "Orbitron", sans-serif;
 }
 
 .aboutText p {
+  margin: 0;
+
   color: rgba(243, 240, 232, 0.83);
+
   line-height: 1.7;
   letter-spacing: 0.011em;
 }
 
+
 /* =========================================================
-   METADATA
+   META
    ========================================================= */
 
 .aboutMeta {
   width: 100%;
 
-  margin-top: auto;
+  margin-top: 48px;
 
   display: grid;
+
   grid-template-columns:
     minmax(150px, 0.8fr)
     minmax(165px, 0.9fr)
@@ -283,7 +244,10 @@ font-family: "Orbitron", sans-serif;
   padding: 18px 20px;
 
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+
+  grid-template-columns:
+    auto minmax(0, 1fr);
+
   align-items: center;
 
   gap: 17px;
@@ -317,10 +281,10 @@ font-family: "Orbitron", sans-serif;
       rgba(217, 182, 99, 0.075),
       rgba(255, 255, 255, 0.016)
     );
-box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
 
-/* Bordered icons — ta kratame */
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
 
 .aboutMetaIcon {
   width: 36px;
@@ -344,9 +308,12 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
 .aboutMetaContent {
   min-width: 0;
+
   font-family: "Orbitron", sans-serif;
+
   display: flex;
   flex-direction: column;
+
   gap: 7px;
 }
 
@@ -355,6 +322,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
   font-size: clamp(0.66rem, 0.63vw, 0.74rem);
   font-weight: 700;
+
   letter-spacing: 0.15em;
 
   text-transform: uppercase;
@@ -365,9 +333,11 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
   font-size: clamp(0.92rem, 0.91vw, 1.07rem);
   font-weight: 650;
+
   line-height: 1.4;
   letter-spacing: 0.06em;
 }
+
 
 /* =========================================================
    PORTRAIT
@@ -379,10 +349,9 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
   min-width: 0;
   width: 100%;
-  height: var(--portrait-height);
 
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
@@ -424,6 +393,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   overflow: visible;
 
   border: 1px solid rgba(217, 182, 99, 0.38);
+
   background: #101216;
 
   box-shadow:
@@ -470,6 +440,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   object-position: center;
 }
 
+
 /* =========================================================
    BOSS ACCENT
    ========================================================= */
@@ -509,6 +480,11 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 }
 
+
+/* =========================================================
+   DECORATIVE COPY LINE
+   ========================================================= */
+
 .aboutCopy::before {
   content: "";
 
@@ -532,48 +508,22 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   pointer-events: none;
 }
 
-/* =========================================================
-   NORMAL DESKTOP
-   ========================================================= */
-
-@media (min-width: 981px) and (min-height: 760px) {
-  .aboutPage {
-    height: 100vh;
-  }
-}
 
 /* =========================================================
-   LAPTOP — 1366×768 / 1440×800
+   LAPTOP / SHORT DESKTOP
    ========================================================= */
 
 @media (min-width: 981px) and (max-height: 840px) {
-  .aboutPage {
-    --portrait-width: clamp(350px, 25vw, 390px);
-
-    height: 100vh;
-
-    padding:
-      18px
-      clamp(34px, 4vw, 64px);
-  }
-
-  .aboutTopbar {
-    padding-bottom: 14px;
-  }
-
-  .aboutBackButton,
-  .aboutPageLabel {
-    font-size: 0.77rem;
-  }
-
   .aboutMain {
-    grid-template-columns:
-      minmax(0, 1.3fr)
-      minmax(var(--portrait-width), 0.7fr);
+    padding-top: 34px;
+    padding-bottom: 56px;
 
     gap: clamp(44px, 4.2vw, 66px);
+  }
 
-    padding: 24px 0;
+  .aboutPage {
+    --portrait-width: clamp(350px, 25vw, 390px);
+    --portrait-height: calc(var(--portrait-width) * 1.25);
   }
 
   .aboutTitle {
@@ -599,6 +549,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
   .aboutMeta {
+    margin-top: 34px;
     gap: 12px;
   }
 
@@ -635,6 +586,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 }
 
+
 /* =========================================================
    LARGE DESKTOP
    ========================================================= */
@@ -642,16 +594,10 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 @media (min-width: 1700px) and (min-height: 850px) {
   .aboutPage {
     --portrait-width: clamp(510px, 27vw, 570px);
-
-    padding-left: clamp(76px, 5.3vw, 120px);
-    padding-right: clamp(76px, 5.3vw, 120px);
+    --portrait-height: calc(var(--portrait-width) * 1.25);
   }
 
   .aboutMain {
-    grid-template-columns:
-      minmax(0, 1.2fr)
-      minmax(var(--portrait-width), 0.8fr);
-
     gap: clamp(76px, 5vw, 120px);
   }
 
@@ -677,83 +623,95 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 }
 
+
 /* =========================================================
    TABLET
    ========================================================= */
 
 @media (max-width: 980px) {
   .aboutPage {
-    --portrait-width: min(100%, 520px);
-    --portrait-height: auto;
-
     min-height: 100vh;
-    height: auto;
-
-    overflow-x: clip;
   }
 
   .aboutMain {
     grid-template-columns: 1fr;
-    align-items: start;
 
-    gap: 48px;
+    gap: 52px;
 
-    padding: 38px 0 52px;
+    padding-top: 44px;
+    padding-bottom: 64px;
   }
 
   .aboutCopy {
     height: auto;
   }
 
+  .aboutText {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 28px;
+  }
+
   .aboutMeta {
-    margin-top: 36px;
+    margin-top: 38px;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .aboutMetaItem {
+    min-height: 94px;
+
+    padding: 14px;
+    gap: 11px;
+  }
+
+  .aboutMetaIcon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 1rem;
+  }
+
+  .aboutMetaLabel {
+    font-size: 0.6rem;
+  }
+
+  .aboutMetaContent strong {
+    font-size: 0.8rem;
   }
 
   .aboutVisual {
-    width: min(100%, 520px);
-    height: auto;
-
-    justify-content: flex-start;
+    width: 100%;
   }
 
   .aboutPortraitFrame {
-    width: 100%;
+    width: min(100%, 520px);
+
     height: auto;
+
     aspect-ratio: 4 / 5;
   }
 }
+
 
 /* =========================================================
    MOBILE
    ========================================================= */
 
-@media (max-width: 720px) {
-  .aboutPage {
-    padding:
-      20px
-      18px
-      30px;
-  }
-
-  .aboutBackButton {
-    gap: 8px;
-
-    font-size: 0.61rem;
-    letter-spacing: 0.09em;
-  }
-
-  .aboutPageLabel {
-    font-size: 0.65rem;
-  }
-
+@media (max-width: 700px) {
   .aboutMain {
-    gap: 40px;
+    gap: 42px;
 
-    padding: 30px 0 44px;
+    padding-top: 36px;
+    padding-bottom: 52px;
   }
 
   .aboutTitle {
-    font-size: clamp(2.25rem, 11.2vw, 3.8rem);
+    font-size: clamp(2.2rem, 10.5vw, 3.6rem);
+
     line-height: 0.96;
   }
 
@@ -764,7 +722,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   .aboutText {
     grid-template-columns: 1fr;
 
-    gap: 18px;
+    gap: 20px;
   }
 
   .aboutText p {
@@ -773,7 +731,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   }
 
   .aboutMeta {
-    margin-top: 32px;
+    margin-top: 30px;
 
     grid-template-columns: 1fr;
 
@@ -782,10 +740,12 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
   .aboutMetaItem {
     min-height: 88px;
+
+    padding: 16px;
   }
 
   .aboutPortraitFrame {
-    width: calc(100% - 8px);
+    width: min(100%, 460px);
   }
 
   .aboutMotionAccent {
@@ -794,71 +754,55 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
     width: 82px;
   }
-  /* TOPBAR */
-.aboutTopbar,
-.learnTopbar,
-.projectsTopbar {
-  align-items: center;
+
+  .aboutCopy::before {
+    display: none;
+  }
 }
 
-/* LEFT SIDE */
-.aboutBackButton,
-.learnBackButton,
-.projectsBackButton {
-  display: inline-flex;
-  align-items: center;
 
-  gap: 5px;
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
 
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
+@media (max-width: 430px) {
+  .aboutMain {
+    padding-top: 30px;
+    padding-bottom: 46px;
+  }
+
+  .aboutTitle {
+    font-size: clamp(2rem, 10.8vw, 3rem);
+  }
+
+  .aboutText p {
+    font-size: 0.92rem;
+  }
+
+  .aboutMetaItem {
+    padding: 14px;
+  }
 }
 
-/* ARROW */
-.aboutBackButton > span:first-child,
-.learnBackButton > span:first-child,
-.projectsBackButton > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1;
-
-  transform: translateY(-1px);
-}
-
-/* RIGHT SIDE */
-.aboutPageLabel,
-.learnPageLabel,
-.projectsPageLabel {
-  position: static;
-  top: auto;
-
-  flex-shrink: 0;
-
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
-
-  white-space: nowrap;
-}
-}
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .aboutMotionAccent {
     animation: none;
   }
 
-  .aboutBackButton,
   .aboutMetaItem {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   PUBLICATION LINK
+   ========================================================= */
 
 .aboutPublicationLink {
   color: inherit;
@@ -875,6 +819,7 @@ box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 
 .aboutPublicationLink:hover {
   color: #f5c34d;
+
   text-decoration-color: #f5c34d;
 }
 

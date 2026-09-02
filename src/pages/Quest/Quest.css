@@ -24,6 +24,22 @@
     clamp(56px, 7vh, 90px);
 }
 
+.quest:has(.questIntro) .questShell {
+  padding:
+    clamp(32px, 5vh, 64px)
+    0
+    clamp(56px, 7vh, 90px);
+}
+
+.quest:has(.questIntro) .questIntro {
+  width: min(
+    calc(100% - (2 * var(--site-gutter))),
+    1440px
+  );
+
+  margin-inline: auto;
+}
+
 .questBackground {
   position: fixed;
   inset: 0;
@@ -210,6 +226,29 @@ column-gap:80px;
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.2em;
+}
+
+.questIntroTopbar .questIntroLabel {
+  margin: 0;
+
+  color: rgba(245, 195, 77, 0.72);
+
+  font-family:
+    "Orbitron",
+    sans-serif;
+
+  font-size:
+    clamp(11px, 0.8vw, 14px);
+
+  font-weight: 600;
+
+  line-height: normal;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  align-self: center;
 }
 
 .questIntro h1 {

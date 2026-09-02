@@ -2,28 +2,57 @@
   --projects-accent: #8cb4b1;
 }
 
-.projectsPage{
+.projectsPage {
+  min-height: 100vh;
 
-    min-height:100vh;
+  width: 100%;
 
-  padding:
-    clamp(20px, 2.5vh, 32px)
-    clamp(34px, 4.5vw, 88px);
+  overflow-x: clip;
+}
 
+.projectsPage > .globalTopBar {
+  border-top-color: rgba(111, 156, 153, 0.72);
+  border-bottom-color: rgba(111, 156, 153, 0.72);
+}
+
+.projectsPage > .globalTopBar .globalTopBarButton:hover,
+.projectsPage > .globalTopBar .globalTopBarButton:focus-visible {
+  color: var(--projects-accent);
+}
+
+.projectsPage > .globalTopBar .globalTopBarButton::after {
+  background: var(--projects-accent);
+}
+
+.projectsPage > .globalTopBar .globalTopBarButtonActive {
+  color: var(--projects-accent);
+}
+
+.projectsPage > .globalTopBar .globalTopBarMarker {
+  background: currentColor;
 }
 
 .projectsHero {
-  position:relative;
-  isolation:isolate;
+  position: relative;
+
+  isolation: isolate;
+
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
+  width: 100%;
+
+  padding:
+    clamp(2.5rem, 4vw, 4.5rem)
+    var(--site-gutter)
+    clamp(1.5rem, 2vw, 2.5rem);
+
   text-align: right;
-  padding-top: clamp(1rem, 2.5vw, 2.5rem);
-  padding-bottom: clamp(1rem, 2vw, 2rem);
+
   gap: 1rem;
 
-  margin-bottom: 2rem;
+  margin: 0;
 }
 
 .projectsHero::before{
@@ -68,14 +97,16 @@
 .projectsHero h1 {
   position: relative;
   isolation: isolate;
-  
+
   margin: 0;
 
-  font-size: clamp(4rem, 7vw, 8rem);
+  font-size:
+    clamp(2.8rem, 4.15vw, 5.4rem);
+
   font-weight: 800;
 
-  line-height: 0.85;
-  letter-spacing: -0.055em;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
 
   color: #f2f4f3;
 }
@@ -126,12 +157,12 @@
 }
 
 .projectsIntro {
-  max-width: 950px;
+  max-width: 900px;
 
   margin: 0;
 
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
-  line-height: 1.5;
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  line-height: 1.55;
 
   color: rgba(242, 244, 243, 0.62);
 }
@@ -153,9 +184,17 @@
 .projectsGrid {
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
-  gap: clamp(1.25rem, 2.2vw, 2rem);
+  gap:
+    clamp(1.25rem, 2.2vw, 2rem);
+
+  width: 100%;
+
+  padding:
+    0
+    var(--site-gutter);
 }
 
 @media (max-width: 900px) {
@@ -950,31 +989,6 @@
   color: rgba(242, 244, 243, 0.78);
 }
 
-.projectsBackButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-
-  padding: 0;
-
-  background: none;
-  border: 0;
-
-  color: rgba(255, 255, 255, 0.64);
-
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.7rem, 0.76vw, 0.84rem);
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-  transition:
-    color 180ms ease,
-    transform 180ms ease;
-}
-
 .projectsBackButton:hover {
   color: #8cb4b1;
   transform: translateX(-3px);
@@ -1139,53 +1153,17 @@ opacity:1;
    TOPBAR
    ========================= */
 
-.projectsTopbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding-bottom: clamp(15px, 1.8vh, 21px);
-
-  border-bottom: 1px solid rgba(111, 156, 153, 0.18);
-}
-
-.projectsPageLabel {
-  color: #8cb4b1;
-
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.76rem, 0.76vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-}
-
 @media (max-width: 560px) {
   .projectsPage {
-    padding:
-      18px
-      18px;
-  }
-
-  .projectsTopbar {
-    gap: 0.5rem;
-  }
-
-  .projectsBackButton {
-    gap: 5px;
-    font-size: 0.60rem;
-    letter-spacing: 0.05em;
-  }
-
-  .projectsPageLabel {
-    flex-shrink: 0;
-    font-size: 0.60rem;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
+    width: 100%;
+    padding: 0;
   }
 
   .projectsHero {
     padding-top: 2rem;
+    padding-right: var(--site-gutter);
     padding-bottom: 1.5rem;
+    padding-left: var(--site-gutter);
   }
 
   .projectsHero h1 {
@@ -1417,56 +1395,4 @@ color: var(--projects-accent);
   .projectsHero h1::before {
     display: none;
   }
-  /* TOPBAR */
-.aboutTopbar,
-.learnTopbar,
-.projectsTopbar {
-  align-items: center;
-}
-
-/* LEFT SIDE */
-.aboutBackButton,
-.learnBackButton,
-.projectsBackButton {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 5px;
-
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
-}
-
-/* ARROW */
-.aboutBackButton > span:first-child,
-.learnBackButton > span:first-child,
-.projectsBackButton > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  
-  font-size: 0.82rem;
-  line-height: 1;
-
-  transform: translateY(-0.01em);
-}
-
-/* RIGHT SIDE */
-.aboutPageLabel,
-.learnPageLabel,
-.projectsPageLabel {
-  position: static;
-  top: auto;
-
-  flex-shrink: 0;
-
-  font-size: 0.64rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.09em;
-
-  white-space: nowrap;
-}
 }

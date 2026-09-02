@@ -191,6 +191,27 @@
   outline-offset: 7px;
 }
 
+/* =========================================================
+   ACTIVE PAGE
+   ========================================================= */
+
+.heroNavigationButtonActive {
+  color: #f5c34d;
+}
+
+.heroNavigationButtonActive .heroNavigationMarker {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+
+.heroNavigationButtonActive::after {
+  transform: scaleX(1);
+}
+
+.heroNavigationButtonActive:hover {
+  transform: translateY(-2px);
+}
+
 
 /* =========================================================
    HERO MAIN CONTENT
@@ -732,23 +753,24 @@
   gap: 16px 12px;
 }
 
-  .heroNavigationButton,
-  .heroNavigationButton:last-child {
-    grid-column: auto;
+.heroNavigationButton,
+.heroNavigationButton:last-child {
+  grid-column: auto;
 
-    width: 100%;
+  width: fit-content;
+  max-width: 100%;
 
-    justify-self: stretch;
-    justify-content: flex-start;
+  justify-self: start;
+  justify-content: flex-start;
 
-    gap: 7px;
+  gap: 7px;
 
-    padding: 8px 0;
+  padding: 8px 0;
 
-    font-size: 10px;
-    letter-spacing: 1.1px;
-    text-align: left;
-  }
+  font-size: 10px;
+  letter-spacing: 1.1px;
+  text-align: left;
+}
 
   .heroNavigationButton::after {
     left: 14px;
@@ -817,14 +839,7 @@
   .heroNavigationLabel {
     white-space: normal;
   }
-
-  .heroNavigationLabelDesktop {
-  display: none;
-}
-
-.heroNavigationLabelMobile {
-  display: inline-block;
-}
+  
 }
 /* =========================================================
    SMALL MOBILE
@@ -911,12 +926,4 @@
 
 .heroNavigationLabel {
   line-height: 1.25;
-}
-
-.heroNavigationLabelDesktop {
-  display: inline-block;
-}
-
-.heroNavigationLabelMobile {
-  display: none;
 }

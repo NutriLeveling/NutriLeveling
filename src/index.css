@@ -128,3 +128,23 @@ transform:translateY(10px);
     }
 
 }
+
+/* =========================================================
+   GLOBAL RESPONSIVE SITE GEOMETRY
+   ========================================================= */
+
+:root {
+    --site-gutter: clamp(18px, 4.5vw, 66px);
+}
+
+@media (max-width: 800px) {
+    :root {
+        --site-gutter: 24px;
+    }
+}
+
+@media (max-width: 520px) {
+    :root {
+        --site-gutter: 18px;
+    }
+}

@@ -71,30 +71,56 @@ function App() {
   const openProjects = () => navigateTo("projects");
   const openContact = () => navigateTo("contact");
 
-  if (currentPage === "quest") {
-    return (
-      <Quest
-        onBackHome={openHome}
-        onOpenContact={openContact}
-      />
-    );
-  }
+if (currentPage === "quest") {
+  return (
+    <Quest
+      onBackHome={openHome}
+      onOpenContact={openContact}
+      onNavigate={navigateTo}
+      currentPage={currentPage}
+    />
+  );
+}
 
-  if (currentPage === "about") {
-    return <About onBackHome={openHome} />;
-  }
+if (currentPage === "about") {
+  return (
+    <About
+      onBackHome={openHome}
+      onNavigate={navigateTo}
+      currentPage={currentPage}
+    />
+  );
+}
 
-  if (currentPage === "learn") {
-    return <Learn onBackHome={openHome} />;
-  }
+if (currentPage === "learn") {
+  return (
+    <Learn
+      onBackHome={openHome}
+      onNavigate={navigateTo}
+      currentPage={currentPage}
+    />
+  );
+}
 
-  if (currentPage === "projects") {
-    return <Projects onBackHome={openHome} />;
-  }
+if (currentPage === "projects") {
+  return (
+    <Projects
+      onBackHome={openHome}
+      onNavigate={navigateTo}
+      currentPage={currentPage}
+    />
+  );
+}
 
-  if (currentPage === "contact") {
-    return <Contact onBackHome={openHome} />;
-  }
+if (currentPage === "contact") {
+  return (
+    <Contact
+      onBackHome={openHome}
+      onNavigate={navigateTo}
+      currentPage={currentPage}
+    />
+  );
+}
 
   return (
     <Home
