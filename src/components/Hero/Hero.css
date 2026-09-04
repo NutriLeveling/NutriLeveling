@@ -927,3 +927,53 @@
 .heroNavigationLabel {
   line-height: 1.25;
 }
+/* =========================================================
+   HERO — ALREADY SEEN
+   Skip entrance animation after first visit
+   ========================================================= */
+
+.hero.heroNoEntrance {
+  opacity: 1;
+}
+
+.hero.heroNoEntrance .heroAmbientGlow,
+.hero.heroNoEntrance .heroLogo,
+.hero.heroNoEntrance .heroTitle,
+.hero.heroNoEntrance .heroNavigationFrame,
+.hero.heroNoEntrance .heroNavigationButton,
+.hero.heroNoEntrance .heroLine,
+.hero.heroNoEntrance .heroCTAText {
+  opacity: 1;
+  animation: none;
+}
+
+.hero.heroNoEntrance .heroAmbientGlow {
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+
+  filter: blur(25px);
+}
+
+.hero.heroNoEntrance .heroLogo {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.hero.heroNoEntrance .heroTitle {
+  clip-path: inset(0 0 0 0);
+}
+
+.hero.heroNoEntrance .heroLine {
+  transform: scaleX(1);
+}
+
+.hero.heroNoEntrance .heroCTAText {
+  transform: translateX(0);
+}
+
+.hero.heroNoEntrance .scrollIndicator {
+  opacity: 1;
+  animation: none;
+  transform: translateY(0);
+}

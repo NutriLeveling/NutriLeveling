@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Hero.css";
 
+const HERO_ANIMATION_STORAGE_KEY =
+  "nutrileveling-hero-animation-seen";
+
 const navigationItems = [
   {
     label: "HOME",
@@ -35,7 +38,24 @@ function Hero({
   onOpenProjects,
   onOpenContact,
   onRevealBuilds,
+  
 }) {
+const [shouldAnimateHero] = useState(() => {
+  if (typeof window === "undefined") {
+    return true;
+  }
+
+  return !window.sessionStorage.getItem(
+    HERO_ANIMATION_STORAGE_KEY
+  );
+});
+
+useEffect(() => {
+  window.sessionStorage.setItem(
+    HERO_ANIMATION_STORAGE_KEY,
+    "true"
+  );
+}, []);
   const [hideScrollIndicator, setHideScrollIndicator] =
     useState(false);
 
@@ -105,7 +125,14 @@ const handleNavigation = (item) => {
 };
 
   return (
-    <section className="hero" id="home">
+   <section
+  className={`hero ${
+    shouldAnimateHero
+      ? ""
+      : "heroNoEntrance"
+  }`}
+  id="home"
+>
       <div
         className="heroAmbientGlow"
         aria-hidden="true"
