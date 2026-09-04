@@ -283,20 +283,6 @@
     box-sizing: border-box;
 }
 
-.aboutFocus li:hover {
-    transform: translateX(6px);
-
-    border-left-color: #f5c34d;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(245, 195, 77, 0.12),
-            rgba(245, 195, 77, 0.025) 55%,
-            transparent
-        );
-}
-
 .focusIcon {
     width: 7px;
     height: 7px;

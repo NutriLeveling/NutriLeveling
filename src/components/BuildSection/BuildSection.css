@@ -1,12 +1,19 @@
+/* =========================================================
+   BUILD / PERFORMANCE FRAMEWORK
+   ========================================================= */
+
 .buildSection {
   width: 100%;
   min-height: 100svh;
-      scroll-margin-top: 24px;
+
+  scroll-margin-top: 24px;
 
   display: flex;
   align-items: center;
 
-  padding: clamp(72px, 8vh, 110px) clamp(24px, 5vw, 90px);
+  padding:
+    clamp(72px, 8vh, 110px)
+    clamp(24px, 5vw, 90px);
 
   background: #05070d;
   color: #fdf6e3;
@@ -14,14 +21,20 @@
 
 .buildSectionInner {
   width: min(1500px, 100%);
-
   margin-inline: auto;
 }
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
 
 .buildHeading {
   max-width: 880px;
 
-  margin: 0 auto clamp(20px, 5vh, 68px);
+  margin:
+    0 auto
+    clamp(20px, 5vh, 68px);
 
   text-align: center;
 }
@@ -33,10 +46,19 @@
 
   color: #f5c34d;
 
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(11px, 0.8vw, 14px);
+  font-family:
+    "Orbitron",
+    sans-serif;
+
+  font-size:
+    clamp(11px, 0.8vw, 14px);
+
   font-weight: 700;
-  letter-spacing: clamp(3px, 0.4vw, 6px);
+
+  letter-spacing:
+    clamp(3px, 0.4vw, 6px);
+
+  text-transform: uppercase;
 }
 
 .buildSection h2 {
@@ -44,49 +66,124 @@
 
   color: #fdf6e3;
 
-  font-size: clamp(38px, 4vw, 64px);
+  font-size:
+    clamp(38px, 4vw, 64px);
+
   font-weight: 800;
+
   line-height: 1;
+
   letter-spacing: -2px;
 }
 
 .buildSubtitle {
   max-width: 720px;
 
-  margin: 22px auto 0;
+  margin:
+    22px auto 0;
 
   color: #c9c3b6;
 
-  font-size: clamp(16px, 1.2vw, 20px);
+  font-size:
+    clamp(16px, 1.2vw, 20px);
+
   line-height: 1.5;
 }
 
-.buildGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: clamp(18px, 1.6vw, 26px);
+/* =========================================================
+   PILLAR GRID
+   ========================================================= */
+
+.buildGrid {
+  display: flex;
+  flex-direction: column;
+
+  gap:
+    clamp(18px, 1.6vw, 26px);
 }
+
+.buildRow {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap:
+    clamp(18px, 1.6vw, 26px);
+
+  transition:
+    grid-template-columns
+    0.6s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.buildRow--active-left {
+  grid-template-columns:
+    minmax(0, 1.42fr)
+    minmax(0, 0.78fr);
+}
+
+.buildRow--active-right {
+  grid-template-columns:
+    minmax(0, 0.78fr)
+    minmax(0, 1.42fr);
+}
+
+
+/* =========================================================
+   PILLAR CARD
+   ========================================================= */
 
 .buildCard {
   position: relative;
 
+  min-width: 0;
   height: 350px;
 
   overflow: hidden;
 
-  border: 2px solid rgba(255, 255, 255, 0.55);
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.55);
+
   border-radius: 20px;
 
   background: #090c14;
 
   cursor: pointer;
 
+  transform: translateZ(0);
+
+  will-change:
+    border-color,
+    box-shadow;
+
   transition:
-    transform 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    border-color
+    0.35s ease,
+
+    box-shadow
+    0.35s ease;
 }
+
+.buildCard:focus-visible {
+  outline:
+    2px solid
+    #f5c34d;
+
+  outline-offset: 5px;
+}
+
+
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
 
 .buildCard img {
   width: 100%;
@@ -96,10 +193,30 @@
 
   object-fit: cover;
 
+  transform:
+    scale(1);
+
+  filter:
+    brightness(0.88);
+
   transition:
-    transform 0.5s ease,
-    filter 0.5s ease;
+    transform
+    0.65s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+
+    filter
+    0.45s ease;
 }
+
+
+/* =========================================================
+   CARD OVERLAY
+   ========================================================= */
 
 .buildCard::after {
   content: "";
@@ -109,90 +226,316 @@
 
   pointer-events: none;
 
-  background: linear-gradient(
-    to top,
-    rgba(5, 7, 13, 0.95),
-    rgba(5, 7, 13, 0.18) 62%,
-    transparent
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5, 7, 13, 0.62),
+      rgba(5, 7, 13, 0.18) 28%,
+      transparent 42%
+    ),
+    linear-gradient(
+      to top,
+      rgba(5, 7, 13, 0.96),
+      rgba(5, 7, 13, 0.32) 58%,
+      transparent
+    );
 }
+
+/* =========================================================
+   CARD CONTENT STACK
+   ========================================================= */
 
 .buildOverlay {
   position: absolute;
-  z-index: 2;
+
   inset: 0;
+
+  z-index: 2;
+
   display: flex;
-  flex-direction: column;
+
+  align-items: flex-start;
   justify-content: flex-end;
 
-  padding: clamp(22px, 2.5vw, 36px);
+  padding:
+    clamp(22px, 2.5vw, 36px);
+
+  pointer-events: none;
+}
+
+.buildOverlayContent {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-rows:
+    auto
+    0px;
+
+  align-content: end;
+
+  transition:
+    grid-template-rows
+      0.65s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
 
 .buildOverlay h3 {
+  grid-row: 1;
+
   margin: 0;
 
   color: #fdf6e3;
 
-  font-size: clamp(25px, 2vw, 38px);
+  font-size:
+    clamp(25px, 2vw, 38px);
+  text-shadow:
+  0 2px 10px rgba(0, 0, 0, 0.55),
+  0 0 2px rgba(0, 0, 0, 0.35);
   line-height: 1;
+
+  transition:
+    color
+      0.35s ease;
 }
 
-.buildOverlay p {
-  max-width: 620px;
+.buildDescription {
+  grid-row: 2;
 
-  margin: 14px 0 0;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.buildDescription p {
+  margin:
+    14px 0 0;
+
+  max-width: 620px;
 
   color: #d9d9d9;
 
-  font-size: clamp(14px, 1vw, 17px);
+  font-size: clamp(15px, 1.05vw, 18px);
+  font-weight: 500;
+  text-shadow:
+  0 2px 8px rgba(0, 0, 0, 0.5);
   line-height: 1.55;
 
   opacity: 0;
-  transform: translateY(14px);
+
+  transform:
+    translateY(14px);
 
   transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+    opacity
+      0.35s ease,
+
+    transform
+      0.55s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
 
-.buildCard:hover {
-  transform: translateY(-6px);
+
+/* =========================================================
+   ACTIVE CARD CONTENT
+   ========================================================= */
+
+.buildCard--active .buildOverlayContent {
+  grid-template-rows:
+    auto
+    clamp(88px, 8vw, 112px);
+}
+
+.buildCard--active .buildDescription p {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   HOVER — VISUAL AFFORDANCE ONLY
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .buildCard:hover {
+    transform: translateY(-3px);
+
+    border-color:
+      rgba(245, 195, 77, 0.72);
+
+    box-shadow:
+      0 14px 34px
+      rgba(0, 0, 0, 0.28),
+
+      0 0 18px
+      rgba(245, 195, 77, 0.08);
+  }
+
+  .buildCard:hover img {
+    transform:
+      scale(1.02);
+
+    filter:
+      brightness(0.82);
+  }
+}
+
+
+/* =========================================================
+   ACTIVE CARD
+   ========================================================= */
+
+.buildCard--active {
+  border-color:
+    rgba(245, 195, 77, 0.9);
 
   box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.42),
-    0 0 26px rgba(245, 195, 77, 0.08);
+    0 22px 55px
+    rgba(0, 0, 0, 0.4),
+
+    0 0 30px
+    rgba(245, 195, 77, 0.11);
 }
 
-.buildCard:hover img {
-  transform: scale(1.045);
+.buildCard--active img {
+  transform:
+    scale(1.045);
 
-  filter: brightness(0.8);
+  filter:
+    brightness(0.76);
 }
 
-.buildCard:hover .buildOverlay p {
-  opacity: 1;
-  transform: translateY(0);
+
+/* =========================================================
+   TERMINAL BRIDGE
+   ========================================================= */
+
+.terminalBridge {
+  width: 100%;
+
+  margin-top:
+    clamp(34px, 4vh, 54px);
 }
+
+.terminalBridgeIntro {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap:
+    clamp(18px, 2vw, 30px);
+
+  margin-bottom: 25px;
+}
+
+.terminalBridgeIntro p {
+  margin: 0;
+
+  color:
+    rgba(245, 195, 77, 0.9);
+
+  font-family:
+    "Orbitron",
+    sans-serif;
+
+  font-size:
+    clamp(11px, 0.8vw, 15px);
+
+  font-weight: 750;
+
+  line-height: 1;
+
+  letter-spacing:
+    clamp(3px, 0.35vw, 6px);
+
+  text-transform: uppercase;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 10px
+    rgba(245, 195, 77, 0.18);
+}
+
+.terminalBridgeLine {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 195, 77, 0.55)
+    );
+
+  box-shadow:
+    0 0 10px
+    rgba(245, 195, 77, 0.08);
+}
+
+.terminalBridgeLine:last-child {
+  transform:
+    scaleX(-1);
+}
+
+
+/* =========================================================
+   TERMINAL ACCESS
+   ========================================================= */
 
 .terminalAccess {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
+
   gap: 30px;
+
   padding-top: 28px;
-  border-top: 1px solid rgba(245, 195, 77, 0.22);
+
+  border-top:
+    1px solid
+    rgba(245, 195, 77, 0.22);
 }
 
 .terminalAccessStatus {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 
   color: #c9c3b6;
 
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(11px, 0.8vw, 14px);
+  font-family:
+    "Orbitron",
+    sans-serif;
+
+  font-size:
+    clamp(11px, 0.8vw, 14px);
+
   font-weight: 600;
+
   letter-spacing: 2px;
 }
 
@@ -200,208 +543,322 @@
   width: 9px;
   height: 9px;
 
+  flex: 0 0 9px;
+
   border-radius: 50%;
 
-  background: #f5c34d;
+  background:
+    #f5c34d;
 
-  box-shadow: 0 0 14px rgba(245, 195, 77, 0.75);
+  box-shadow:
+    0 0 14px
+    rgba(245, 195, 77, 0.75);
 
-  animation: terminalPulse 2.2s ease-in-out infinite;
+  animation:
+    terminalPulse
+    2.2s
+    ease-in-out
+    infinite;
 }
 
 @keyframes terminalPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
 
-    0%,
-    100% {
-        opacity: 0.45;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.35);
-    }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
 }
 
 .terminalAccessButton {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 18px;
 
   min-height: 58px;
 
-  padding: 16px 28px;
+  padding:
+    16px 28px;
 
-  border: 1px solid #f5c34d;
+  border:
+    1px solid
+    #f5c34d;
 
-  background: transparent;
-  color: #f5c34d;
+  background:
+    transparent;
 
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(11px, 0.9vw, 15px);
+  color:
+    #f5c34d;
+
+  font-family:
+    "Orbitron",
+    sans-serif;
+
+  font-size:
+    clamp(11px, 0.9vw, 15px);
+
   font-weight: 700;
+
   letter-spacing: 2px;
 
   cursor: pointer;
 
   transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    background
+    0.25s ease,
+
+    color
+    0.25s ease,
+
+    transform
+    0.25s ease,
+
+    box-shadow
+    0.25s ease;
 }
 
 .terminalAccessButton span:last-child {
   font-size: 20px;
 
-  transition: transform 0.25s ease;
+  transition:
+    transform
+    0.25s ease;
 }
 
 .terminalAccessButton:hover {
-  transform: translateY(-3px);
+  transform:
+    translateY(-3px);
 
-  background: #f5c34d;
-  color: #05070d;
+  background:
+    #f5c34d;
 
-  box-shadow: 0 0 26px rgba(245, 195, 77, 0.2);
+  color:
+    #05070d;
+
+  box-shadow:
+    0 0 26px
+    rgba(245, 195, 77, 0.2);
 }
 
 .terminalAccessButton:hover span:last-child {
-  transform: translateX(4px);
+  transform:
+    translateX(4px);
 }
 
 .terminalAccessButton:focus-visible {
-  outline: 3px solid #fdf6e3;
-  outline-offset: 5px;
+  outline:
+    3px solid
+    #fdf6e3;
+
+  outline-offset:
+    5px;
 }
 
+
+/* =========================================================
+   BUILD SECTION ENTRANCE
+   ========================================================= */
+
+.buildHeading,
+.buildCard,
+.terminalBridge {
+  opacity: 0;
+
+  transform:
+    translateY(34px);
+
+  filter:
+    blur(3px);
+
+  transition:
+    opacity
+    0.8s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+
+    transform
+    0.8s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+
+    filter
+    0.8s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.buildSection--visible .buildHeading,
+.buildSection--visible .buildCard,
+.buildSection--visible .terminalBridge {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  filter:
+    blur(0);
+}
+
+.buildSection--visible .buildHeading {
+  transition-delay:
+    0.08s;
+}
+
+.buildSection--visible .buildCard:nth-child(1) {
+  transition-delay:
+    0.22s;
+}
+
+.buildSection--visible .buildCard:nth-child(2) {
+  transition-delay:
+    0.34s;
+}
+
+.buildSection--visible .buildCard:nth-child(3) {
+  transition-delay:
+    0.46s;
+}
+
+.buildSection--visible .buildCard:nth-child(4) {
+  transition-delay:
+    0.58s;
+}
+
+.buildSection--visible .terminalBridge {
+  transition-delay:
+    0.72s;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
 @media (max-width: 1100px) {
+
   .buildSection {
     min-height: auto;
   }
 
   .buildCard {
-    height: clamp(240px, 28vw, 320px);
+    height:
+      clamp(240px, 28vw, 320px);
   }
 }
 
-/* =========================================
-   PILLARS → PLAYER BUILD BRIDGE
-========================================= */
 
-.terminalBridge {
-    width: 100%;
-
-    margin-top: clamp(34px, 4vh, 54px);
-}
-
-.terminalBridgeIntro {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: clamp(18px, 2vw, 30px);
-
-    margin-bottom: 25px;
-}
-
-.terminalBridgeIntro p {
-    margin: 0;
-
-    color: rgba(245, 195, 77, 0.9);
-
-    font-family: "Orbitron", sans-serif;
-    font-size: clamp(11px, 0.8vw, 15px);
-    font-weight: 750;
-
-    line-height: 1;
-    letter-spacing: clamp(3px, 0.35vw, 6px);
-
-    text-transform: uppercase;
-    text-align: center;
-
-    text-shadow:
-        0 0 10px rgba(245, 195, 77, 0.18);
-}
-
-.terminalBridgeLine {
-    width: 100%;
-    height: 1px;
-    box-shadow:
-        0 0 10px rgba(245, 195, 77, 0.08);
-background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(245, 195, 77, 0.55)
-    
-);
-}
-
-.terminalBridgeLine:last-child {
-    transform: scaleX(-1);
-}
-
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+   ========================================================= */
 
 @media (max-width: 760px) {
+
   .buildSection {
     padding-inline: 20px;
   }
 
   .buildGrid {
-    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .buildRow,
+  .buildRow--active-left,
+  .buildRow--active-right {
+    grid-template-columns:
+      1fr;
+
+    gap: 18px;
   }
 
   .buildCard {
-    height: min(64vw, 360px);
+    height:
+      min(64vw, 360px);
   }
 
-  .buildOverlay p {
-    opacity: 1;
-    transform: none;
+  .buildCard--active {
+    border-color:
+      rgba(245, 195, 77, 0.9);
+
+    box-shadow:
+      0 18px 40px
+      rgba(0, 0, 0, 0.35),
+
+      0 0 24px
+      rgba(245, 195, 77, 0.12);
+  }
+
+  .buildCard--active img {
+    transform:
+      scale(1.025);
   }
 
   .terminalBridge {
     margin-top: 44px;
   }
 
-.terminalBridgeIntro {
-  width: 100%;
+  .terminalBridgeIntro {
+    width: 100%;
 
-  grid-template-columns: minmax(28px, 1fr) auto minmax(28px, 1fr);
-  align-items: center;
-  gap: 16px;
+    grid-template-columns:
+      minmax(28px, 1fr)
+      auto
+      minmax(28px, 1fr);
 
-  margin-bottom: 24px;
-}
+    align-items: center;
 
-.terminalBridgeIntro p {
-  max-width: 260px;
-  margin: 0;
+    gap: 16px;
 
-  font-size: 10px;
-  line-height: 1.5;
-  letter-spacing: 1.7px;
+    margin-bottom: 24px;
+  }
 
-  text-align: center;
-  text-wrap: balance;
-}
+  .terminalBridgeIntro p {
+    max-width: 260px;
 
-.terminalBridgeLine {
-  width: 100%;
-}
+    margin: 0;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    letter-spacing: 1.7px;
+
+    text-align: center;
+
+    text-wrap: balance;
+  }
+
+  .terminalBridgeLine {
+    width: 100%;
+  }
 
   .terminalAccess {
     flex-direction: column;
+
     align-items: stretch;
   }
 
   .terminalAccessStatus {
     justify-content: center;
+
     text-align: center;
   }
 
@@ -410,11 +867,13 @@ background: linear-gradient(
   }
 }
 
-/* =========================================
-   LARGE DESKTOP WIDTH POLISH
-========================================= */
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
 
 @media (min-width: 1500px) and (min-height: 881px) {
+
   .buildSection {
     padding-left: 48px;
     padding-right: 48px;
@@ -426,62 +885,37 @@ background: linear-gradient(
   }
 }
 
-/* =========================================
-   BUILD SECTION ENTRANCE
-========================================= */
 
-.buildHeading,
-.buildCard,
-.terminalBridge {
-  opacity: 0;
-  transform: translateY(34px);
-  filter: blur(3px);
-
-  transition:
-    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.buildSection--visible .buildHeading,
-.buildSection--visible .buildCard,
-.buildSection--visible .terminalBridge {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
-}
-
-.buildSection--visible .buildHeading {
-  transition-delay: 0.08s;
-}
-
-.buildSection--visible .buildCard:nth-child(1) {
-  transition-delay: 0.22s;
-}
-
-.buildSection--visible .buildCard:nth-child(2) {
-  transition-delay: 0.34s;
-}
-
-.buildSection--visible .buildCard:nth-child(3) {
-  transition-delay: 0.46s;
-}
-
-.buildSection--visible .buildCard:nth-child(4) {
-  transition-delay: 0.58s;
-}
-
-.buildSection--visible .terminalBridge {
-  transition-delay: 0.72s;
-}
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .buildHeading,
   .buildCard,
-  .terminalBridge {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  .terminalBridge,
+  .buildRow,
+  .buildCard img,
+  .buildOverlay,
+  .buildOverlay h3,
+  .buildOverlay p,
+  .terminalAccessButton,
+  .terminalAccessButton span:last-child {
     transition: none;
+  }
+
+  .buildSection--visible .buildHeading,
+  .buildSection--visible .buildCard,
+  .buildSection--visible .terminalBridge {
+    opacity: 1;
+
+    transform: none;
+
+    filter: none;
+  }
+
+  .terminalAccessDot {
+    animation: none;
   }
 }
