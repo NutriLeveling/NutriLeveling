@@ -974,6 +974,13 @@
 
 .hero.heroNoEntrance .scrollIndicator {
   opacity: 1;
-  animation: none;
-  transform: translateY(0);
+
+  animation:
+    scrollIndicatorFloat
+    2s
+    ease-in-out
+    infinite;
+
+  transform:
+    translateY(0);
 }

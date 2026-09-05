@@ -3,6 +3,8 @@
    ========================================================= */
 
 .buildSection {
+  position: relative;
+
   width: 100%;
   min-height: 100svh;
 
@@ -518,6 +520,16 @@
     rgba(245, 195, 77, 0.22);
 }
 
+.terminalAccessActions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: clamp(18px, 2vw, 30px);
+}
+
 .terminalAccessStatus {
   display: flex;
 
@@ -855,6 +867,22 @@
 
     align-items: stretch;
   }
+
+  .terminalAccessActions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+}
+
+.buildBackToTop {
+  width: 34px;
+  height: 48px;
+}
 
   .terminalAccessStatus {
     justify-content: center;

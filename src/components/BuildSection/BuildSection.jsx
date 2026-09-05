@@ -40,7 +40,10 @@ function BuildCard({
   onActivate,
 }) {
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
+    if (
+      event.key === "Enter" ||
+      event.key === " "
+    ) {
       event.preventDefault();
       onActivate();
     }
@@ -49,7 +52,9 @@ function BuildCard({
   return (
     <article
       className={`buildCard ${
-        isActive ? "buildCard--active" : ""
+        isActive
+          ? "buildCard--active"
+          : ""
       }`}
       tabIndex={0}
       role="button"
@@ -62,15 +67,15 @@ function BuildCard({
         alt={build.title}
       />
 
-<div className="buildOverlay">
-  <div className="buildOverlayContent">
-    <h3>{build.title}</h3>
+      <div className="buildOverlay">
+        <div className="buildOverlayContent">
+          <h3>{build.title}</h3>
 
-    <div className="buildDescription">
-      <p>{build.description}</p>
-    </div>
-  </div>
-</div>
+          <div className="buildDescription">
+            <p>{build.description}</p>
+          </div>
+        </div>
+      </div>
     </article>
   );
 }
@@ -91,32 +96,39 @@ export default function BuildSection({
 
     if (!section) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
 
-        setIsVisible(true);
-        observer.unobserve(section);
-      },
-      {
-        threshold: 0.15,
-      }
-    );
+          setIsVisible(true);
+          observer.unobserve(section);
+        },
+        {
+          threshold: 0.15,
+        }
+      );
 
     observer.observe(section);
 
-    return () => observer.disconnect();
+    return () =>
+      observer.disconnect();
   }, []);
 
   const handleActivateBuild = (index) => {
     setActiveBuild((current) =>
-      current === index ? null : index
+      current === index
+        ? null
+        : index
     );
   };
 
   const getRowClassName = (rowIndex) => {
-    const firstIndex = rowIndex * 2;
-    const secondIndex = firstIndex + 1;
+    const firstIndex =
+      rowIndex * 2;
+
+    const secondIndex =
+      firstIndex + 1;
 
     if (activeBuild === firstIndex) {
       return "buildRow buildRow--active-left";
@@ -158,7 +170,9 @@ export default function BuildSection({
 
         <div className="buildGrid">
 
-          <div className={getRowClassName(0)}>
+          <div
+            className={getRowClassName(0)}
+          >
             <BuildCard
               build={builds[0]}
               isActive={
@@ -180,7 +194,9 @@ export default function BuildSection({
             />
           </div>
 
-          <div className={getRowClassName(1)}>
+          <div
+            className={getRowClassName(1)}
+          >
             <BuildCard
               build={builds[2]}
               isActive={
@@ -217,33 +233,38 @@ export default function BuildSection({
             <span className="terminalBridgeLine" />
           </div>
 
-          <div className="terminalAccess">
+<div className="terminalAccess">
 
-            <div className="terminalAccessStatus">
-              <span className="terminalAccessDot" />
+  <div className="terminalAccessStatus">
+    <span className="terminalAccessDot" />
 
-              <span>
-                PLAYER BUILD UNIDENTIFIED
-              </span>
-            </div>
+    <span>
+      PLAYER BUILD UNIDENTIFIED
+    </span>
+  </div>
 
-            <button
-              type="button"
-              className="terminalAccessButton"
-              onClick={() =>
-                onOpenQuest?.()
-              }
-            >
-              <span>
-                IDENTIFY MY BUILD
-              </span>
+  <div className="terminalAccessActions">
 
-              <span aria-hidden="true">
-                →
-              </span>
-            </button>
+    <button
+      type="button"
+      className="terminalAccessButton"
+      onClick={() =>
+        onOpenQuest?.()
+      }
+    >
+      <span>
+        IDENTIFY MY BUILD
+      </span>
 
-          </div>
+      <span aria-hidden="true">
+        →
+      </span>
+    </button>
+
+  </div>
+
+</div>
+
         </div>
 
       </div>
