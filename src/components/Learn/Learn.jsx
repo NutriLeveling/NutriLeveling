@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import LearnCard from "./LearnCard";
 import LearnModal from "./LearnModal";
@@ -14,9 +14,13 @@ function Learn({
   onBackHome,
   onNavigate,
   currentPage,
+  initialItemId,
 }) {
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [activeFilter, setActiveFilter] =
+    useState("all");
+
+  const [selectedItem, setSelectedItem] =
+    useState(null);
 
   const filteredContent = useMemo(() => {
     if (activeFilter === "all") {
@@ -24,32 +28,53 @@ function Learn({
     }
 
     return learnContent.filter(
-      (item) => item.type === activeFilter
+      (item) =>
+        item.type === activeFilter
     );
   }, [activeFilter]);
 
-const handleOpenItem = (item) => {
-  setSelectedItem(item);
-};
+  useEffect(() => {
+    if (!initialItemId) {
+      setSelectedItem(null);
+      return;
+    }
 
-const handleCloseModal = () => {
-  setSelectedItem(null);
-};
+    const item = learnContent.find(
+      (contentItem) =>
+        contentItem.id === initialItemId
+    );
+
+    setSelectedItem(item || null);
+  }, [initialItemId]);
+
+  const handleOpenItem = (item) => {
+    onNavigate(
+      "learn",
+      item.id
+    );
+  };
+
+  const handleCloseModal = () => {
+    onNavigate("learn");
+  };
 
   return (
     <main className="learnPage">
-<GlobalTopBar
-  currentPage={currentPage}
-  onNavigate={onNavigate}
-/>
+
+      <GlobalTopBar
+        currentPage={currentPage}
+        onNavigate={onNavigate}
+      />
 
       <section className="learnHero">
+
         <div
           className="learnHeroTechnicalGrid"
           aria-hidden="true"
         />
 
         <div className="learnHeroContent">
+
           <div className="learnHeroEyebrowRow">
             <span className="learnEyebrow">
               LEVEL 01
@@ -62,20 +87,24 @@ const handleCloseModal = () => {
           </div>
 
           <div className="learnHeroTitleRow">
+
             <h1>
+
               <span className="learnHeroTitleLine">
                 LEARN THE SYSTEM.
               </span>
 
-<span className="learnHeroTitleLine learnHeroTitleLine--gold">
-  LEVEL UP THE PLAYER
-  <span
-    className="learnHeroTitlePixel"
-    aria-hidden="true"
-  >
+              <span className="learnHeroTitleLine learnHeroTitleLine--gold">
+                LEVEL UP THE PLAYER
+
+                <span
+                  className="learnHeroTitlePixel"
+                  aria-hidden="true"
+                >
                   .
                 </span>
               </span>
+
             </h1>
 
             <div
@@ -89,9 +118,11 @@ const handleCloseModal = () => {
               <span />
               <span />
             </div>
+
           </div>
 
           <div className="learnHeroFooter">
+
             <p>
               Evidence-based nutrition, recovery and
               performance content for gamers and
@@ -101,12 +132,17 @@ const handleCloseModal = () => {
             <span className="learnHeroCode">
               FUEL // RECOVER // PERFORM
             </span>
+
           </div>
+
         </div>
+
       </section>
 
       <section className="learnLibrary">
+
         <div className="learnLibraryHeader">
+
           <div className="learnLibraryIdentity">
             <h2>THE LIBRARY</h2>
           </div>
@@ -124,30 +160,39 @@ const handleCloseModal = () => {
                     ? "is-active"
                     : ""
                 }
-                onClick={() => setActiveFilter(filter)}
+                onClick={() =>
+                  setActiveFilter(filter)
+                }
               >
                 {filter}
               </button>
             ))}
           </div>
+
         </div>
 
         <div className="learnEditorialList">
-          {filteredContent.map((item, index) => (
-            <LearnCard
-              key={item.id}
-              item={item}
-              index={index}
-              onOpen={handleOpenItem}
-            />
-          ))}
+
+          {filteredContent.map(
+            (item, index) => (
+              <LearnCard
+                key={item.id}
+                item={item}
+                index={index}
+                onOpen={handleOpenItem}
+              />
+            )
+          )}
+
         </div>
+
       </section>
 
-<LearnModal
-  item={selectedItem}
-  onClose={handleCloseModal}
-/>
+      <LearnModal
+        item={selectedItem}
+        onClose={handleCloseModal}
+      />
+
     </main>
   );
 }

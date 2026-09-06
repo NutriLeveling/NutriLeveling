@@ -25,26 +25,26 @@ function getRouteFromHash() {
   if (!rawHash) {
     return {
       page: "home",
-      projectId: null,
+      itemId: null,
     };
   }
 
-  const [page, projectId] = rawHash
+  const [page, itemId] = rawHash
     .split("/")
     .filter(Boolean);
 
   if (!VALID_PAGES.has(page)) {
     return {
       page: "home",
-      projectId: null,
+      itemId: null,
     };
   }
 
   return {
     page,
-    projectId:
-      page === "projects"
-        ? projectId || null
+    itemId:
+      page === "projects" || page === "learn"
+        ? itemId || null
         : null,
   };
 }
@@ -54,8 +54,10 @@ function App() {
     getRouteFromHash
   );
 
-  const [introFinished, setIntroFinished] =
-    useState(false);
+  const [
+    introFinished,
+    setIntroFinished,
+  ] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -94,8 +96,8 @@ function App() {
     if (window.location.hash === nextHash) {
       setRoute({
         page,
-        projectId:
-          page === "projects"
+        itemId:
+          page === "projects" || page === "learn"
             ? subPath
             : null,
       });
@@ -107,13 +109,17 @@ function App() {
     window.location.hash = nextHash;
   };
 
-  const openQuest = () => navigateTo("quest");
+  const openQuest = () =>
+    navigateTo("quest");
 
-  const openHome = () => navigateTo("home");
+  const openHome = () =>
+    navigateTo("home");
 
-  const openAbout = () => navigateTo("about");
+  const openAbout = () =>
+    navigateTo("about");
 
-  const openLearn = () => navigateTo("learn");
+  const openLearn = () =>
+    navigateTo("learn");
 
   const openProjects = () =>
     navigateTo("projects");
@@ -148,6 +154,7 @@ function App() {
         onBackHome={openHome}
         onNavigate={navigateTo}
         currentPage={route.page}
+        initialItemId={route.itemId}
       />
     );
   }
@@ -158,7 +165,7 @@ function App() {
         onBackHome={openHome}
         onNavigate={navigateTo}
         currentPage={route.page}
-        initialProjectId={route.projectId}
+        initialProjectId={route.itemId}
       />
     );
   }

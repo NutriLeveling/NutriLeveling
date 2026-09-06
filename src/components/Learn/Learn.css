@@ -3370,3 +3370,103 @@ border:
   max-width: 760px;
 }
 }
+/* ======================================================
+   LEARN MODAL — SHARE LINK
+   ====================================================== */
+
+.learnModalHeaderActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.learnModalShare {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  padding:
+    0.55rem
+    0.8rem;
+
+  border:
+    1px solid
+    rgba(232, 201, 79, 0.28);
+
+  background:
+    rgba(232, 201, 79, 0.035);
+
+  color:
+    rgba(232, 201, 79, 0.82);
+
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.learnModalShare:hover {
+  color: var(--learn-gold);
+
+  background:
+    rgba(232, 201, 79, 0.09);
+
+  border-color:
+    rgba(232, 201, 79, 0.48);
+
+  transform: translateY(-1px);
+}
+
+.learnModalShare:focus-visible {
+  outline:
+    2px solid
+    var(--learn-gold);
+
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .learnModalHeaderActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .learnModalShare {
+    height: 38px;
+    box-sizing: border-box;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0 0.6rem;
+
+    line-height: 1;
+
+    font-size: 0.58rem;
+    letter-spacing: 0.11em;
+  }
+}
