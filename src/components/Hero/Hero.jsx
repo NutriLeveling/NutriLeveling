@@ -1,35 +1,10 @@
 import { useEffect, useState } from "react";
+
 import "./Hero.css";
+import GlobalTopBar from "../GlobalTopBar/GlobalTopBar";
 
 const HERO_ANIMATION_STORAGE_KEY =
   "nutrileveling-hero-animation-seen";
-
-const navigationItems = [
-  {
-    label: "HOME",
-    action: "home",
-  },
-  {
-    label: "ABOUT",
-    action: "about",
-  },
-  {
-    label: "KNOWLEDGE HUB",
-    action: "learn",
-  },
-  {
-    label: "PROJECTS",
-    action: "projects",
-  },
-  {
-    label: "QUEST",
-    action: "quest",
-  },
-  {
-    label: "CONTACT",
-    action: "contact",
-  },
-];
 
 function Hero({
   onOpenQuest,
@@ -37,27 +12,26 @@ function Hero({
   onOpenLearn,
   onOpenProjects,
   onOpenContact,
-  onRevealBuilds,
-  
 }) {
-const [shouldAnimateHero] = useState(() => {
-  if (typeof window === "undefined") {
-    return true;
-  }
+  const [shouldAnimateHero] = useState(() => {
+    if (typeof window === "undefined") {
+      return true;
+    }
 
-  return !window.sessionStorage.getItem(
-    HERO_ANIMATION_STORAGE_KEY
-  );
-});
+    return !window.sessionStorage.getItem(
+      HERO_ANIMATION_STORAGE_KEY
+    );
+  });
 
-useEffect(() => {
-  window.sessionStorage.setItem(
-    HERO_ANIMATION_STORAGE_KEY,
-    "true"
-  );
-}, []);
   const [hideScrollIndicator, setHideScrollIndicator] =
     useState(false);
+
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      HERO_ANIMATION_STORAGE_KEY,
+      "true"
+    );
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,6 +56,7 @@ useEffect(() => {
       console.warn(
         `Section with id "${sectionId}" was not found.`
       );
+
       return;
     }
 
@@ -91,85 +66,71 @@ useEffect(() => {
     });
   };
 
-const handleNavigation = (item) => {
-  switch (item.action) {
-    case "home":
-      scrollToSection("home");
-      break;
+  const handleNavigation = (action) => {
+    switch (action) {
+      case "home":
+        scrollToSection("home");
+        break;
 
-    case "about":
-      onOpenAbout?.();
-      break;
+      case "about":
+        onOpenAbout?.();
+        break;
 
-    case "quest":
-      onOpenQuest?.();
-      break;
+      case "learn":
+        onOpenLearn?.();
+        break;
 
-    case "learn":
-      onOpenLearn?.();
-      break;
+      case "projects":
+        onOpenProjects?.();
+        break;
 
-    case "projects":
-      onOpenProjects?.();
-      break;
+      case "quest":
+        onOpenQuest?.();
+        break;
 
-    case "contact":
-      onOpenContact?.();
-      break;
+      case "contact":
+        onOpenContact?.();
+        break;
 
-    default:
-      if (item.target) {
-        scrollToSection(item.target);
-      }
-  }
-};
+      default:
+        break;
+    }
+  };
 
   return (
-   <section
-  className={`hero ${
-    shouldAnimateHero
-      ? ""
-      : "heroNoEntrance"
-  }`}
-  id="home"
+    <section
+      className={`hero ${
+        shouldAnimateHero
+          ? ""
+          : "heroNoEntrance"
+      }`}
+      id="home"
+    >
+      <video
+  className="heroBackgroundVideo"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+  aria-hidden="true"
 >
+  <source src="/assets/hero.mp4" type="video/mp4" />
+</video>
+
+<div className="heroVideoOverlay" aria-hidden="true" />
+
       <div
         className="heroAmbientGlow"
         aria-hidden="true"
       />
 
+      <GlobalTopBar
+        currentPage="home"
+        onNavigate={handleNavigation}
+      />
+
       <div className="heroContent">
-        <div className="heroNavigationFrame">
-          <nav
-            className="heroNavigation"
-            aria-label="Main navigation"
-          >
-            {navigationItems.map((item, index) => (
-<button
-  key={item.label}
-  type="button"
-  className={`heroNavigationButton ${
-    item.action === "home"
-      ? "heroNavigationButtonActive"
-      : ""
-  }`}
-  style={{ "--nav-index": index }}
-  onClick={() => handleNavigation(item)}
->
-                <span
-                  className="heroNavigationMarker"
-                  aria-hidden="true"
-                />
-
-<span className="heroNavigationLabel">
-  {item.label}
-</span>
-
-              </button>
-            ))}
-          </nav>
-        </div>
-
         <div className="heroMain">
           <div className="heroLogoReveal">
             <img
@@ -194,7 +155,9 @@ const handleNavigation = (item) => {
             <button
               type="button"
               className="heroCTA"
-              onClick={() => scrollToSection("about")}
+              onClick={() =>
+                scrollToSection("about")
+              }
             >
               <span
                 className="heroLine"
@@ -216,7 +179,9 @@ const handleNavigation = (item) => {
             ? "scrollIndicatorHidden"
             : ""
         }`}
-        onClick={() => scrollToSection("about")}
+        onClick={() =>
+          scrollToSection("about")
+        }
         aria-label="Scroll to About section"
       >
         <span className="scrollIndicatorPixel" />

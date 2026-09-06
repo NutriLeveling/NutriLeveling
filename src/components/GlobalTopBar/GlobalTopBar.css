@@ -2,7 +2,7 @@
    GLOBAL TOP BAR
    ========================================================= */
 :root {
-  --site-page-padding-inline: clamp(40px, 8vw, 150px);
+  --site-gutter: clamp(40px, 8vw, 150px);
 }
 
 .globalTopBar {
