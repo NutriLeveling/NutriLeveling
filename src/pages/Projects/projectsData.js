@@ -11,7 +11,6 @@ import lockinCover from "./assets/lockin/lockin-cover.png";
 import lockinGallery01 from "./assets/lockin/lockin-gallery-01.png";
 import lockinGallery02 from "./assets/lockin/lockin-gallery-02.png";
 import lockinGallery03 from "./assets/lockin/lockin-gallery-03.png";
-import nutrilevelingLogo from "./assets/lockin/nutrileveling-logo.png";
 import gamersPerformanceLogo from "./assets/lockin/gamers-performance-logo.png";
 import lockinBeaLogo from "./assets/lockin/bea-logo.png";
 
@@ -43,7 +42,7 @@ const projectsData = [
     ],
 
     roleDescription:
-      "I lead the project, overseeing concept, content, and overall direction. LOCK IN is developed in collaboration with NutriLeveling, Gamers Performance, and Bredde-e-sport Alliansen.",
+      "I lead the project, overseeing concept, content, and overall direction. LOCK IN is developed in collaboration with Gamers Performance and Bredde-e-sport Alliansen.",
 
     gallery: [
       {
@@ -62,16 +61,14 @@ const projectsData = [
 
     partners: [
       {
-        name: "NutriLeveling",
-        logo: nutrilevelingLogo,
-      },
-      {
         name: "Gamers Performance",
         logo: gamersPerformanceLogo,
+        website: "https://www.gamersperformance.no/",
       },
       {
         name: "Bredde-e-sport Alliansen",
         logo: lockinBeaLogo,
+        website: "https://www.esportalliansen.no/",
       },
     ],
 
@@ -125,14 +122,17 @@ const projectsData = [
       {
         name: "Bredde-e-sport Alliansen",
         logo: beyondBeaLogo,
+        website: "https://www.esportalliansen.no/",
       },
       {
         name: "Breezageri Ltd",
         logo: breezageriLogo,
+        website: "https://breezageri.eu/",
       },
       {
         name: "University of Bergen",
         logo: universityBergenLogo,
+        website: "https://www4.uib.no/en",
       },
     ],
 
@@ -207,14 +207,17 @@ const projectsData = [
       {
         name: "Bredde-e-sport Alliansen",
         logo: ecidBeaLogo,
+        website: "https://www.esportalliansen.no/",
       },
       {
         name: "H20 Esports Campus",
         logo: h20Logo,
+        website: "https://h20.gg/",
       },
       {
         name: "DGI",
         logo: dgiLogo,
+        website: "https://www.dgi.dk/",
       },
     ],
 

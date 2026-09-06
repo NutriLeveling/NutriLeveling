@@ -1,22 +1,82 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 function ProjectModal({ project, onClose }) {
-  const [isClosing, setIsClosing] =
-    useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
-const requestClose = useCallback(() => {
-  if (isClosing) return;
+  const [galleryStartIndex, setGalleryStartIndex] =
+    useState(0);
 
-  setIsClosing(true);
+  const [lightboxIndex, setLightboxIndex] =
+    useState(null);
 
-  window.setTimeout(() => {
-    onClose();
-  }, 260);
-}, [isClosing, onClose]);
+  const gallery = project.gallery || [];
+
+  const visibleGalleryItems = 3;
+
+  const maxGalleryStartIndex = Math.max(
+    0,
+    gallery.length - visibleGalleryItems
+  );
+
+  const requestClose = () => {
+    if (isClosing) {
+      return;
+    }
+
+    setIsClosing(true);
+
+    window.setTimeout(() => {
+      onClose();
+    }, 260);
+  };
+
+  const openLightbox = (index) => {
+    setLightboxIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+  };
+
+  const showPreviousLightboxImage = () => {
+    setLightboxIndex((current) => {
+      if (current === null || gallery.length === 0) {
+        return current;
+      }
+
+      return current === 0
+        ? gallery.length - 1
+        : current - 1;
+    });
+  };
+
+  const showNextLightboxImage = () => {
+    setLightboxIndex((current) => {
+      if (current === null || gallery.length === 0) {
+        return current;
+      }
+
+      return current === gallery.length - 1
+        ? 0
+        : current + 1;
+    });
+  };
+
+  const showPreviousGalleryItems = () => {
+    setGalleryStartIndex((current) =>
+      Math.max(0, current - 1)
+    );
+  };
+
+  const showNextGalleryItems = () => {
+    setGalleryStartIndex((current) =>
+      Math.min(
+        maxGalleryStartIndex,
+        current + 1
+      )
+    );
+  };
 
   useEffect(() => {
     const previousOverflow =
@@ -25,12 +85,34 @@ const requestClose = useCallback(() => {
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event) => {
+      if (lightboxIndex !== null) {
+        if (event.key === "Escape") {
+          closeLightbox();
+          return;
+        }
+
+        if (event.key === "ArrowLeft") {
+          showPreviousLightboxImage();
+          return;
+        }
+
+        if (event.key === "ArrowRight") {
+          showNextLightboxImage();
+          return;
+        }
+
+        return;
+      }
+
       if (event.key === "Escape") {
         requestClose();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
 
     return () => {
       document.body.style.overflow =
@@ -41,183 +123,311 @@ const requestClose = useCallback(() => {
         handleKeyDown
       );
     };
-  }, [requestClose]);
+  }, [lightboxIndex]);
+
+  const lightbox =
+    lightboxIndex !== null &&
+    gallery.length > 0
+      ? createPortal(
+          <div
+            className="projectGalleryLightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${project.title} gallery viewer`}
+            onMouseDown={(event) => {
+              if (
+                event.target ===
+                event.currentTarget
+              ) {
+                closeLightbox();
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="projectGalleryLightboxClose"
+              onClick={closeLightbox}
+              aria-label="Close gallery"
+            >
+              ×
+            </button>
+
+            <button
+              type="button"
+              className="projectGalleryLightboxPrevious"
+              onClick={
+                showPreviousLightboxImage
+              }
+              aria-label="Previous image"
+            >
+              ←
+            </button>
+
+            <div className="projectGalleryLightboxContent">
+              <img
+                src={gallery[lightboxIndex].src}
+                alt={gallery[lightboxIndex].alt}
+                className="projectGalleryLightboxImage"
+              />
+
+              <span className="projectGalleryLightboxCounter">
+                {lightboxIndex + 1} / {gallery.length}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              className="projectGalleryLightboxNext"
+              onClick={
+                showNextLightboxImage
+              }
+              aria-label="Next image"
+            >
+              →
+            </button>
+          </div>,
+          document.body
+        )
+      : null;
 
   return (
-    <div
-      className={`projectModalBackdrop ${
-        isClosing ? "is-closing" : ""
-      }`}
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) {
-          requestClose();
-        }
-      }}
-    >
-      <article
-        className={`projectModal ${
+    <>
+      <div
+        className={`projectModalBackdrop ${
           isClosing ? "is-closing" : ""
         }`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="project-modal-title"
+        onMouseDown={(event) => {
+          if (
+            event.target ===
+            event.currentTarget
+          ) {
+            requestClose();
+          }
+        }}
       >
-        <button
-          type="button"
-          className="projectModalClose"
-          onClick={requestClose}
-          aria-label="Close project"
+        <article
+          className={`projectModal ${
+            isClosing ? "is-closing" : ""
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
         >
-          <span aria-hidden="true">×</span>
-        </button>
+          <button
+            type="button"
+            className="projectModalClose"
+            onClick={requestClose}
+            aria-label="Close project"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
 
-        <header className="projectModalHero">
-          <div className="projectModalStatus">
-            <span className="projectModalStatusDot" />
-
-            {project.status}
-          </div>
-
-          <h2 id="project-modal-title">
-            {project.title}
-          </h2>
-
-          <p>{project.description}</p>
-        </header>
-
-        {project.cover && (
-          <div className="projectModalCover">
-            <img
-              src={project.cover}
-              alt={project.coverAlt}
-              style={{
-                objectFit: project.coverFit || "cover",
-    }}
-            />
-
-            <div
-              className="projectModalCoverOverlay"
-              aria-hidden="true"
-            />
-          </div>
-        )}
-
-        <div className="projectModalBody">
-          <section className="projectModalSection">
-            <p className="projectModalSectionLabel">
-              About the Project
-            </p>
-
-            <div className="projectModalText">
-              {project.about.map((paragraph) => (
-                <p key={paragraph}>
-                  {paragraph}
-                </p>
-              ))}
+          <header className="projectModalHero">
+            <div className="projectModalStatus">
+              <span className="projectModalStatusDot" />
+              {project.status}
             </div>
-          </section>
 
-          <section className="projectModalSection projectModalRoleSection">
-            <p className="projectModalSectionLabel">
-              My Role
-            </p>
+            <h2 id="project-modal-title">
+              {project.title}
+            </h2>
 
-            <h3>{project.role}</h3>
+            <p>{project.description}</p>
+          </header>
 
-            <p>{project.roleDescription}</p>
-          </section>
+          {project.cover && (
+            <div className="projectModalCover">
+              <img
+                src={project.cover}
+                alt={project.coverAlt}
+                style={{
+                  objectFit:
+                    project.coverFit || "cover",
+                }}
+              />
 
-          {project.gallery?.length > 0 && (
-            <section className="projectModalSection">
-              <p className="projectModalSectionLabel">
-                Gallery
-              </p>
-
-              <div className="projectModalGallery">
-                {project.gallery.map(
-                  (image, index) => (
-                    <figure
-                      className={`projectModalGalleryItem ${
-                        index === 0
-                          ? "projectModalGalleryItemFeatured"
-                          : ""
-                      }`}
-                      key={image.src}
-                    >
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                      />
-                    </figure>
-                  )
-                )}
-              </div>
-            </section>
+              <div
+                className="projectModalCoverOverlay"
+                aria-hidden="true"
+              />
+            </div>
           )}
 
-          {project.partners?.length > 0 && (
+          <div className="projectModalBody">
             <section className="projectModalSection">
               <p className="projectModalSectionLabel">
-                Project Partners
+                About the Project
               </p>
 
-              <div className="projectModalPartners">
-                {project.partners.map((partner) => (
-                  <div
-                    className="projectModalPartner"
-                    key={partner.name}
+              <div className="projectModalText">
+                {project.about.map((paragraph) => (
+                  <p key={paragraph}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+
+            <section className="projectModalSection projectModalRoleSection">
+              <p className="projectModalSectionLabel">
+                My Role
+              </p>
+
+              <h3>{project.role}</h3>
+
+              <p>{project.roleDescription}</p>
+            </section>
+
+            {gallery.length > 0 && (
+              <section className="projectModalSection">
+                <p className="projectModalSectionLabel">
+                  Gallery
+                </p>
+
+                <div className="projectModalGallery">
+                  <button
+                    type="button"
+                    className="projectModalGalleryArrow projectModalGalleryArrow--left"
+                    onClick={
+                      showPreviousGalleryItems
+                    }
+                    disabled={
+                      galleryStartIndex === 0
+                    }
+                    aria-label="Previous gallery images"
                   >
-                    <img
-                      src={partner.logo}
-                      alt={`${partner.name} logo`}
-                      loading="lazy"
-                    />
+                    ←
+                  </button>
 
-                    <span>{partner.name}</span>
+                  <div className="projectModalGalleryViewport">
+                    <div
+                      className="projectModalGalleryTrack"
+                      style={{
+                        "--gallery-start":
+                          galleryStartIndex,
+                      }}
+                    >
+                      {gallery.map(
+                        (image, index) => (
+                          <button
+                            type="button"
+                            className="projectModalGalleryItem"
+                            key={image.src}
+                            onClick={() =>
+                              openLightbox(index)
+                            }
+                            aria-label={`Open gallery image ${
+                              index + 1
+                            } of ${
+                              gallery.length
+                            }`}
+                          >
+                            <img
+                              src={image.src}
+                              alt={image.alt}
+                              loading="lazy"
+                            />
+                          </button>
+                        )
+                      )}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
 
-          {project.funding && (
-            <section className="projectModalSection">
-              <p className="projectModalSectionLabel">
-                Funding
-              </p>
+                  <button
+                    type="button"
+                    className="projectModalGalleryArrow projectModalGalleryArrow--right"
+                    onClick={
+                      showNextGalleryItems
+                    }
+                    disabled={
+                      galleryStartIndex >=
+                      maxGalleryStartIndex
+                    }
+                    aria-label="Next gallery images"
+                  >
+                    →
+                  </button>
+                </div>
+              </section>
+            )}
 
-              <div className="projectModalFunding">
-                <img
-                  src={project.funding.logo}
-                  alt={project.funding.alt}
-                  loading="lazy"
-                />
+            {project.partners?.length > 0 && (
+              <section className="projectModalSection">
+                <p className="projectModalSectionLabel">
+                  Project Partners
+                </p>
 
-                <p>{project.funding.text}</p>
-              </div>
-            </section>
-          )}
+                <div className="projectModalPartners">
+                  {project.partners.map(
+                    (partner) => (
+                      <a
+                        className="projectModalPartner"
+                        key={partner.name}
+                        href={partner.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${partner.name} website`}
+                      >
+                        <img
+                          src={partner.logo}
+                          alt={`${partner.name} logo`}
+                          loading="lazy"
+                        />
 
-          {project.information?.length > 0 && (
-            <section className="projectModalSection projectModalInformationSection">
-              <p className="projectModalSectionLabel">
-                Project Information
-              </p>
+                        <span>
+                          {partner.name}
+                        </span>
+                      </a>
+                    )
+                  )}
+                </div>
+              </section>
+            )}
 
-              <dl className="projectModalInformation">
-                {project.information.map((item) => (
-                  <div key={item.label}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          )}
-        </div>
-      </article>
-    </div>
+            {project.funding && (
+              <section className="projectModalSection">
+                <p className="projectModalSectionLabel">
+                  Funding
+                </p>
+
+                <div className="projectModalFunding">
+                  <img
+                    src={project.funding.logo}
+                    alt={project.funding.alt}
+                    loading="lazy"
+                  />
+
+                  <p>
+                    {project.funding.text}
+                  </p>
+                </div>
+              </section>
+            )}
+
+            {project.information?.length > 0 && (
+              <section className="projectModalSection projectModalInformationSection">
+                <p className="projectModalSectionLabel">
+                  Project Information
+                </p>
+
+                <dl className="projectModalInformation">
+                  {project.information.map(
+                    (item) => (
+                      <div key={item.label}>
+                        <dt>{item.label}</dt>
+                        <dd>{item.value}</dd>
+                      </div>
+                    )
+                  )}
+                </dl>
+              </section>
+            )}
+          </div>
+        </article>
+      </div>
+
+      {lightbox}
+    </>
   );
 }
 

@@ -246,7 +246,7 @@
 .projectCard {
   position: relative;
   overflow: hidden;
-
+  cursor: pointer;
   display: flex;
   flex-direction: column;
 
@@ -273,6 +273,11 @@
   transform: translateY(-5px);
 
   border-color: rgba(111, 156, 153, 0.42);
+}
+
+.projectCard:focus-visible {
+  outline: 2px solid rgba(111, 156, 153, 0.65);
+  outline-offset: 4px;
 }
 
 .projectCardHeader {
@@ -788,7 +793,6 @@
 
 .projectModalGallery {
   display: grid;
-
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
@@ -864,12 +868,28 @@
   padding: 1rem;
 
   text-align: center;
+  text-decoration: none;
+
+  color: inherit;
 
   background:
     rgba(255, 255, 255, 0.018);
 
   border:
     2px solid rgba(255, 255, 255, 0.08);
+
+  cursor: pointer;
+
+  transition:
+    border-color 250ms ease,
+    background 250ms ease;
+}
+
+.projectModalPartner:hover {
+  border-color: rgba(111, 156, 153, 0.38);
+
+  background:
+    rgba(111, 156, 153, 0.035);
 }
 
 .projectModalPartner img {
@@ -886,7 +906,6 @@
 }
 
 .projectModalPartner:hover img {
-
   transform: translateY(-4px);
 }
 
@@ -896,6 +915,7 @@
   line-height: 2.5;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+
   font-family: "space grotesk", sans-serif;
   color: rgba(242, 244, 243, 0.67);
 }
@@ -1394,5 +1414,458 @@ color: var(--projects-accent);
   .projectsHero::before,
   .projectsHero h1::before {
     display: none;
+  }
+}
+
+/* =========================================================
+   PROJECT GALLERY — HORIZONTAL RAIL
+   ========================================================= */
+
+.projectModalGallery {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  gap: 0.85rem;
+
+  width: 100%;
+}
+
+.projectModalGalleryViewport {
+  min-width: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.projectModalGalleryTrack {
+  --gallery-start: 0;
+
+  display: grid;
+
+  grid-auto-flow: column;
+
+  grid-auto-columns:
+    calc((100% - 2rem) / 3);
+
+  gap: 1rem;
+
+  width: 100%;
+
+  transform:
+    translateX(
+      calc(
+        -1 *
+        var(--gallery-start) *
+        (calc((100% - 2rem) / 3) + 1rem)
+      )
+    );
+
+  transition:
+    transform 450ms cubic-bezier(
+      0.2,
+      0.8,
+      0.2,
+      1
+    );
+}
+
+.projectModalGalleryItem {
+  position: relative;
+
+  width: 100%;
+  height: 240px;
+
+  min-width: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.08);
+
+  background: #0d1010;
+
+  cursor: pointer;
+
+  appearance: none;
+}
+
+.projectModalGalleryItem img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  filter:
+    saturate(0.86)
+    brightness(0.84);
+
+  transform: scale(1.001);
+
+  transition:
+    transform 400ms ease,
+    filter 300ms ease;
+}
+
+.projectModalGalleryItem:hover img {
+  transform: scale(1.035);
+
+  filter:
+    saturate(1)
+    brightness(0.96);
+}
+
+.projectModalGalleryItem:focus-visible {
+  outline:
+    2px solid
+    rgba(111, 156, 153, 0.72);
+
+  outline-offset: 4px;
+}
+
+.projectModalGalleryArrow {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(7, 9, 9, 0.72);
+
+  color: #f2f4f3;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease,
+    opacity 200ms ease;
+}
+
+.projectModalGalleryArrow:hover:not(:disabled) {
+  color: #8cb4b1;
+
+  border-color:
+    rgba(111, 156, 153, 0.52);
+}
+
+.projectModalGalleryArrow--left:hover:not(:disabled) {
+  transform: translateX(-3px);
+}
+
+.projectModalGalleryArrow--right:hover:not(:disabled) {
+  transform: translateX(3px);
+}
+
+.projectModalGalleryArrow:disabled {
+  opacity: 0.22;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   PROJECT GALLERY — LIGHTBOX
+   ========================================================= */
+
+.projectGalleryLightbox {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 2147483000;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  width: 100vw;
+  height: 100dvh;
+
+  padding:
+    clamp(1rem, 3vw, 3rem);
+
+  box-sizing: border-box;
+
+  background:
+    rgba(3, 5, 5, 0.95);
+
+  backdrop-filter: blur(14px);
+
+  isolation: isolate;
+
+  animation:
+    projectGalleryLightboxIn
+    220ms ease both;
+}
+
+.projectGalleryLightboxContent {
+  min-width: 0;
+
+  min-height: 0;
+
+  width: 100%;
+  height: min(82dvh, 900px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1rem;
+}
+
+.projectGalleryLightboxImage {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: 1200px;
+
+  object-fit: contain;
+}
+
+.projectGalleryLightboxClose {
+  position: absolute;
+
+  top: 1.25rem;
+  right: 1.25rem;
+
+  z-index: 2;
+
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(7, 9, 9, 0.74);
+
+  color: #f2f4f3;
+
+  font-size: 1.7rem;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.projectGalleryLightboxClose:hover {
+  color: #8cb4b1;
+
+  border-color:
+    rgba(111, 156, 153, 0.52);
+
+  transform: rotate(4deg);
+}
+
+.projectGalleryLightboxPrevious,
+.projectGalleryLightboxNext {
+  width: 50px;
+  height: 50px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.12);
+
+  background:
+    rgba(7, 9, 9, 0.72);
+
+  color: #f2f4f3;
+
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.projectGalleryLightboxPrevious:hover,
+.projectGalleryLightboxNext:hover {
+  color: #8cb4b1;
+
+  border-color:
+    rgba(111, 156, 153, 0.52);
+}
+
+.projectGalleryLightboxPrevious:hover {
+  transform: translateX(-3px);
+}
+
+.projectGalleryLightboxNext:hover {
+  transform: translateX(3px);
+}
+
+.projectGalleryLightboxCounter {
+  font-family: "Orbitron", sans-serif;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(242, 244, 243, 0.55);
+}
+
+@keyframes projectGalleryLightboxIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .projectModalGallery {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    gap: 0.5rem;
+  }
+
+  .projectModalGalleryTrack {
+    grid-auto-columns: 100%;
+
+    gap: 0;
+
+    transform:
+      translateX(
+        calc(
+          -1 *
+          var(--gallery-start) *
+          100%
+        )
+      );
+  }
+
+  .projectModalGalleryItem {
+    height: 260px;
+  }
+
+  .projectModalGalleryArrow {
+    width: 36px;
+    height: 36px;
+
+    font-size: 0.9rem;
+  }
+
+  .projectGalleryLightbox {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+
+    padding:
+      4rem
+      0.75rem
+      1.5rem;
+  }
+
+  .projectGalleryLightboxContent {
+    height: 74dvh;
+  }
+
+  .projectGalleryLightboxPrevious,
+  .projectGalleryLightboxNext {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+  }
+
+  .projectGalleryLightboxPrevious {
+    left: 0.75rem;
+  }
+
+  .projectGalleryLightboxNext {
+    right: 0.75rem;
+  }
+
+  .projectGalleryLightboxPrevious:hover,
+  .projectGalleryLightboxNext:hover {
+    transform: translateY(-50%);
+  }
+}
+
+@media (min-width: 701px) {
+  .projectModalPartners:has(> :nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 746px;
+    margin-inline: auto;
+  }
+}
+
+/* =========================================================
+   PROJECT GALLERY — FINAL SIZE TUNE
+   ========================================================= */
+
+@media (min-width: 761px) {
+  .projectModalGallery {
+    width: calc(100% + 96px);
+    margin-left: -48px;
+  }
+
+  .projectModalGalleryItem {
+    height: 280px;
   }
 }

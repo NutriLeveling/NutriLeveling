@@ -1,38 +1,37 @@
 function ProjectCard({ project, onOpen }) {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onOpen(project);
+    }
+  };
+
   return (
-    <article className="projectCard">
+    <article
+      className="projectCard"
+      role="button"
+      tabIndex={0}
+      aria-label={`Open ${project.title}`}
+      onClick={() => onOpen(project)}
+      onKeyDown={handleKeyDown}
+    >
       <div className="projectCardHeader">
         <span className="projectCardStatus">
           <span className="projectCardStatusDot" />
-
           {project.status}
         </span>
 
-        <button
-          type="button"
-          className="projectCardButton"
-          onClick={() => onOpen(project)}
-          aria-label={`Read more about ${project.title}`}
-        >
+        <span className="projectCardButton" aria-hidden="true">
           Read More
-
-          <span aria-hidden="true">↗</span>
-        </button>
+          <span>↗</span>
+        </span>
       </div>
 
-      <button
-        type="button"
-        className="projectCardMedia"
-        onClick={() => onOpen(project)}
-        aria-label={`Open ${project.title}`}
-      >
+      <div className="projectCardMedia">
         {project.cover ? (
           <img
             src={project.cover}
             alt={project.coverAlt}
-            style={{
-              objectFit: project.coverFit || "cover",
-    }}
           />
         ) : (
           <span className="projectCardMediaFallback">
@@ -44,7 +43,7 @@ function ProjectCard({ project, onOpen }) {
           className="projectCardMediaOverlay"
           aria-hidden="true"
         />
-      </button>
+      </div>
 
       <div className="projectCardContent">
         <h2>{project.title}</h2>
