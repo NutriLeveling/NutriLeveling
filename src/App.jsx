@@ -16,47 +16,90 @@ const VALID_PAGES = new Set([
   "contact",
 ]);
 
-function getPageFromHash() {
-  const page = window.location.hash
+function getRouteFromHash() {
+  const rawHash = window.location.hash
     .replace(/^#\/?/, "")
     .trim()
     .toLowerCase();
 
-  if (!page) {
-    return "home";
+  if (!rawHash) {
+    return {
+      page: "home",
+      projectId: null,
+    };
   }
 
-  return VALID_PAGES.has(page) ? page : "home";
+  const [page, projectId] = rawHash
+    .split("/")
+    .filter(Boolean);
+
+  if (!VALID_PAGES.has(page)) {
+    return {
+      page: "home",
+      projectId: null,
+    };
+  }
+
+  return {
+    page,
+    projectId:
+      page === "projects"
+        ? projectId || null
+        : null,
+  };
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(getPageFromHash);
-  const [introFinished, setIntroFinished] = useState(false);
+  const [route, setRoute] = useState(
+    getRouteFromHash
+  );
+
+  const [introFinished, setIntroFinished] =
+    useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
-      const nextPage = getPageFromHash();
-
-      setCurrentPage(nextPage);
+      setRoute(getRouteFromHash());
       window.scrollTo(0, 0);
     };
 
-    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener(
+      "hashchange",
+      handleHashChange
+    );
 
     return () => {
-      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener(
+        "hashchange",
+        handleHashChange
+      );
     };
   }, []);
 
-  const navigateTo = (page) => {
+  const navigateTo = (
+    page,
+    subPath = null
+  ) => {
     if (!VALID_PAGES.has(page)) {
       return;
     }
 
-    const nextHash = page === "home" ? "" : `#/${page}`;
+    const nextHash =
+      page === "home"
+        ? ""
+        : `#/${page}${
+            subPath ? `/${subPath}` : ""
+          }`;
 
     if (window.location.hash === nextHash) {
-      setCurrentPage(page);
+      setRoute({
+        page,
+        projectId:
+          page === "projects"
+            ? subPath
+            : null,
+      });
+
       window.scrollTo(0, 0);
       return;
     }
@@ -65,62 +108,70 @@ function App() {
   };
 
   const openQuest = () => navigateTo("quest");
+
   const openHome = () => navigateTo("home");
+
   const openAbout = () => navigateTo("about");
+
   const openLearn = () => navigateTo("learn");
-  const openProjects = () => navigateTo("projects");
-  const openContact = () => navigateTo("contact");
 
-if (currentPage === "quest") {
-  return (
-    <Quest
-      onBackHome={openHome}
-      onOpenContact={openContact}
-      onNavigate={navigateTo}
-      currentPage={currentPage}
-    />
-  );
-}
+  const openProjects = () =>
+    navigateTo("projects");
 
-if (currentPage === "about") {
-  return (
-    <About
-      onBackHome={openHome}
-      onNavigate={navigateTo}
-      currentPage={currentPage}
-    />
-  );
-}
+  const openContact = () =>
+    navigateTo("contact");
 
-if (currentPage === "learn") {
-  return (
-    <Learn
-      onBackHome={openHome}
-      onNavigate={navigateTo}
-      currentPage={currentPage}
-    />
-  );
-}
+  if (route.page === "quest") {
+    return (
+      <Quest
+        onBackHome={openHome}
+        onOpenContact={openContact}
+        onNavigate={navigateTo}
+        currentPage={route.page}
+      />
+    );
+  }
 
-if (currentPage === "projects") {
-  return (
-    <Projects
-      onBackHome={openHome}
-      onNavigate={navigateTo}
-      currentPage={currentPage}
-    />
-  );
-}
+  if (route.page === "about") {
+    return (
+      <About
+        onBackHome={openHome}
+        onNavigate={navigateTo}
+        currentPage={route.page}
+      />
+    );
+  }
 
-if (currentPage === "contact") {
-  return (
-    <Contact
-      onBackHome={openHome}
-      onNavigate={navigateTo}
-      currentPage={currentPage}
-    />
-  );
-}
+  if (route.page === "learn") {
+    return (
+      <Learn
+        onBackHome={openHome}
+        onNavigate={navigateTo}
+        currentPage={route.page}
+      />
+    );
+  }
+
+  if (route.page === "projects") {
+    return (
+      <Projects
+        onBackHome={openHome}
+        onNavigate={navigateTo}
+        currentPage={route.page}
+        initialProjectId={route.projectId}
+      />
+    );
+  }
+
+  if (route.page === "contact") {
+    return (
+      <Contact
+        onBackHome={openHome}
+        onNavigate={navigateTo}
+        currentPage={route.page}
+      />
+    );
+  }
 
   return (
     <Home

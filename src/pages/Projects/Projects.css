@@ -1869,3 +1869,42 @@ color: var(--projects-accent);
     height: 280px;
   }
 }
+/* =========================================================
+   PROJECT MODAL — COPY LINK
+   ========================================================= */
+
+.projectModalCopyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 1.25rem;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: rgba(242, 244, 243, 0.48);
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    gap 200ms ease;
+}
+
+.projectModalCopyLink:hover {
+  color: #8cb4b1;
+  gap: 0.7rem;
+}
+
+.projectModalCopyLink:focus-visible {
+  outline: 2px solid rgba(111, 156, 153, 0.65);
+  outline-offset: 4px;
+}

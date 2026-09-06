@@ -1,4 +1,7 @@
-import { useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import "./Projects.css";
 
@@ -10,9 +13,40 @@ import GlobalTopBar from "../../components/GlobalTopBar/GlobalTopBar";
 function Projects({
   onNavigate,
   currentPage,
+  initialProjectId,
 }) {
-  const [selectedProject, setSelectedProject] =
-    useState(null);
+  const [
+    selectedProject,
+    setSelectedProject,
+  ] = useState(null);
+
+  useEffect(() => {
+    if (!initialProjectId) {
+      setSelectedProject(null);
+      return;
+    }
+
+    const project =
+      projectsData.find(
+        (item) =>
+          item.id === initialProjectId
+      );
+
+    setSelectedProject(
+      project || null
+    );
+  }, [initialProjectId]);
+
+  const openProject = (project) => {
+    onNavigate(
+      "projects",
+      project.id
+    );
+  };
+
+  const closeProject = () => {
+    onNavigate("projects");
+  };
 
   return (
     <main className="projectsPage">
@@ -51,7 +85,7 @@ function Projects({
           <ProjectCard
             key={project.id}
             project={project}
-            onOpen={setSelectedProject}
+            onOpen={openProject}
           />
         ))}
       </section>
@@ -59,7 +93,7 @@ function Projects({
       {selectedProject && (
         <ProjectModal
           project={selectedProject}
-          onClose={() => setSelectedProject(null)}
+          onClose={closeProject}
         />
       )}
 

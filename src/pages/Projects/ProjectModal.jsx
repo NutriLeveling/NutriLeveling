@@ -10,6 +10,9 @@ function ProjectModal({ project, onClose }) {
   const [lightboxIndex, setLightboxIndex] =
     useState(null);
 
+  const [linkCopied, setLinkCopied] =
+  useState(false);
+
   const gallery = project.gallery || [];
 
   const visibleGalleryItems = 3;
@@ -38,6 +41,50 @@ function ProjectModal({ project, onClose }) {
   const closeLightbox = () => {
     setLightboxIndex(null);
   };
+
+const copyProjectLink = async () => {
+  const projectUrl =
+    `${window.location.origin}` +
+    `${window.location.pathname}` +
+    `#/projects/${project.id}`;
+
+  try {
+    await navigator.clipboard.writeText(
+      projectUrl
+    );
+
+    setLinkCopied(true);
+
+    window.setTimeout(() => {
+      setLinkCopied(false);
+    }, 1600);
+  } catch {
+    const textArea =
+      document.createElement("textarea");
+
+    textArea.value = projectUrl;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    document.body.removeChild(
+      textArea
+    );
+
+    setLinkCopied(true);
+
+    window.setTimeout(() => {
+      setLinkCopied(false);
+    }, 1600);
+  }
+};
 
   const showPreviousLightboxImage = () => {
     setLightboxIndex((current) => {
@@ -233,6 +280,17 @@ function ProjectModal({ project, onClose }) {
             </h2>
 
             <p>{project.description}</p>
+            <button
+  type="button"
+  className="projectModalCopyLink"
+  onClick={copyProjectLink}
+>
+  <span aria-hidden="true">↗</span>
+
+  {linkCopied
+    ? "Link Copied"
+    : "SHARE PROJECT"}
+</button>
           </header>
 
           {project.cover && (
