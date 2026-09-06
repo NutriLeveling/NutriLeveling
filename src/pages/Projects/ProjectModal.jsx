@@ -13,14 +13,44 @@ function ProjectModal({ project, onClose }) {
   const [linkCopied, setLinkCopied] =
   useState(false);
 
-  const gallery = project.gallery || [];
+    const [visibleGalleryItems, setVisibleGalleryItems] =
+  useState(
+    () =>
+      window.innerWidth <= 760
+        ? 1
+        : 3
+  );
 
-  const visibleGalleryItems = 3;
+  const gallery = project.gallery || [];
 
   const maxGalleryStartIndex = Math.max(
     0,
     gallery.length - visibleGalleryItems
   );
+
+  useEffect(() => {
+  const handleResize = () => {
+    setVisibleGalleryItems(
+      window.innerWidth <= 760
+        ? 1
+        : 3
+    );
+  };
+
+  handleResize();
+
+  window.addEventListener(
+    "resize",
+    handleResize
+  );
+
+  return () => {
+    window.removeEventListener(
+      "resize",
+      handleResize
+    );
+  };
+}, []);
 
   const requestClose = () => {
     if (isClosing) {

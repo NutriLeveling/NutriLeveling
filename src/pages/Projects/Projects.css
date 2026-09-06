@@ -1779,7 +1779,6 @@ color: var(--projects-accent);
 @media (max-width: 760px) {
   .projectModalGallery {
     grid-template-columns: auto minmax(0, 1fr) auto;
-
     gap: 0.5rem;
   }
 
@@ -1907,4 +1906,37 @@ color: var(--projects-accent);
 .projectModalCopyLink:focus-visible {
   outline: 2px solid rgba(111, 156, 153, 0.65);
   outline-offset: 4px;
+}
+/* =========================================================
+   PROJECT MODAL — MOBILE PARTNER LOGOS + LIGHTBOX ARROWS
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  /* Smaller partner logos on mobile */
+  .projectModalPartner img {
+    max-width: 145px;
+    height: 80px;
+  }
+
+  /* More refined fullscreen arrows on mobile */
+  .projectGalleryLightboxPrevious,
+  .projectGalleryLightboxNext {
+    width: 42px;
+    height: 42px;
+
+    font-size: 1rem;
+
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(7, 9, 9, 0.62);
+  }
+
+  .projectGalleryLightboxPrevious {
+    left: 0.6rem;
+  }
+
+  .projectGalleryLightboxNext {
+    right: 0.6rem;
+  }
+  
 }
