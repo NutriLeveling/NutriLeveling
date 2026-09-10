@@ -26,7 +26,7 @@ export const heroes = {
     ],
 
     upgrade:
-      "Build flexible routines that give you structure without limiting your ability to react.\n\nWant to take this build further? Click here to get in touch!",
+      "Build flexible routines that give you structure without limiting your ability to react.",
 
     image: strategistGif,
   },
@@ -53,8 +53,7 @@ export const heroes = {
     ],
 
     upgrade:
-      "Create short reset rituals that help you maintain speed without sacrificing control.\n\nWant to take this build further? Click here to get in touch!",
-
+      "Create short reset rituals that help you maintain speed without sacrificing control.",
     image: reactorGif,
   },
 
@@ -80,7 +79,7 @@ export const heroes = {
     ],
 
     upgrade:
-      "Introduce controlled challenges that push your adaptability without disrupting consistency.\n\nWant to take this build further? Click here to get in touch!",
+      "Introduce controlled challenges that push your adaptability without disrupting consistency.",
 
     image: sentinelGif,
   },
@@ -105,8 +104,7 @@ export const heroes = {
     ],
 
     upgrade:
-      "Choose one core system and refine it before moving toward the next opportunity.\n\nWant to take this build further? Click here to get in touch!",
-
+      "Choose one core system and refine it before moving toward the next opportunity.",
     image: catalystGif,
   },
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Quest.css";
 import GlobalTopBar from "../../components/GlobalTopBar/GlobalTopBar";
 import { questions } from "./questions";
@@ -10,7 +10,9 @@ const Quest = ({
   onNavigate,
   currentPage,
 }) => {
-  const [started, setStarted] = useState(false);
+const [started, setStarted] = useState(
+  () => window.history.state?.questStarted === true
+);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -19,38 +21,92 @@ const Quest = ({
   const [playerStats, setPlayerStats] = useState(null);
   const [isStarting, setIsStarting] = useState(false);
 
-const handleStart = () => {
-  setIsStarting(true);
+  const startTimeoutRef = useRef(null);
 
-  setTimeout(() => {
-    setStarted(true);
-    setIsStarting(false);
-  }, 3000);
-};
+  useEffect(() => {
+    return () => {
+      if (startTimeoutRef.current) {
+        window.clearTimeout(startTimeoutRef.current);
+      }
+    };
+  }, []);
 
-const handleAnswer = (answer, index) => {
-  if (selectedAnswer !== null) return;
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state?.questStarted) {
+        return;
+      }
 
-  setSelectedAnswer(index);
+      if (started || isStarting || result || isCompiling) {
+        setStarted(false);
+        setIsStarting(false);
+        setIsCompiling(false);
+        setCurrentQuestion(0);
+        setSelectedAnswer(null);
+        setAnswers([]);
+        setResult(null);
+        setPlayerStats(null);
 
-  const updatedAnswers = [...answers];
+        if (startTimeoutRef.current) {
+          window.clearTimeout(startTimeoutRef.current);
+          startTimeoutRef.current = null;
+        }
 
-  updatedAnswers[currentQuestion] = {
-  archetypes: answer.archetypes,
-  stats: answer.stats,
-};
+        window.scrollTo({
+          top: 0,
+          behavior: "auto",
+        });
+      }
+    };
 
-  setAnswers(updatedAnswers);
+    window.addEventListener("popstate", handlePopState);
 
-  setTimeout(() => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
-      setSelectedAnswer(null);
-    } else {
-      calculateResult(updatedAnswers);
-    }
-  }, 360);
-};
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [started, isStarting, result, isCompiling]);
+
+  const handleStart = () => {
+    window.history.pushState(
+      {
+        questStarted: true,
+      },
+      "",
+      window.location.href
+    );
+
+    setIsStarting(true);
+
+    startTimeoutRef.current = window.setTimeout(() => {
+      setStarted(true);
+      setIsStarting(false);
+      startTimeoutRef.current = null;
+    }, 3000);
+  };
+
+  const handleAnswer = (answer, index) => {
+    if (selectedAnswer !== null) return;
+
+    setSelectedAnswer(index);
+
+    const updatedAnswers = [...answers];
+
+    updatedAnswers[currentQuestion] = {
+      archetypes: answer.archetypes,
+      stats: answer.stats,
+    };
+
+    setAnswers(updatedAnswers);
+
+    window.setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion((prev) => prev + 1);
+        setSelectedAnswer(null);
+      } else {
+        calculateResult(updatedAnswers);
+      }
+    }, 360);
+  };
 
   const calculateResult = (finalAnswers) => {
     setIsCompiling(true);
@@ -97,409 +153,483 @@ const handleAnswer = (answer, index) => {
       ])
     );
 
-    setTimeout(() => {
+window.setTimeout(() => {
+  const questResult = {
+    result: winner,
+    playerStats: normalizedStats,
+  };
+
+  window.localStorage.setItem(
+    "nutrilevelingQuestResult",
+    JSON.stringify(questResult)
+  );
+
   setResult(winner);
   setPlayerStats(normalizedStats);
   setIsCompiling(false);
+
+  onNavigate?.("quest", "result");
 }, 3600);
   };
 
-const handleBack = () => {
-  if (currentQuestion > 0) {
-    setCurrentQuestion((prev) => prev - 1);
-    setSelectedAnswer(null);
-  }
-};
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion((prev) => prev - 1);
+      setSelectedAnswer(null);
+    }
+  };
 
-const handleRetake = () => {
-  setStarted(true);
+  const handleRetake = () => {
+    setStarted(true);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setAnswers([]);
+    setResult(null);
+    setPlayerStats(null);
+    setIsCompiling(false);
+    setIsStarting(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleReturnToMain = () => {
+    onBackHome?.();
+  };
+
+const handleExitQuest = () => {
+  if (startTimeoutRef.current) {
+    window.clearTimeout(startTimeoutRef.current);
+    startTimeoutRef.current = null;
+  }
+
+  setStarted(false);
+  setIsStarting(false);
+  setIsCompiling(false);
   setCurrentQuestion(0);
   setSelectedAnswer(null);
   setAnswers([]);
   setResult(null);
   setPlayerStats(null);
-  setIsCompiling(false);
-  setIsStarting(false);
+
+  window.history.replaceState(
+    null,
+    "",
+    "#/quest"
+  );
 
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    behavior: "auto",
   });
 };
 
-const handleReturnToMain = () => {
-  onBackHome?.();
-};
-
   return (
-    <section className="quest questPageEntrance">
+    <section className="quest">
       <div
-  className={`questBackground ${result ? "resultBackground" : ""}`}
-  aria-hidden="true"
-  style={{
-    "--result-accent": result
-      ? heroes[result].accent
-      : "transparent",
-  }}
->
+        className={`questBackground ${
+          result ? "resultBackground" : ""
+        }`}
+        aria-hidden="true"
+        style={{
+          "--result-accent": result
+            ? heroes[result].accent
+            : "transparent",
+        }}
+      >
         <div className="questGlow questGlowOne" />
         <div className="questGlow questGlowTwo" />
         <div className="questGrid" />
         <div className="questNoise" />
       </div>
-{!started && !isStarting && (
-  <GlobalTopBar
-    currentPage={currentPage}
-    onNavigate={onNavigate}
-  />
-)}
+
+      {!started && !isStarting && (
+        <GlobalTopBar
+          currentPage={currentPage}
+          onNavigate={onNavigate}
+        />
+      )}
+
       <div className="questShell">
         {!started && !isStarting ? (
-<div className="questIntro">
+          <div className="questIntro">
+            <div className="questIntroTopbar">
+              <p className="questIntroLabel">
+                PERFORMANCE ASSESSMENT
+              </p>
 
-<div className="questIntroTopbar">
+              <div className="questIntroEyebrow">
+                <span>QUEST v1.0</span>
+              </div>
+            </div>
 
-  <p className="questIntroLabel">
-    PERFORMANCE ASSESSMENT
-  </p>
+            <div className="questIntroLine" />
 
-  <div className="questIntroEyebrow">
-    <span>QUEST v1.0</span>
-  </div>
+            <div className="questIntroContent">
+              <div className="questIntroLeft">
+                <h1>
+                  DISCOVER YOUR
+                  <span>PLAYER BUILD</span>
+                </h1>
 
-</div>
+                <p className="questIntroDescription">
+                  Answer a few quick questions to reveal how you focus,
+                  recover, adapt, and perform.
+                </p>
+              </div>
 
-  <div className="questIntroLine" />
-
-  <div className="questIntroContent">
-    <div className="questIntroLeft">
-
-      <h1>
-        DISCOVER YOUR
-        <span>PLAYER BUILD</span>
-      </h1>
-
-      <p className="questIntroDescription">
-        Answer a few quick questions to reveal how you focus,
-  recover, adapt, and perform.
-      </p>
-
-    </div>
-
-    <div className="questIntroRight">
-      <div className="questSystemStatus">
-        <span className="questStatusDot" />
-        <span>SYSTEM READY</span>
-      </div>
-
-      <button
-        type="button"
-        className="questStartButton"
-        onClick={handleStart}
-      >
-        <span>START YOUR QUEST</span>
-        <span className="questStartArrow">↗</span>
-      </button>
-
-      <div className="questIntroMeta questIntroMetaRight">
-    <div>
-      <span>QUESTIONS</span>
-      <strong>08</strong>
-    </div>
-
-    <div>
-      <span>ESTIMATED TIME</span>
-      <strong>≈ 60 SEC</strong>
-    </div>
-  </div>
-    </div>
-  </div>
-
-  <div className="questIntroGhost">
-    QUEST
-  </div>
-</div>
-        ) : isStarting ? (
-          <div className="questInitializing">
-  <div className="questInitializingHeader">
-    <span>BUILD SCAN PROTOCOL</span>
-  </div>
-
-  <div className="questInitializingCore">
-
-    <h2>
-      INITIALIZING
-      <span>PLAYER BUILD SCAN</span>
-    </h2>
-
-    <div className="questInitializingTrack">
-      <div className="questInitializingFill" />
-    </div>
-
-    <div className="questInitializingStatus">
-      <span>LOADING</span>
-      <strong>READY</strong>
-    </div>
-
-    <div className="questInitializingSignals">
-      <span>FOCUS</span>
-      <span>ENERGY</span>
-      <span>RECOVERY</span>
-      <span>ADAPTABILITY</span>
-    </div>
-  </div>
-
-  <div className="questInitializingFrame" />
-  <div className="questScanLine" />
-</div>
-        ) : isCompiling ? (
-          <div className="questLoading">
-  <div className="questLoadingHeader">
-    <span>BUILD ANALYSIS</span>
-  </div>
-
-  <div className="questLoadingCore">
-    <p className="questLoadingKicker">
-      ASSESSMENT COMPLETE
-    </p>
-
-    <h2>
-      COMPILING
-      <span>YOUR PLAYER PROFILE</span>
-    </h2>
-
-    <div className="questLoadingTrack">
-      <div className="questLoadingFill" />
-    </div>
-
-    <div className="questLoadingStatus">
-      <span>ANALYZING PERFORMANCE PATTERNS</span>
-      <strong>PROCESSING</strong>
-    </div>
-
-    <div className="questLoadingSignals">
-      <div>
-        <span>FOCUS</span>
-        <i />
-      </div>
-
-      <div>
-        <span>ENERGY</span>
-        <i />
-      </div>
-
-      <div>
-        <span>RECOVERY</span>
-        <i />
-      </div>
-
-      <div>
-        <span>ADAPTABILITY</span>
-        <i />
-      </div>
-    </div>
-
-    <div className="questLoadingReveal">
-      <span>PLAYER BUILD</span>
-      <strong>IDENTIFYING...</strong>
-    </div>
-  </div>
-
-  <div className="questLoadingFrame" />
-  <div className="questLoadingSweep" />
-</div>
-        ) : result ? (
-        <div
-  className="questResult"
-  style={{
-    "--hero-accent": heroes[result].accent,
-  }}
->
-  <header className="questResultHeroHeader">
-    <span>PLAYER BUILD IDENTIFIED</span>
-
-    <h1>{heroes[result].name}</h1>
-
-    <h2>{heroes[result].tagline}</h2>
-
-    <p>{heroes[result].description}</p>
-  </header>
-
-  <div className="questResultBody">
-    <div className="questResultProfile">
-      <section className="questProfilePanel">
-        <div className="questResultSectionTitle">
-          PERFORMANCE PROFILE
-        </div>
-
-        {playerStats && (
-          <div className="questStats">
-            {Object.entries(playerStats).map(([stat, value]) => (
-              <div className="questStat" key={stat}>
-                <span>{stat}</span>
-
-                <div className="questStatBar">
-                  <div
-                    className="questStatFill"
-                    style={{ width: `${value}%` }}
-                  />
+              <div className="questIntroRight">
+                <div className="questSystemStatus">
+                  <span className="questStatusDot" />
+                  <span>SYSTEM READY</span>
                 </div>
 
-                <strong>{value}</strong>
+                <button
+                  type="button"
+                  className="questStartButton"
+                  onClick={handleStart}
+                >
+                  <span>START YOUR QUEST</span>
+                  <span className="questStartArrow">↗</span>
+                </button>
+
+                <div className="questIntroMeta questIntroMetaRight">
+                  <div>
+                    <span>QUESTIONS</span>
+                    <strong>08</strong>
+                  </div>
+
+                  <div>
+                    <span>ESTIMATED TIME</span>
+                    <strong>≈ 60 SEC</strong>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+
+            <div className="questIntroGhost">
+              QUEST
+            </div>
           </div>
-        )}
+        ) : isStarting ? (
+          <div className="questInitializing">
+            <div className="questInitializingHeader">
+              <span>BUILD SCAN PROTOCOL</span>
+            </div>
 
-        <div className="questResultInsights">
-          <div className="questInsightBlock">
-            <span className="questInsightLabel">
-              STRENGTHS
-            </span>
+            <div className="questInitializingCore">
+              <h2>
+                INITIALIZING
+                <span>PLAYER BUILD SCAN</span>
+              </h2>
 
-            <ul>
-              {heroes[result].strengths.map((strength) => (
-                <li key={strength}>{strength}</li>
-              ))}
-            </ul>
+              <div className="questInitializingTrack">
+                <div className="questInitializingFill" />
+              </div>
+
+              <div className="questInitializingStatus">
+                <span>LOADING</span>
+                <strong>READY</strong>
+              </div>
+
+              <div className="questInitializingSignals">
+                <span>FOCUS</span>
+                <span>ENERGY</span>
+                <span>RECOVERY</span>
+                <span>ADAPTABILITY</span>
+              </div>
+            </div>
+
+            <div className="questInitializingFrame" />
+            <div className="questScanLine" />
           </div>
+        ) : isCompiling ? (
+          <div className="questLoading">
+            <div className="questLoadingHeader">
+              <span>BUILD ANALYSIS</span>
+            </div>
 
-          <div className="questInsightBlock">
-            <span className="questInsightLabel">
-              RISK ZONE
-            </span>
+            <div className="questLoadingCore">
+              <p className="questLoadingKicker">
+                ASSESSMENT COMPLETE
+              </p>
 
-            <ul>
-              {heroes[result].watchOut.map((risk) => (
-                <li key={risk}>{risk}</li>
-              ))}
-            </ul>
+              <h2>
+                COMPILING
+                <span>YOUR PLAYER PROFILE</span>
+              </h2>
+
+              <div className="questLoadingTrack">
+                <div className="questLoadingFill" />
+              </div>
+
+              <div className="questLoadingStatus">
+                <span>ANALYZING PERFORMANCE PATTERNS</span>
+                <strong>PROCESSING</strong>
+              </div>
+
+              <div className="questLoadingSignals">
+                <div>
+                  <span>FOCUS</span>
+                  <i />
+                </div>
+
+                <div>
+                  <span>ENERGY</span>
+                  <i />
+                </div>
+
+                <div>
+                  <span>RECOVERY</span>
+                  <i />
+                </div>
+
+                <div>
+                  <span>ADAPTABILITY</span>
+                  <i />
+                </div>
+              </div>
+
+              <div className="questLoadingReveal">
+                <span>PLAYER BUILD</span>
+                <strong>IDENTIFYING...</strong>
+              </div>
+            </div>
+
+            <div className="questLoadingFrame" />
+            <div className="questLoadingSweep" />
           </div>
-        </div>
-      </section>
-    </div>
+        ) : result ? (
+          <div
+            className="questResult"
+            style={{
+              "--hero-accent": heroes[result].accent,
+            }}
+          >
+            <header className="questResultHeroHeader">
+              <span>PLAYER BUILD IDENTIFIED</span>
 
-    <div className="questResultVisual">
-      <div className="questHeroFrame">
-        <img
-          src={heroes[result].image}
-          alt={heroes[result].name}
-        />
-      </div>
-    </div>
-  </div>
+              <h1>{heroes[result].name}</h1>
 
-<button
-  type="button"
-  className="questUpgradeBlock questUpgradeButton"
-  onClick={() => onOpenContact?.()}
->
-  <div className="questUpgradeIcon" aria-hidden="true">
-    ↑
-  </div>
+              <h2>{heroes[result].tagline}</h2>
 
-  <div className="questUpgradeContent">
-    <span className="questInsightLabel">
-      NEXT UPGRADE
-    </span>
+              <p>{heroes[result].description}</p>
+            </header>
 
-    <p>{heroes[result].upgrade}</p>
-  </div>
+            <div className="questResultBody">
+              <div className="questResultProfile">
+                <section className="questProfilePanel">
+                  <div className="questResultSectionTitle">
+                    PERFORMANCE PROFILE
+                  </div>
 
-</button>
+                  {playerStats && (
+                    <div className="questStats">
+                      {Object.entries(playerStats).map(
+                        ([stat, value]) => (
+                          <div className="questStat" key={stat}>
+                            <span>{stat}</span>
 
-  <div className="questResultButtons">
-    <button
-      type="button"
-      className="questSecondaryButton"
-      onClick={handleRetake}
-    >
-      RETAKE QUEST
-    </button>
+                            <div className="questStatBar">
+                              <div
+                                className="questStatFill"
+                                style={{
+                                  width: `${value}%`,
+                                }}
+                              />
+                            </div>
 
-<button
-  type="button"
-  className="questPrimaryButton"
-  onClick={handleReturnToMain}
->
-  EXPLORE NUTRILEVELING
-</button>
-  </div>
-</div>
+                            <strong>{value}</strong>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+
+                  <div className="questResultInsights">
+                    <div className="questInsightBlock">
+                      <span className="questInsightLabel">
+                        STRENGTHS
+                      </span>
+
+                      <ul>
+                        {heroes[result].strengths.map(
+                          (strength) => (
+                            <li key={strength}>
+                              {strength}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+
+                    <div className="questInsightBlock">
+                      <span className="questInsightLabel">
+                        RISK ZONE
+                      </span>
+
+                      <ul>
+                        {heroes[result].watchOut.map((risk) => (
+                          <li key={risk}>{risk}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div className="questResultVisual">
+                <div className="questHeroFrame">
+                  <img
+                    src={heroes[result].image}
+                    alt={heroes[result].name}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="questUpgradeBlock questUpgradeButton"
+              onClick={() => onOpenContact?.()}
+            >
+              <div
+                className="questUpgradeIcon"
+                aria-hidden="true"
+              >
+                ↑
+              </div>
+
+              <div className="questUpgradeContent">
+                <span className="questInsightLabel">
+                  NEXT UPGRADE
+                </span>
+
+                <p>{heroes[result].upgrade}</p>
+              </div>
+            </button>
+
+            <div className="questResultButtons">
+              <button
+                type="button"
+                className="questSecondaryButton"
+                onClick={handleRetake}
+              >
+                RETAKE QUEST
+              </button>
+
+              <button
+                type="button"
+                className="questPrimaryButton"
+                onClick={handleReturnToMain}
+              >
+                EXPLORE NUTRILEVELING
+              </button>
+            </div>
+          </div>
         ) : (
           <div className="questQuestion">
-            <div className="questQuestionTop">
-              <span className="questEyebrow">BUILD SCAN</span>
-              <span className="questProgress">
-                {String(currentQuestion + 1).padStart(2, "0")}
-                <span>/</span>
-                {String(questions.length).padStart(2, "0")}
-              </span>
-            </div>
+<div className="questQuestionTop">
+  <span className="questEyebrow">
+    BUILD SCAN
+  </span>
+
+  <span className="questProgress">
+    {String(currentQuestion + 1).padStart(2, "0")}
+    <span>/</span>
+    {String(questions.length).padStart(2, "0")}
+  </span>
+</div>
 
             <div className="questProgressTrack">
               <div
                 className="questProgressFill"
                 style={{
                   width: `${
-                    ((currentQuestion + 1) / questions.length) * 100
+                    ((currentQuestion + 1) /
+                      questions.length) *
+                    100
                   }%`,
                 }}
               />
             </div>
 
             <div className="questQuestionContent">
-              <h2>{questions[currentQuestion].question}</h2>
+              <h2>
+                {questions[currentQuestion].question}
+              </h2>
 
               <div
-  className="questAnswers"
-  key={currentQuestion}
->
-  {questions[currentQuestion].answers.map(
-    (answer, index) => (
-      <button
-        type="button"
-        key={index}
-        onClick={() => handleAnswer(answer, index)}
-        className={
-          selectedAnswer === index ? "selected" : ""
-        }
-        disabled={selectedAnswer !== null}
-        style={{
-          "--answer-delay": `${index * 70}ms`,
-        }}
-      >
-        <span className="answerTop">
-          <span className="answerIndex">
-            {String.fromCharCode(65 + index)}
-          </span>
+                className="questAnswers"
+                key={currentQuestion}
+              >
+                {questions[currentQuestion].answers.map(
+                  (answer, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      onClick={() =>
+                        handleAnswer(answer, index)
+                      }
+                      className={
+                        selectedAnswer === index
+                          ? "selected"
+                          : ""
+                      }
+                      disabled={
+                        selectedAnswer !== null
+                      }
+                      style={{
+                        "--answer-delay": `${
+                          index * 70
+                        }ms`,
+                      }}
+                    >
+                      <span className="answerTop">
+                        <span className="answerIndex">
+                          {String.fromCharCode(65 + index)}
+                        </span>
 
-          <span className="answerArrow">
-            ↗
-          </span>
-        </span>
+                        <span className="answerArrow">
+                          ↗
+                        </span>
+                      </span>
 
-        <span className="answerText">
-          {answer.text}
-        </span>
+                      <span className="answerText">
+                        {answer.text}
+                      </span>
 
-        <span className="answerLine" />
-      </button>
-    )
-  )}
-</div>
+                      <span className="answerLine" />
+                    </button>
+                  )
+                )}
+              </div>
             </div>
 
-            {currentQuestion > 0 && (
-              <button
-                type="button"
-                className="questBack"
-                onClick={handleBack}
-                disabled={selectedAnswer !== null}
-              >
-                ← Previous question
-              </button>
-            )}
+<div className="questQuestionBottom">
+  {currentQuestion > 0 ? (
+    <button
+      type="button"
+      className="questBack"
+      onClick={handleBack}
+      disabled={selectedAnswer !== null}
+    >
+      ← Previous question
+    </button>
+  ) : (
+    <span aria-hidden="true" />
+  )}
+
+  <button
+    type="button"
+    className="questExit"
+    onClick={handleExitQuest}
+  >
+    Exit quest
+  </button>
+</div>
           </div>
         )}
       </div>

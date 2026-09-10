@@ -6,6 +6,7 @@ import About from "./pages/About/About";
 import Learn from "./components/Learn/Learn";
 import Projects from "./pages/Projects/Projects";
 import Contact from "./pages/Contact/Contact";
+import QuestResult from "./pages/Quest/QuestResult";
 
 const VALID_PAGES = new Set([
   "home",
@@ -42,10 +43,12 @@ function getRouteFromHash() {
 
   return {
     page,
-    itemId:
-      page === "projects" || page === "learn"
-        ? itemId || null
-        : null,
+itemId:
+  page === "projects" ||
+  page === "learn" ||
+  page === "quest"
+    ? itemId || null
+    : null,
   };
 }
 
@@ -127,9 +130,10 @@ function App() {
   const openContact = () =>
     navigateTo("contact");
 
-  if (route.page === "quest") {
+if (route.page === "quest") {
+  if (route.itemId === "result") {
     return (
-      <Quest
+      <QuestResult
         onBackHome={openHome}
         onOpenContact={openContact}
         onNavigate={navigateTo}
@@ -137,6 +141,16 @@ function App() {
       />
     );
   }
+
+  return (
+    <Quest
+      onBackHome={openHome}
+      onOpenContact={openContact}
+      onNavigate={navigateTo}
+      currentPage={route.page}
+    />
+  );
+}
 
   if (route.page === "about") {
     return (

@@ -297,3 +297,46 @@
     transition: none;
   }
 }
+
+/* =========================================================
+   RESULT CONTEXT ACCENT
+   Only active on Quest Result pages
+   ========================================================= */
+
+.globalTopBar[data-accent="true"] {
+  border-color: color-mix(
+    in srgb,
+    var(--global-top-bar-accent) 34%,
+    rgba(244, 239, 230, 0.08)
+  );
+
+  box-shadow:
+    0 0 24px color-mix(
+      in srgb,
+      var(--global-top-bar-accent) 8%,
+      transparent
+    );
+}
+
+.globalTopBar[data-accent="true"] .globalTopBarButton:hover,
+.globalTopBar[data-accent="true"] .globalTopBarButtonActive {
+  color: var(--global-top-bar-accent);
+}
+
+.globalTopBar[data-accent="true"] .globalTopBarButton:hover
+  .globalTopBarMarker,
+.globalTopBar[data-accent="true"] .globalTopBarButtonActive
+  .globalTopBarMarker {
+  background: var(--global-top-bar-accent);
+  border-color: var(--global-top-bar-accent);
+  box-shadow:
+    0 0 14px color-mix(
+      in srgb,
+      var(--global-top-bar-accent) 38%,
+      transparent
+    );
+}
+
+.globalTopBar[data-accent="true"] .globalTopBarButton::after {
+  background: var(--global-top-bar-accent);
+}

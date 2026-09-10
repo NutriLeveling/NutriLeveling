@@ -6418,82 +6418,6 @@ opacity: 0.45;
   width: 100%;
 }
 
-/* =========================================
-   QUEST PAGE ENTRANCE
-========================================= */
-
-.questPageEntrance {
-  animation:
-    questPageReveal 0.9s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    both;
-}
-
-.questPageEntrance .questShell {
-  animation:
-    questShellReveal 1s
-    cubic-bezier(0.22, 1, 0.36, 1)
-    0.12s
-    both;
-}
-
-.questPageEntrance .questBackground {
-  animation:
-    questBackgroundReveal 1.2s
-    ease
-    both;
-}
-
-@keyframes questPageReveal {
-  0% {
-    opacity: 0;
-    background-color: #05070d;
-  }
-
-  35% {
-    opacity: 1;
-    background-color: #05070d;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes questShellReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(34px) scale(0.99);
-    filter: blur(5px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes questBackgroundReveal {
-  0% {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .questPageEntrance,
-  .questPageEntrance .questShell,
-  .questPageEntrance .questBackground {
-    animation: none;
-  }
-}
-
 /* =========================================================
    QUEST — FINAL MOBILE FIT
    Keep this at the absolute end of Quest.css
@@ -6960,4 +6884,83 @@ opacity: 0.45;
     bottom: 44px;
     left: 34px;
   }
+}
+
+/* =========================================================
+   QUEST — QUESTION NAVIGATION
+   ========================================================= */
+
+.questQuestionBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  margin-top: 26px;
+}
+
+.questBack,
+.questExit {
+  margin: 0;
+  padding: 8px 0;
+
+  border: 0;
+  background: transparent;
+
+  color: rgba(244, 239, 230, 0.45);
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.questBack:hover:not(:disabled) {
+  color: #f4efe6;
+  transform: translateX(-4px);
+}
+
+.questExit:hover {
+  color: #f4efe6;
+  transform: translateX(4px);
+}
+
+.questBack:focus-visible,
+.questExit:focus-visible {
+  outline: 2px solid rgba(216, 200, 106, 0.7);
+  outline-offset: 5px;
+}
+
+.questBack:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+@media (max-width: 600px) {
+  .questQuestionBottom {
+    margin-top: 22px;
+  }
+
+  .questBack,
+  .questExit {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* =========================================================
+   QUEST — DISABLE PAGE ENTRANCE MOTION
+   ========================================================= */
+
+.questPageEntrance,
+.questPageEntrance .questShell,
+.questPageEntrance .questBackground {
+  animation: none !important;
 }
