@@ -1,8 +1,15 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
+
+const CLOSE_ANIMATION_DURATION = 190;
 
 function ProjectModal({ project, onClose }) {
   const [isClosing, setIsClosing] = useState(false);
+  const modalRef = useRef(null);
 
   const [galleryStartIndex, setGalleryStartIndex] =
     useState(0);
@@ -11,15 +18,12 @@ function ProjectModal({ project, onClose }) {
     useState(null);
 
   const [linkCopied, setLinkCopied] =
-  useState(false);
+    useState(false);
 
-    const [visibleGalleryItems, setVisibleGalleryItems] =
-  useState(
-    () =>
-      window.innerWidth <= 760
-        ? 1
-        : 3
-  );
+  const [visibleGalleryItems, setVisibleGalleryItems] =
+    useState(() =>
+      window.innerWidth <= 760 ? 1 : 3
+    );
 
   const gallery = project.gallery || [];
 
@@ -29,28 +33,26 @@ function ProjectModal({ project, onClose }) {
   );
 
   useEffect(() => {
-  const handleResize = () => {
-    setVisibleGalleryItems(
-      window.innerWidth <= 760
-        ? 1
-        : 3
-    );
-  };
+    const handleResize = () => {
+      setVisibleGalleryItems(
+        window.innerWidth <= 760 ? 1 : 3
+      );
+    };
 
-  handleResize();
+    handleResize();
 
-  window.addEventListener(
-    "resize",
-    handleResize
-  );
-
-  return () => {
-    window.removeEventListener(
+    window.addEventListener(
       "resize",
       handleResize
     );
-  };
-}, []);
+
+    return () => {
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, []);
 
   const requestClose = () => {
     if (isClosing) {
@@ -61,7 +63,7 @@ function ProjectModal({ project, onClose }) {
 
     window.setTimeout(() => {
       onClose();
-    }, 260);
+    }, CLOSE_ANIMATION_DURATION);
   };
 
   const openLightbox = (index) => {
@@ -72,53 +74,53 @@ function ProjectModal({ project, onClose }) {
     setLightboxIndex(null);
   };
 
-const copyProjectLink = async () => {
-  const projectUrl =
-    `${window.location.origin}` +
-    `${window.location.pathname}` +
-    `#/projects/${project.id}`;
+  const copyProjectLink = async () => {
+    const projectUrl =
+      `${window.location.origin}` +
+      `${window.location.pathname}` +
+      `#/projects/${project.id}`;
 
-  try {
-    await navigator.clipboard.writeText(
-      projectUrl
-    );
+    try {
+      await navigator.clipboard.writeText(
+        projectUrl
+      );
 
-    setLinkCopied(true);
+      setLinkCopied(true);
 
-    window.setTimeout(() => {
-      setLinkCopied(false);
-    }, 1600);
-  } catch {
-    const textArea =
-      document.createElement("textarea");
+      window.setTimeout(() => {
+        setLinkCopied(false);
+      }, 1600);
+    } catch {
+      const textArea =
+        document.createElement("textarea");
 
-    textArea.value = projectUrl;
-    textArea.style.position = "fixed";
-    textArea.style.opacity = "0";
+      textArea.value = projectUrl;
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
 
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
+      document.body.appendChild(textArea);
 
-    document.execCommand(
-      "copy"
-    );
+      textArea.focus();
+      textArea.select();
 
-    document.body.removeChild(
-      textArea
-    );
+      document.execCommand("copy");
 
-    setLinkCopied(true);
+      document.body.removeChild(textArea);
 
-    window.setTimeout(() => {
-      setLinkCopied(false);
-    }, 1600);
-  }
-};
+      setLinkCopied(true);
+
+      window.setTimeout(() => {
+        setLinkCopied(false);
+      }, 1600);
+    }
+  };
 
   const showPreviousLightboxImage = () => {
     setLightboxIndex((current) => {
-      if (current === null || gallery.length === 0) {
+      if (
+        current === null ||
+        gallery.length === 0
+      ) {
         return current;
       }
 
@@ -130,7 +132,10 @@ const copyProjectLink = async () => {
 
   const showNextLightboxImage = () => {
     setLightboxIndex((current) => {
-      if (current === null || gallery.length === 0) {
+      if (
+        current === null ||
+        gallery.length === 0
+      ) {
         return current;
       }
 
@@ -155,19 +160,37 @@ const copyProjectLink = async () => {
     );
   };
 
+useEffect(() => {
+  const previousOverflow =
+    document.body.style.overflow;
+
+  const previousPaddingRight =
+    document.body.style.paddingRight;
+
+  const scrollbarWidth =
+    window.innerWidth -
+    document.documentElement.clientWidth;
+
+  document.body.style.overflow =
+    "hidden";
+
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight =
+      `${scrollbarWidth}px`;
+  }
+
+  return () => {
+    document.body.style.overflow =
+      previousOverflow;
+
+    document.body.style.paddingRight =
+      previousPaddingRight;
+  };
+}, []);
+
   useEffect(() => {
-    const previousOverflow =
-      document.body.style.overflow;
-
-    document.body.style.overflow = "hidden";
-
     const handleKeyDown = (event) => {
       if (lightboxIndex !== null) {
-        if (event.key === "Escape") {
-          closeLightbox();
-          return;
-        }
-
         if (event.key === "ArrowLeft") {
           showPreviousLightboxImage();
           return;
@@ -175,6 +198,11 @@ const copyProjectLink = async () => {
 
         if (event.key === "ArrowRight") {
           showNextLightboxImage();
+          return;
+        }
+
+        if (event.key === "Escape") {
+          closeLightbox();
           return;
         }
 
@@ -192,15 +220,40 @@ const copyProjectLink = async () => {
     );
 
     return () => {
-      document.body.style.overflow =
-        previousOverflow;
-
       window.removeEventListener(
         "keydown",
         handleKeyDown
       );
     };
-  }, [lightboxIndex]);
+  }, [lightboxIndex, isClosing]);
+
+  const handleLightboxMouseDown = (event) => {
+    const clickedButton =
+      event.target.closest("button");
+
+    const clickedImage =
+      event.target.closest(
+        ".projectGalleryLightboxImage"
+      );
+
+    if (clickedButton || clickedImage) {
+      return;
+    }
+
+    closeLightbox();
+  };
+
+  const handleModalWheel = (event) => {
+    if (!modalRef.current) return;
+    if (modalRef.current.contains(event.target)) return;
+
+    event.preventDefault();
+    modalRef.current.scrollBy({
+      top: event.deltaY,
+      left: 0,
+      behavior: "auto",
+    });
+  };
 
   const lightbox =
     lightboxIndex !== null &&
@@ -211,14 +264,7 @@ const copyProjectLink = async () => {
             role="dialog"
             aria-modal="true"
             aria-label={`${project.title} gallery viewer`}
-            onMouseDown={(event) => {
-              if (
-                event.target ===
-                event.currentTarget
-              ) {
-                closeLightbox();
-              }
-            }}
+            onMouseDown={handleLightboxMouseDown}
           >
             <button
               type="button"
@@ -269,23 +315,22 @@ const copyProjectLink = async () => {
 
   return (
     <>
-      <div
-        className={`projectModalBackdrop ${
-          isClosing ? "is-closing" : ""
-        }`}
-        onMouseDown={(event) => {
-          if (
-            event.target ===
-            event.currentTarget
-          ) {
-            requestClose();
-          }
-        }}
-      >
-        <article
-          className={`projectModal ${
-            isClosing ? "is-closing" : ""
-          }`}
+<div
+  className={`projectModalBackdrop ${
+    isClosing ? "is-closing" : ""
+  }`}
+  onMouseDown={(event) => {
+    if (event.target === event.currentTarget) {
+      requestClose();
+    }
+  }}
+  onWheel={handleModalWheel}
+>
+<article
+  ref={modalRef}
+  className={`projectModal ${
+    isClosing ? "is-closing" : ""
+  }`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-modal-title"
@@ -310,17 +355,67 @@ const copyProjectLink = async () => {
             </h2>
 
             <p>{project.description}</p>
-            <button
-  type="button"
-  className="projectModalCopyLink"
-  onClick={copyProjectLink}
->
-  <span aria-hidden="true">↗</span>
 
-  {linkCopied
-    ? "Link Copied"
-    : "SHARE PROJECT"}
-</button>
+            <button
+              type="button"
+              className="projectModalCopyLink"
+              onClick={copyProjectLink}
+            >
+              <span
+                className="projectModalCopyLinkIcon"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="18"
+                    cy="5"
+                    r="2.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+
+                  <circle
+                    cx="6"
+                    cy="12"
+                    r="2.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+
+                  <circle
+                    cx="18"
+                    cy="19"
+                    r="2.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+
+                  <path
+                    d="M8.2 10.9L15.8 6.1"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M8.2 13.1L15.8 17.9"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+
+              <span>
+                {linkCopied
+                  ? "Link Copied"
+                  : "SHARE PROJECT"}
+              </span>
+            </button>
           </header>
 
           {project.cover && (

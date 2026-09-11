@@ -498,52 +498,73 @@
   z-index: 9999;
   inset: 0;
 
-  overflow-y: auto;
+  display: grid;
 
   padding:
-    clamp(1rem, 3vw, 2.5rem);
+    clamp(14px, 2vw, 28px);
+
+  overflow: hidden;
 
   background: rgba(3, 5, 5, 0.86);
 
   backdrop-filter: blur(10px);
-
-  animation:
-    projectBackdropIn 260ms ease both;
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .projectModalBackdrop.is-closing {
   animation:
-    projectBackdropOut 260ms ease both;
+    projectBackdropOut
+    190ms
+    ease
+    both;
 }
 
 .projectModal {
   position: relative;
 
-  width: min(1120px, 100%);
+  width: min(100%, 1120px);
+  height: 100%;
+  max-height: calc(100vh - 28px);
 
-  margin: 0 auto;
+  margin: auto;
 
-  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   background: #090b0b;
 
   border:
-    2px solid rgba(111, 156, 153, 0.24);
+    2px solid
+    rgba(111, 156, 153, 0.24);
 
   box-shadow:
-    0 30px 100px rgba(0, 0, 0, 0.48);
+    0 30px 100px
+    rgba(0, 0, 0, 0.48);
 
-  animation:
-    projectModalIn
-    340ms
-    cubic-bezier(.2, .8, .2, 1)
-    both;
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(111, 156, 153, 0.32)
+    transparent;
+}
+
+.projectModal::-webkit-scrollbar {
+  width: 7px;
+}
+
+.projectModal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.projectModal::-webkit-scrollbar-thumb {
+  background:
+    rgba(111, 156, 153, 0.3);
 }
 
 .projectModal.is-closing {
   animation:
     projectModalOut
-    260ms
+    190ms
     ease
     both;
 }
@@ -1014,16 +1035,6 @@
   transform: translateX(-3px);
 }
 
-@keyframes projectBackdropIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes projectBackdropOut {
   from {
     opacity: 1;
@@ -1031,24 +1042,6 @@
 
   to {
     opacity: 0;
-  }
-}
-
-@keyframes projectModalIn {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(24px)
-      scale(0.985);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
   }
 }
 
@@ -1221,35 +1214,37 @@ color: var(--projects-accent);
   line-height: 0.88;
 }
 
-  .projectModalBackdrop {
-    width: 100%;
-    max-width: 100vw;
+.projectModalBackdrop {
+  width: 100%;
+  max-width: 100vw;
 
-    padding: 0;
+  padding: 0;
 
-    overflow-x: hidden;
-    overflow-y: auto;
+  overflow: hidden;
 
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 
-  .projectModal {
-    width: 100%;
-    max-width: 100vw;
-    min-width: 0;
-    min-height: 100svh;
+.projectModal {
+  width: 100%;
+  max-width: 100vw;
 
-    margin: 0;
+  height: 100%;
+  max-height: 100vh;
 
-    overflow-x: hidden;
-    overflow-y: visible;
+  min-width: 0;
+  min-height: 0;
 
-    border-right: 0;
-    border-left: 0;
+  margin: 0;
 
-    box-sizing: border-box;
-  }
+  overflow-x: hidden;
+  overflow-y: auto;
 
+  border-right: 0;
+  border-left: 0;
+
+  box-sizing: border-box;
+}
 
   /* Modal hero */
 
@@ -1649,10 +1644,11 @@ color: var(--projects-accent);
 .projectGalleryLightboxImage {
   display: block;
 
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 
-  max-width: 1200px;
+  max-width: min(1200px, 100%);
+  max-height: min(82dvh, 900px);
 
   object-fit: contain;
 }
@@ -1896,6 +1892,20 @@ color: var(--projects-accent);
   transition:
     color 200ms ease,
     gap 200ms ease;
+}
+
+.projectModalCopyLinkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.projectModalCopyLinkIcon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .projectModalCopyLink:hover {

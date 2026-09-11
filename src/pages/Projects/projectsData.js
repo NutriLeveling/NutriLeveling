@@ -92,7 +92,7 @@ const projectsData = [
 
   {
     id: "beyond-the-game",
-    status: "Starting September 2026",
+    status: "Active",
     title: "Beyond The Game",
     role: "Project Coordinator & Project Manager",
 

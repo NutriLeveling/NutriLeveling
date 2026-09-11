@@ -16,10 +16,24 @@ function LearnModal({ item, onClose }) {
 
   const [linkCopied, setLinkCopied] =
     useState(false);
-
+  const modalRef = useRef(null);
   const isClosingRef = useRef(false);
   const closeTimerRef = useRef(null);
+  const handleModalWheel = (event) => {
+  if (!modalRef.current) return;
 
+  if (modalRef.current.contains(event.target)) {
+    return;
+  }
+
+  event.preventDefault();
+
+  modalRef.current.scrollBy({
+    top: event.deltaY,
+    left: 0,
+    behavior: "auto",
+  });
+};
   const requestClose = useCallback(() => {
     if (isClosingRef.current) return;
 
@@ -95,36 +109,50 @@ function LearnModal({ item, onClose }) {
   /*
    * Escape key and body scroll lock.
    */
-  useEffect(() => {
-    if (!item) return;
+useEffect(() => {
+  if (!item) return;
 
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        requestClose();
-      }
-    };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      requestClose();
+    }
+  };
 
-    const previousOverflow =
-      document.body.style.overflow;
+  const previousOverflow =
+    document.body.style.overflow;
 
+  const previousPaddingRight =
+    document.body.style.paddingRight;
+
+  const scrollbarWidth =
+    window.innerWidth -
+    document.documentElement.clientWidth;
+
+  document.body.style.overflow = "hidden";
+
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight =
+      `${scrollbarWidth}px`;
+  }
+
+  window.addEventListener(
+    "keydown",
+    handleKeyDown
+  );
+
+  return () => {
     document.body.style.overflow =
-      "hidden";
+      previousOverflow;
 
-    window.addEventListener(
+    document.body.style.paddingRight =
+      previousPaddingRight;
+
+    window.removeEventListener(
       "keydown",
       handleKeyDown
     );
-
-    return () => {
-      document.body.style.overflow =
-        previousOverflow;
-
-      window.removeEventListener(
-        "keydown",
-        handleKeyDown
-      );
-    };
-  }, [item, requestClose]);
+  };
+}, [item, requestClose]);
 
   /*
    * Clear any pending timer if the
@@ -154,17 +182,19 @@ function LearnModal({ item, onClose }) {
   };
 
   return (
-    <div
-      className={
-        isClosing
-          ? "learnModalBackdrop is-closing"
-          : "learnModalBackdrop"
-      }
-      role="presentation"
-      onMouseDown={handleBackdropClick}
-    >
-      <article
-        className="learnModal"
+<div
+  className={
+    isClosing
+      ? "learnModalBackdrop is-closing"
+      : "learnModalBackdrop"
+  }
+  role="presentation"
+  onMouseDown={handleBackdropClick}
+  onWheel={handleModalWheel}
+>
+<article
+  ref={modalRef}
+  className="learnModal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="learn-modal-title"
@@ -184,19 +214,68 @@ function LearnModal({ item, onClose }) {
   </div>
 
   <div className="learnModalHeaderActions">
-    <button
-      type="button"
-      className="learnModalShare"
-      onClick={copyItemLink}
+<button
+  type="button"
+  className="learnModalShare"
+  onClick={copyItemLink}
+>
+  <span
+    className="learnModalShareIcon"
+    aria-hidden="true"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <span aria-hidden="true">↗</span>
+      <circle
+        cx="18"
+        cy="5"
+        r="2.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
 
-      {linkCopied
-        ? "LINK COPIED"
-        : item.type === "video"
-          ? "SHARE VIDEO"
-          : "SHARE ARTICLE"}
-    </button>
+      <circle
+        cx="6"
+        cy="12"
+        r="2.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <circle
+        cx="18"
+        cy="19"
+        r="2.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <path
+        d="M8.2 10.9L15.8 6.1"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <path
+        d="M8.2 13.1L15.8 17.9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  </span>
+
+  <span>
+    {linkCopied
+      ? "LINK COPIED"
+      : item.type === "video"
+        ? "SHARE VIDEO"
+        : "SHARE ARTICLE"}
+  </span>
+</button>
 
     <button
       type="button"

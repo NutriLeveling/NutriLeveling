@@ -10,34 +10,36 @@ import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import GlobalTopBar from "../../components/GlobalTopBar/GlobalTopBar";
 
+function getProjectById(projectId) {
+  return (
+    projectsData.find(
+      (item) => item.id === projectId
+    ) || null
+  );
+}
+
 function Projects({
   onNavigate,
   currentPage,
   initialProjectId,
 }) {
-  const [
-    selectedProject,
-    setSelectedProject,
-  ] = useState(null);
+  const [selectedProject, setSelectedProject] =
+    useState(() =>
+      initialProjectId
+        ? getProjectById(initialProjectId)
+        : null
+    );
 
   useEffect(() => {
-    if (!initialProjectId) {
-      setSelectedProject(null);
-      return;
-    }
-
-    const project =
-      projectsData.find(
-        (item) =>
-          item.id === initialProjectId
-      );
-
     setSelectedProject(
-      project || null
+      initialProjectId
+        ? getProjectById(initialProjectId)
+        : null
     );
   }, [initialProjectId]);
 
   const openProject = (project) => {
+    setSelectedProject(project);
     onNavigate(
       "projects",
       project.id
@@ -50,14 +52,12 @@ function Projects({
 
   return (
     <main className="projectsPage">
-
       <GlobalTopBar
         currentPage={currentPage}
         onNavigate={onNavigate}
       />
 
       <section className="projectsHero">
-
         <h1 className="projectsTitle">
           <span className="projectsTitleLine">
             FROM CONCEPT
@@ -74,7 +74,6 @@ function Projects({
         </p>
 
         <div className="projectsDivider" />
-
       </section>
 
       <section
@@ -96,7 +95,6 @@ function Projects({
           onClose={closeProject}
         />
       )}
-
     </main>
   );
 }

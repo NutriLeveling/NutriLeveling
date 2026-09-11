@@ -41,7 +41,7 @@ export const learnContent = [
   description:
     "My peer-reviewed narrative review on personalized nutrition, lifestyle, and supplementation strategies for esports athletes.",
 
-  duration: "JOURNAL ARTICLE",
+  duration: "",
 
   journal: "Nutrients",
   citation: "Nutrients 2026, 18(6), 981",

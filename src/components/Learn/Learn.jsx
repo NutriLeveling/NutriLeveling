@@ -1,4 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import LearnCard from "./LearnCard";
 import LearnModal from "./LearnModal";
@@ -20,18 +24,18 @@ function Learn({
     useState("all");
 
   const [selectedItem, setSelectedItem] =
-    useState(null);
+    useState(() => {
+      if (!initialItemId) {
+        return null;
+      }
 
-  const filteredContent = useMemo(() => {
-    if (activeFilter === "all") {
-      return learnContent;
-    }
-
-    return learnContent.filter(
-      (item) =>
-        item.type === activeFilter
-    );
-  }, [activeFilter]);
+      return (
+        learnContent.find(
+          (contentItem) =>
+            contentItem.id === initialItemId
+        ) || null
+      );
+    });
 
   useEffect(() => {
     if (!initialItemId) {
@@ -46,6 +50,17 @@ function Learn({
 
     setSelectedItem(item || null);
   }, [initialItemId]);
+
+  const filteredContent = useMemo(() => {
+    if (activeFilter === "all") {
+      return learnContent;
+    }
+
+    return learnContent.filter(
+      (item) =>
+        item.type === activeFilter
+    );
+  }, [activeFilter]);
 
   const handleOpenItem = (item) => {
     onNavigate(
@@ -188,10 +203,10 @@ function Learn({
 
       </section>
 
-      <LearnModal
-        item={selectedItem}
-        onClose={handleCloseModal}
-      />
+<LearnModal
+  item={selectedItem}
+  onClose={handleCloseModal}
+/>
 
     </main>
   );
