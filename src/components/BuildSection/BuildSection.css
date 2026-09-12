@@ -6,7 +6,7 @@
   position: relative;
 
   width: 100%;
-  min-height: 100svh;
+  min-height: auto;
 
   scroll-margin-top: 24px;
 

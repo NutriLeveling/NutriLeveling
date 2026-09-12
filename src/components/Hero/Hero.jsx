@@ -12,6 +12,7 @@ function Hero({
   onOpenLearn,
   onOpenProjects,
   onOpenContact,
+  onRevealWelcome,
 }) {
   const [shouldAnimateHero] = useState(() => {
     if (typeof window === "undefined") {
@@ -152,38 +153,34 @@ function Hero({
               </h1>
             </div>
 
-            <button
-              type="button"
-              className="heroCTA"
-              onClick={() =>
-                scrollToSection("about")
-              }
-            >
-              <span
-                className="heroLine"
-                aria-hidden="true"
-              />
+<button
+  type="button"
+  className="heroCTA"
+  onClick={onRevealWelcome}
+>
+  <span
+    className="heroLine"
+    aria-hidden="true"
+  />
 
-              <span className="heroCTAText">
-                DISCOVER MORE
-              </span>
-            </button>
+  <span className="heroCTAText">
+    DISCOVER MORE
+  </span>
+</button>
           </div>
         </div>
       </div>
 
-      <button
-        type="button"
-        className={`scrollIndicator ${
-          hideScrollIndicator
-            ? "scrollIndicatorHidden"
-            : ""
-        }`}
-        onClick={() =>
-          scrollToSection("about")
-        }
-        aria-label="Scroll to About section"
-      >
+<button
+  type="button"
+  className={`scrollIndicator ${
+    hideScrollIndicator
+      ? "scrollIndicatorHidden"
+      : ""
+  }`}
+  onClick={onRevealWelcome}
+  aria-label="Scroll to About section"
+>
         <span className="scrollIndicatorPixel" />
         <span className="scrollIndicatorPixel" />
         <span className="scrollIndicatorPixel" />

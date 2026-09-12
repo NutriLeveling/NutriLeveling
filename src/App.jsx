@@ -57,10 +57,14 @@ function App() {
     getRouteFromHash
   );
 
-  const [
-    introFinished,
-    setIntroFinished,
-  ] = useState(false);
+const [introFinished, setIntroFinished] =
+  useState(() => {
+    return (
+      window.sessionStorage.getItem(
+        "nutrileveling-intro-seen"
+      ) === "true"
+    );
+  });
 
   useEffect(() => {
     const handleHashChange = () => {

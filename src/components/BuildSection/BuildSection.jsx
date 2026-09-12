@@ -85,8 +85,14 @@ export default function BuildSection({
 }) {
   const sectionRef = useRef(null);
 
-  const [isVisible, setIsVisible] =
-    useState(false);
+const [isVisible, setIsVisible] =
+    useState(() => {
+        return (
+            window.sessionStorage.getItem(
+                "nutrileveling-framework-animation-seen"
+            ) === "true"
+        );
+    });
 
   const [activeBuild, setActiveBuild] =
     useState(null);
@@ -99,10 +105,16 @@ export default function BuildSection({
     const observer =
       new IntersectionObserver(
         ([entry]) => {
-          if (!entry.isIntersecting) return;
+if (!entry.isIntersecting) return;
 
-          setIsVisible(true);
-          observer.unobserve(section);
+setIsVisible(true);
+
+window.sessionStorage.setItem(
+    "nutrileveling-framework-animation-seen",
+    "true"
+);
+
+observer.unobserve(section);
         },
         {
           threshold: 0.15,

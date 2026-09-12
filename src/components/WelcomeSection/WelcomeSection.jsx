@@ -3,7 +3,13 @@ import "./WelcomeSection.css";
 
 function WelcomeSection({ onRevealBuilds }) {
     const sectionRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(() => {
+    return (
+        window.sessionStorage.getItem(
+            "nutrileveling-welcome-animation-seen"
+        ) === "true"
+    );
+});
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -12,10 +18,16 @@ function WelcomeSection({ onRevealBuilds }) {
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
+if (entry.isIntersecting) {
+    setIsVisible(true);
+
+    window.sessionStorage.setItem(
+        "nutrileveling-welcome-animation-seen",
+        "true"
+    );
+
+    observer.disconnect();
+}
             },
             {
                 threshold: 0.22,
