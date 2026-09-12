@@ -628,6 +628,17 @@
    TABLET
    ========================================================= */
 
+@media (min-width: 981px) and (max-width: 1100px) {
+  .aboutVisual {
+    align-self: start;
+    padding-top: 33px;
+  }
+
+  .aboutPortraitFrame {
+    margin-top: 0;
+  }
+}
+   
 @media (max-width: 980px) {
   .aboutPage {
     min-height: 100vh;

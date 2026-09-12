@@ -6533,16 +6533,14 @@ opacity: 0.45;
     letter-spacing: 0.14em;
   }
 
-  .questIntro h1 {
-    width: 100%;
-    max-width: 100%;
-
-    font-size: clamp(2.75rem, 12.4vw, 3.8rem);
-    line-height: 0.9;
-    letter-spacing: -0.055em;
-
-    overflow-wrap: normal;
-  }
+.questIntro h1 {
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(2.1rem, 8.8vw, 3.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  overflow-wrap: normal;
+}
 
   .questIntro h1 span {
     margin-top: 5px;
