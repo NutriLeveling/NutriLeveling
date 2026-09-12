@@ -86,7 +86,7 @@ if (entry.isIntersecting) {
                     <p className="aboutParagraph">
                         NutriLeveling brings evidence-based nutrition and
                         performance science into esports, helping players build
-                        sustainable habits that support both long-term health and sustainable performance.
+                        habits that support both long-term health and sustainable performance.
                     </p>
                 </div>
 

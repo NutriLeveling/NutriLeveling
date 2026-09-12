@@ -38,7 +38,7 @@ function About({
               founder of NutriLeveling. I hold a Bachelor’s degree
               in Nutrition and Dietetics from the European
               University of Cyprus, and I currently work at
-              Bredde-e-sport Alliansen in Norway as an esports
+              the Norwegian Esports Federation as an esports
               nutrition advisor and research assistant.   Through NutriLeveling, my goal is to make
   evidence-based nutrition and wellbeing more relevant,
   practical, and accessible for the gaming and esports

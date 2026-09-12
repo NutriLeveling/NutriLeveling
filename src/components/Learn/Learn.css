@@ -431,7 +431,7 @@
     padding:
       22px
       var(--site-gutter)
-      60px;
+      36px;
   }
 
   .learnHeroEyebrowRow {
@@ -693,7 +693,7 @@
 
 @media (max-width: 800px) {
   .learnLibrary {
-    padding-top: 28px;
+    padding-top: 12px;
   }
 
   .learnLibraryHeader {

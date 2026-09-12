@@ -145,20 +145,21 @@ function ProjectModal({ project, onClose }) {
     });
   };
 
-  const showPreviousGalleryItems = () => {
-    setGalleryStartIndex((current) =>
-      Math.max(0, current - 1)
-    );
-  };
+const showPreviousGalleryItems = () => {
+  setGalleryStartIndex((current) =>
+    current === 0
+      ? maxGalleryStartIndex
+      : current - 1
+  );
+};
 
-  const showNextGalleryItems = () => {
-    setGalleryStartIndex((current) =>
-      Math.min(
-        maxGalleryStartIndex,
-        current + 1
-      )
-    );
-  };
+const showNextGalleryItems = () => {
+  setGalleryStartIndex((current) =>
+    current === maxGalleryStartIndex
+      ? 0
+      : current + 1
+  );
+};
 
 useEffect(() => {
   const previousOverflow =
@@ -474,9 +475,6 @@ useEffect(() => {
                     onClick={
                       showPreviousGalleryItems
                     }
-                    disabled={
-                      galleryStartIndex === 0
-                    }
                     aria-label="Previous gallery images"
                   >
                     ←
@@ -521,10 +519,6 @@ useEffect(() => {
                     className="projectModalGalleryArrow projectModalGalleryArrow--right"
                     onClick={
                       showNextGalleryItems
-                    }
-                    disabled={
-                      galleryStartIndex >=
-                      maxGalleryStartIndex
                     }
                     aria-label="Next gallery images"
                   >

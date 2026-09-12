@@ -425,21 +425,23 @@
 
   /* PRESS START */
 
-  .playButton {
-    width: min(100%, 360px);
-    max-width: calc(100vw - 32px);
-    min-width: 0;
-    min-height: 76px;
+.playButton {
+  width: min(100%, 360px);
+  max-width: calc(100vw - 32px);
+  min-width: 0;
+  min-height: 76px;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    padding: 18px 22px;
-    gap: 14px;
+  padding: 18px 22px;
+  gap: 14px;
 
-    font-size: clamp(18px, 5.4vw, 23px);
-    letter-spacing: clamp(2px, 1vw, 5px);
-    line-height: 1.2;
-  }
+  font-size: 16px !important;
+  letter-spacing: 1.5px !important;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
 
   .playSelector {
     border-top-width: 9px;

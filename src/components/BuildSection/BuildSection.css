@@ -823,6 +823,16 @@
       scale(1.025);
   }
 
+    .buildCard--active .buildOverlayContent {
+    grid-template-rows:
+      auto
+      auto;
+  }
+
+  .buildCard--active .buildDescription {
+    overflow: visible;
+  }
+
   .terminalBridge {
     margin-top: 44px;
   }
