@@ -14,6 +14,7 @@ import lockinGallery03 from "./assets/lockin/lockin-gallery-03.png";
 import gamersPerformanceLogo from "./assets/lockin/gamers-performance-logo.png";
 import lockinBeaLogo from "./assets/lockin/bea-logo.png";
 
+import beyondCover from "./assets/beyond/beyond-cover.png";
 import beyondBeaLogo from "./assets/beyond/bea-logo.png";
 import breezageriLogo from "./assets/beyond/breezageri-logo.png";
 import universityBergenLogo from "./assets/beyond/university-bergen-logo.png";
