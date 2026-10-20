@@ -100,7 +100,7 @@ const projectsData = [
     description:
       "An Erasmus+ youth project transforming grassroots gaming into a structured environment for skills recognition and non-formal learning.",
 
-    cover: null,
+    cover: beyondCover,
     coverFit: "contain",
     coverAlt: "Beyond The Game project identity",
 
